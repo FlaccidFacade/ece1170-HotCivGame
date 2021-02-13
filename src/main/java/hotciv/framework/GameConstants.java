@@ -36,6 +36,21 @@ public class GameConstants {
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";
   public static final String SETTLER   = "settler";
+
+  //Valid unit attack strengths
+  public static final int ARCHER_ATTACKING_STRENGTH = 2;
+  public static final int LEGION_ATTACKING_STRENGTH = 4;
+  public static final int SETTLER_ATTACKING_STRENGTH = 0;
+
+  //Valid unit defense strengths
+  public static final int ARCHER_DEFENSIVE_STRENGTH = 3;
+  public static final int LEGION_DEFENSIVE_STRENGTH = 2;
+  public static final int SETTLER_DEFENSIVE_STRENGTH = 3;
+
+  //valid unit move distance
+  public static final int UNIT_MOVE_DISTANCE = 1;
+
+
   // Valid terrain types
   public static final String PLAINS    = "plains";
   public static final String OCEANS    = "ocean";
@@ -48,4 +63,7 @@ public class GameConstants {
 
   //City constants
   public static final int POPULATION_SIZE = 1;
+
+  //Valid Number of players
+  public static final int NUMBER_OF_PLAYERS = 2;
 }

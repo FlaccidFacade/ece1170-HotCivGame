@@ -30,5 +30,10 @@ Responsibilities:
 
 */
 public enum Player {
-  RED, BLUE, YELLOW, GREEN
+  RED, BLUE, YELLOW, GREEN;
+  private static Player[] players = values();
+  public Player next(){
+    return players[(this.ordinal()+1) % GameConstants.NUMBER_OF_PLAYERS];
+  }
+
 }

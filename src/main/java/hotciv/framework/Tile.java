@@ -41,6 +41,10 @@ public interface Tile {
 
   public Position getPosition();
 
+  public void addUnit(Unit u);
+
+  public void addCity(City c);
+
   public Unit getUnit();
 
   public City getCity();
