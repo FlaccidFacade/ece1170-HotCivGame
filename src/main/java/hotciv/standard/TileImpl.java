@@ -14,15 +14,8 @@ public class TileImpl implements Tile{
     File graphic;
 
 
-    public TileImpl(String t, Position p){
-        if(p.getColumn() > -1
-                && p.getRow() > -1
-                && p.getRow() <= GameConstants.WORLDSIZE
-                && p.getColumn() <= GameConstants.WORLDSIZE) {
-            position = p;
-        }else{
-            position = new Position(0,0);
-        }
+    public TileImpl(String t){
+
         if(t.equalsIgnoreCase(GameConstants.PLAINS)
                 || t.equalsIgnoreCase(GameConstants.OCEANS)
                 || t.equalsIgnoreCase(GameConstants.FOREST)
@@ -38,11 +31,6 @@ public class TileImpl implements Tile{
     @Override
     public String getTypeString() {
         return type;
-    }
-
-    @Override
-    public Position getPosition() {
-        return position;
     }
 
     @Override

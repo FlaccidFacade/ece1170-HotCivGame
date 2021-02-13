@@ -39,8 +39,6 @@ public interface Tile {
    */
   public String getTypeString();
 
-  public Position getPosition();
-
   public void addUnit(Unit u);
 
   public void addCity(City c);
