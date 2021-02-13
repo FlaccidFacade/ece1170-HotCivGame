@@ -26,6 +26,9 @@ public class TileImpl implements Tile{
         }else{
             type = GameConstants.PLAINS;
         }
+        city = null;
+        unit = null;
+
     }
 
     @Override
@@ -37,6 +40,7 @@ public class TileImpl implements Tile{
     public void addUnit(Unit u){
         unit = u;
     }
+
 
     @Override
     public void addCity(City c){
@@ -51,5 +55,10 @@ public class TileImpl implements Tile{
     @Override
     public City getCity() {
         return city;
+    }
+
+    @Override
+    public void removeUnit() {
+        unit = null;
     }
 }

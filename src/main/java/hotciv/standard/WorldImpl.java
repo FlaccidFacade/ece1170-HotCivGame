@@ -28,41 +28,48 @@ public class WorldImpl implements  World{
 
     @Override
     public void placeCity(Position p, City c) {
-
+        Tile t = world[p.getRow()][p.getColumn()];
+        t.addCity(c);
     }
 
     @Override
     public void placeUnit(Position p, Unit u) {
-
+        Tile t = world[p.getRow()][p.getColumn()];
+        t.addUnit(u);
     }
 
     @Override
     public void removeUnit(Position p) {
-
+        Tile t = world[p.getRow()][p.getColumn()];
+        t.removeUnit();
     }
 
     @Override
-    public void getSize() {
-
+    public int getSize() {
+        return world.length;
     }
 
     @Override
     public Tile getTileAt(Position p) {
-        return null;
+        Tile t = world[p.getRow()][p.getColumn()];
+        return t;
     }
 
     @Override
     public City getCityAt(Position p) {
-        return null;
+        Tile t = world[p.getRow()][p.getColumn()];
+        return t.getCity();
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        return null;
+        Tile t = world[p.getRow()][p.getColumn()];
+        return t.getUnit();
     }
 
     @Override
     public String getTerrainAt(Position p) {
-        return null;
+        Tile t = world[p.getRow()][p.getColumn()];
+        return t.getTypeString();
     }
 }

@@ -47,5 +47,7 @@ public interface Tile {
 
   public City getCity();
 
+  public void removeUnit();
+
 
 }

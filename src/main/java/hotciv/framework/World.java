@@ -13,7 +13,7 @@ public interface World {
     public void removeUnit(Position p);
 
 
-    public void getSize();
+    public int getSize();
 
     public Tile getTileAt(Position p);
 
