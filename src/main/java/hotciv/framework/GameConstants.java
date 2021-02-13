@@ -64,7 +64,13 @@ public class GameConstants {
 
   //City constants
   public static final int POPULATION_SIZE = 1;
-
+  public static final int PRODUCTION = 6;
   //Valid Number of players
   public static final int NUMBER_OF_PLAYERS = 2;
+
+  //Game time
+  public static final int START_TIME = 4000;
+  public static final int INCREMENT_TIME = 100;
+
+  //
 }

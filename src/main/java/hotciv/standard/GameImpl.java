@@ -37,19 +37,33 @@ public class GameImpl implements Game {
   private List<Tile> board = new ArrayList<>();
   private int age;
   private Player currentTurn;
+  private World w;
 
+  public GameImpl(){
+     age = GameConstants.START_TIME;
+     currentTurn = Player.RED;
+     w = new WorldImpl();
+     w.placeTile(new Position(1,0), new TileImpl(GameConstants.OCEANS));
+     w.placeTile(new Position(3,2), new TileImpl(GameConstants.HILLS));
+     w.placeTile(new Position(2,2), new TileImpl(GameConstants.MOUNTAINS));
+     w.placeUnit(new Position(2,0), new UnitImpl(currentTurn,GameConstants.ARCHER));
+     w.placeUnit(new Position(4,3), new UnitImpl(currentTurn,GameConstants.SETTLER));
+     w.placeUnit(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
 
-  public Tile getTileAt( Position p ) { return null; }
-  public Unit getUnitAt( Position p ) { return null; }
-  public City getCityAt( Position p ) { return null; }
-  public Player getPlayerInTurn() { return null; }
+  }
+  public Tile getTileAt( Position p ) { return w.getTileAt(p); }
+  public Unit getUnitAt( Position p ) { return w.getUnitAt(p); }
+  public City getCityAt( Position p ) { return w.getCityAt(p); }
+  public Player getPlayerInTurn() { return currentTurn; }
   public Player getWinner() { return null; }
-  public int getAge() { return 0; }
+  public int getAge() { return age; }
   public boolean moveUnit( Position from, Position to ) {
     return false;
   }
   public void endOfTurn() {
     currentTurn.next();
+    age -= GameConstants.INCREMENT_TIME;
+    //does game have a time limit? if so check here
   }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
