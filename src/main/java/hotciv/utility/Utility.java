@@ -31,7 +31,7 @@ import java.util.List;
  * @author Henrik Baerbak Christensen, CS @ AU
  */
 public class Utility {
-    public static Iterator<Position> get8neighborhoodIterator(Position center) {
+    public static List<Position> get8neighborhoodIterator(Position center) {
         List<Position> list = new ArrayList<>();
         // Define the 'delta' to add to the row for the 8 positions
         int[] rowDelta = new int[] {-1, -1, 0, +1, +1, +1, 0, -1};
@@ -46,17 +46,17 @@ public class Utility {
                     && col < GameConstants.WORLDSIZE)
                 list.add(new Position(row, col));
         }
-        return list.iterator();
+        return list;
     }
 
-    public static Iterable<Position> get8neighborhoodOf(Position center) {
-        final Iterator<Position> iterator = get8neighborhoodIterator(center);
-        Iterable<Position> iterable = new Iterable<Position>() {
-            @Override
-            public Iterator<Position> iterator() {
-                return iterator;
-            }
-        };
-        return iterable;
-    }
+//    public static Iterable<Position> get8neighborhoodOf(Position center) {
+//        final Iterator<Position> iterator = get8neighborhoodIterator(center);
+//        Iterable<Position> iterable = new Iterable<Position>() {
+//            @Override
+//            public Iterator<Position> iterator() {
+//                return iterator;
+//            }
+//        };
+//        return iterable;
+//    }
 }

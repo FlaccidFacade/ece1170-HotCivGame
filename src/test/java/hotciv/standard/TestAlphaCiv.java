@@ -50,32 +50,38 @@ public class TestAlphaCiv {
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));
     // TODO: reenable the assert below to get started...
-    // assertThat(game.getPlayerInTurn(), is(Player.RED));
+     assertThat(game.getPlayerInTurn(), is(Player.RED));
   }
 
-  /** REMOVE ME. Not a test of HotCiv, just an example of what
-      matchers the hamcrest library has... */
   @Test
-  public void shouldDefinetelyBeRemoved() {
-    // Matching null and not null values
-    // 'is' require an exact match
-    String s = null;
-    assertThat(s, is(nullValue()));
-    s = "Ok";
-    assertThat(s, is(notNullValue()));
-    assertThat(s, is("Ok"));
+  public void redCityPlacedProperly(){
+    assertThat(game.getCityAt(new Position(1,1)).getOwner(),is(Player.RED));
+  }
 
-    // If you only validate substrings, use containsString
-    assertThat("This is a dummy test", containsString("dummy"));
+  @Test
+  public void oceanPlacedProperly(){
+    assertThat(game.getTileAt(new Position(1,0)).getTypeString(),is(GameConstants.OCEANS));
+  }
 
-    // Match contents of Lists
-    List<String> l = new ArrayList<String>();
-    l.add("Bimse");
-    l.add("Bumse");
-    // Note - ordering is ignored when matching using hasItems
-    assertThat(l, hasItems(new String[] {"Bumse","Bimse"}));
+  @Test
+  public void ownershipForMovement(){
+    assertThat(game.moveUnit(new Position(3,2),new Position(3,3)),is(Boolean.FALSE));
+  }
 
-    // Matchers may be combined, like is-not
-    assertThat(l.get(0), is(not("Bumse")));
+  @Test
+  public void cityFocusChange(){
+    assertThat(game.getCityAt(new Position( 1,1)).getWorkforceFocus(),is(GameConstants.productionFocus));
+    game.changeWorkForceFocusInCityAt(new Position(1,1),GameConstants.foodFocus);
+    assertThat(game.getCityAt(new Position(1,1)).getWorkforceFocus(), is(GameConstants.foodFocus));
+  }
+
+
+  @Test
+  public void redWins(){
+   //at 3000BC red must win
+    for(int i = 0; i < 21; i++)
+      game.endOfTurn();
+
+    assertThat(game.getWinner(),is(Player.RED));
   }
 }

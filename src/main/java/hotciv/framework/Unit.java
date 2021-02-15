@@ -64,4 +64,12 @@ public interface Unit {
    */
   public int getAttackingStrength();
 
+  public void fortify();
+
+  public void buildCity();
+
+  public void move();
+
+  public void setMoveCount(int m);
+
 }

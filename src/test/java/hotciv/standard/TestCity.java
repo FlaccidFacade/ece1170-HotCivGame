@@ -16,10 +16,21 @@ public class TestCity{
     public void setUp(){
         city = new CityImpl(Player.RED);
     }
+
     @Test
-    public void nameOfTest(){
-        //      assertThat();
+    public void cityKnowsOwner(){
+       assertThat(city.getOwner(),is(Player.RED));
     }
+
+    @Test
+    public void cityCanChangeOwner(){
+        city.setOwner(Player.BLUE);
+        assertThat(city.getOwner(),is(not(Player.RED)));
+        assertThat(city.getOwner(),is(Player.BLUE));
+
+    }
+
+
 
 
 }

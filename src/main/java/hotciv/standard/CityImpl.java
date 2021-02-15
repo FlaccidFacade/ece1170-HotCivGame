@@ -9,7 +9,7 @@ public class CityImpl implements City{
     private int resourcesProduced;
     private int foodCount;
     private String workForceFocus = GameConstants.productionFocus;
-    private int treasury = 0;
+    private int treasury;
 
     public CityImpl(Player Owner){
         owner = Owner;

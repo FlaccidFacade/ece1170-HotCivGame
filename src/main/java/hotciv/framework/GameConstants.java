@@ -47,9 +47,6 @@ public class GameConstants {
   public static final int LEGION_DEFENSIVE_STRENGTH = 2;
   public static final int SETTLER_DEFENSIVE_STRENGTH = 3;
 
-  //valid unit move distance
-  public static final int UNIT_MOVE_DISTANCE = 1;
-
 
   // Valid terrain types
   public static final String PLAINS    = "plains";
