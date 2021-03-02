@@ -72,4 +72,6 @@ public interface Unit {
 
   public void setMoveCount(int m);
 
+  public String getAction();
+
 }

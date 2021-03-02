@@ -63,18 +63,78 @@ public class TestAlphaCiv {
     assertThat(game.getTileAt(new Position(1,0)).getTypeString(),is(GameConstants.OCEANS));
   }
 
+
   @Test
   public void ownershipForMovement(){
     assertThat(game.moveUnit(new Position(3,2),new Position(3,3)),is(Boolean.FALSE));
   }
 
   @Test
+  public void cityOwnership() {
+    City c = game.getCityAt(new Position(1,1));
+    assertThat(c.getOwner(), is(Player.RED));
+    assertThat(c.getOwner(), is(not(Player.BLUE)));
+  }
+
+  @Test
+  public void cityPopulationStatic() {
+    City c = game.getCityAt(new Position(1,1));
+    assertThat(c.getSize(), is(1));
+    assertThat(c.getSize(), is(not(0)));
+    assertThat(c.getSize(), is(not(2)));
+    game.endOfTurn();
+    assertThat(c.getSize(), is(1));
+  }
+
+  @Test
+  public void blueAfterRed() {
+    assertThat(game.getPlayerInTurn(), is(Player.RED));
+    game.endOfTurn();
+    assertThat(game.getPlayerInTurn(), is(Player.BLUE));
+
+  }
+
+  @Test
+  public void redAfterBlue() {
+    assertThat(game.getPlayerInTurn(), is(Player.RED));
+    game.endOfTurn();
+    assertThat(game.getPlayerInTurn(), is(Player.BLUE));
+    game.endOfTurn();
+    assertThat(game.getPlayerInTurn(), is(Player.RED));
+  }
+
+  @Test
+  public void roundTest() {
+    //TODO testing if rounds work city growth and unit production... etc?
+    //round is 100 years
+    //game starts at 4,000BC
+
+    // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
+
+    game.endOfTurn();
+    game.endOfTurn();
+
+    City c = game.getCityAt(new Position(1,1));
+    assertThat(c.getResources(), is(6));
+    City c1 = game.getCityAt(new Position(4,1));
+    assertThat(c1.getResources(), is(6));
+
+  }
+
+  @Test
   public void cityFocusChange(){
     assertThat(game.getCityAt(new Position( 1,1)).getWorkforceBalance(),is(GameConstants.productionFocus));
-    game.changeWorkForceFocusInCityAt(new Position(1,1),GameConstants.foodFocus);
+    game.changeWorkforceFocusInCityAt(new Position(1,1),GameConstants.foodFocus);
     assertThat(game.getCityAt(new Position(1,1)).getWorkforceBalance(), is(GameConstants.foodFocus));
   }
 
+  @Test
+  public void cityProductionChange(){
+
+    assertThat(game.getCityAt(new Position(1,1)).getProduction(), is(GameConstants.ARCHER));
+    game.changeProductionInCityAt(new Position(1,1), GameConstants.SETTLER);
+    assertThat(game.getCityAt(new Position(1,1)).getProduction(), is(GameConstants.SETTLER));
+  }
 
   @Test
   public void redWins(){
@@ -84,4 +144,33 @@ public class TestAlphaCiv {
 
     assertThat(game.getWinner(),is(Player.RED));
   }
+
+  @Test
+  public void attackingDestroys(){
+    //TODO red's unit attack and destroy blue's unit
+  }
+
+  @Test
+  public void movingAUnit(){
+    //TODO test move
+
+  }
+
+  @Test
+  public void tileStacking(){
+    //TODO test that a tile can only have one unit on it
+
+  }
+
+  @Test
+  public void refuseInvalidMove(){
+    //TODO test move
+
+  }
+
+  @Test
+  public void unitActionSettlerDoesNothing(){
+    //TODO there is a setter at 4,3. use perform unit action at and make the settler do nothing
+  }
+
 }

@@ -3,16 +3,42 @@ package hotciv.standard;
 import hotciv.framework.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WorldImpl implements  World{
 
-    private final Tile[][] world;
+    private final Map<Position,Tile> world;
+    private List<City> cities;
 
     public WorldImpl(){
-        world = new Tile[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];
+        world = new HashMap<Position,Tile>();
+        cities = new ArrayList<>();
         setToPlains();
     }
+
+    public WorldImpl(String[] layout){
+        world = new HashMap<Position,Tile>();
+        cities = new ArrayList<>();
+
+            String line;
+            for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
+                line = layout[r];
+                for ( int c = 0; c < GameConstants.WORLDSIZE; c++ ) {
+                    char tileChar = line.charAt(c);
+                    String type = "error";
+                    if ( tileChar == '.' ) { type = GameConstants.OCEANS; }
+                    if ( tileChar == 'o' ) { type = GameConstants.PLAINS; }
+                    if ( tileChar == 'M' ) { type = GameConstants.MOUNTAINS; }
+                    if ( tileChar == 'f' ) { type = GameConstants.FOREST; }
+                    if ( tileChar == 'h' ) { type = GameConstants.HILLS; }
+                    Position p = new Position(r,c);
+                    world.put( p, new TileImpl(type));
+                }
+            }
+    }
+
 
     private void setToPlains(){
         for(int r = 0; r < GameConstants.WORLDSIZE; r++) {
@@ -26,53 +52,59 @@ public class WorldImpl implements  World{
 
     @Override
     public void placeTile(Position p, Tile t) {
-        world[p.getRow()][p.getColumn()] = t;
+       world.put(p, t);
     }
 
     @Override
     public void placeCity(Position p, City c) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         t.addCity(c);
+        cities.add(c);
+        //todo see if this line is actually needed
+       // world.put(p,t);
     }
 
     @Override
     public void placeUnit(Position p, Unit u) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         t.addUnit(u);
+
+        //todo see if this line is actually needed
+        // world.put(p,t);
     }
 
     @Override
     public void removeUnit(Position p) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         t.removeUnit();
     }
 
     @Override
     public int getSize() {
-        return world.length;
+        return world.size();
     }
 
     @Override
     public Tile getTileAt(Position p) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         return t;
     }
 
     @Override
     public City getCityAt(Position p) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         return t.getCity();
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         return t.getUnit();
     }
 
     @Override
     public String getTerrainAt(Position p) {
-        Tile t = world[p.getRow()][p.getColumn()];
+        Tile t = world.get(p);
         return t.getTypeString();
     }
 
@@ -112,7 +144,7 @@ public class WorldImpl implements  World{
         }
 
         //Make sure the terrain is allowed
-        Tile t = world[to.getRow()][to.getColumn()];
+        Tile t = world.get(to);
         if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS)
                 || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)
         ){
@@ -132,6 +164,11 @@ public class WorldImpl implements  World{
     }
 
 
+    public void updateAllCityResources(){
+        for(City c: cities){
+            c.harvest();
+        }
+    }
 }
 
 

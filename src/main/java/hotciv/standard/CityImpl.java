@@ -6,8 +6,8 @@ public class CityImpl implements City{
     private int size;
     private Player owner;
     private String production;
-    private int resourcesProduced;
-    private int foodCount;
+    private int resources;
+    private int food;
     private String workforceBalance = GameConstants.productionFocus;
     private int treasury;
 
@@ -15,8 +15,9 @@ public class CityImpl implements City{
         owner = Owner;
         size = GameConstants.POPULATION_SIZE;
         production = GameConstants.ARCHER;
-        resourcesProduced = 0;
+        resources = 0;
     }
+
 
     @Override
     public Player getOwner() {
@@ -49,13 +50,13 @@ public class CityImpl implements City{
     }
 
     @Override
-    public int getProductionCount() {
-        return resourcesProduced;
+    public int getResources() {
+        return resources;
     }
 
     @Override
-    public void setProductionCount(int newCount) {
-        resourcesProduced = newCount;
+    public void setResources(int newCount) {
+        resources = newCount;
     }
 
     @Override
@@ -64,8 +65,8 @@ public class CityImpl implements City{
     }
 
     @Override
-    public void spendProduction(int price) {
-        resourcesProduced -= price;
+    public void spendResources(int price) {
+        resources -= price;
     }
 
     @Override
@@ -79,5 +80,14 @@ public class CityImpl implements City{
         }
     }
 
+    @Override
+    public void spend(){
+
+    }
+
+    @Override
+    public void harvest(){
+        resources += 6;
+    }
 
 }

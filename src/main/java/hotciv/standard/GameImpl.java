@@ -35,7 +35,6 @@ import java.util.function.Predicate;
 
 public class GameImpl implements Game {
 
-  private List<Tile> board = new ArrayList<>();
   private int age;
   private int round;
   private Player currentTurn, firstPlayer;
@@ -55,6 +54,11 @@ public class GameImpl implements Game {
      w.placeUnit(new Position(4,3), new UnitImpl(currentTurn,GameConstants.SETTLER));
      w.placeUnit(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
      w.placeCity(new Position(1,1), new CityImpl(Player.RED));
+  }
+
+  public GameImpl(String[] layout){
+      w = new WorldImpl(layout);
+
   }
   public Tile getTileAt( Position p ) { return w.getTileAt(p); }
   public Unit getUnitAt( Position p ) { return w.getUnitAt(p); }
@@ -80,7 +84,7 @@ public class GameImpl implements Game {
       return false;
   }
   public void endOfTurn() {
-    currentTurn.next();
+    currentTurn = currentTurn.next();
     age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
 
     //does game have a time limit? if so check here
@@ -95,10 +99,14 @@ public class GameImpl implements Game {
 
   }
 
-  public void endOfRound() {
+  public void endOfRound(){
+      //TODO city growth, unit production 'resources', and maximize move counts
+      //ages
+
+      w.updateAllCityResources();
 
   }
-  public void changeWorkForceFocusInCityAt( Position p, String balance ) {
+  public void changeWorkforceFocusInCityAt( Position p, String balance ) {
       City c = w.getCityAt(p);
       c.setWorkforceBalance(balance);
   }

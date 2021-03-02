@@ -25,5 +25,5 @@ public interface World {
 
     public boolean movable(Position from, Position to);
 
-
+    public void updateAllCityResources();
 }

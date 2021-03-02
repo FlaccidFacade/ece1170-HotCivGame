@@ -52,6 +52,10 @@ public class GameConstants {
   public static final int LEGION_COST = 15;
   public static final int SETTLER_COST = 30;
 
+  //Valid unit actions
+  public static final String ARCHER_ACTION = "fortify";
+  public static final String LEGION_ACTION = "none";
+  public static final String SETTLER_ACTION = "build city";
 
 
 
@@ -88,8 +92,6 @@ public class GameConstants {
 
   //City constants
   public static final int POPULATION_SIZE = 1;
-  public static final int PRODUCTION = 6;
-
 
   //Valid Number of players
   public static final int NUMBER_OF_PLAYERS = 2;
