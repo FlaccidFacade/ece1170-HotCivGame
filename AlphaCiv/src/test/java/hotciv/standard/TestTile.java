@@ -44,3 +44,19 @@ public class TestTile{
         assertThat(tile.getUnit(), is(nullValue()));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

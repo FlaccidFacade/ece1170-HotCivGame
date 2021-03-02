@@ -23,4 +23,7 @@ public interface World {
 
     public String getTerrainAt(Position p);
 
+    public boolean movable(Position from, Position to);
+
+
 }

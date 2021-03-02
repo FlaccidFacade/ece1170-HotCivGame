@@ -72,4 +72,42 @@ public class WorldImpl implements  World{
         Tile t = world[p.getRow()][p.getColumn()];
         return t.getTypeString();
     }
+
+    @Override
+    public boolean movable(Position from, Position to) {
+        boolean able = false;
+
+        Tile[] neighbors = new Tile[]{
+                world[from.getRow() - 1][from.getColumn()],
+                world[from.getRow() - 2][from.getColumn() +1],
+                world[from.getRow() - ][from.getColumn()],
+                world[from.getRow() - 1][from.getColumn()],
+                world[from.getRow() - 1][from.getColumn()]
+        };
+
+        if(){
+
+        }
+
+        return able;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -25,7 +25,6 @@ public class CityImpl implements City{
 
     @Override
     public int getSize() {
-
         return size;
     }
 
@@ -79,4 +78,6 @@ public class CityImpl implements City{
             workForceFocus = GameConstants.productionFocus;
         }
     }
+
+
 }

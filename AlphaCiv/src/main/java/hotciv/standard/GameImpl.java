@@ -61,7 +61,7 @@ public class GameImpl implements Game {
   public int getAge() { return age; }
   public boolean moveUnit( Position from, Position to ) {
     //check if player has ownership and if unit can move and if distance is allowed
-      if(movable(from,to)
+      if(w.movable(from,to)
               && (w.getTerrainAt(to) != GameConstants.MOUNTAINS)
               && (w.getTerrainAt(to) != GameConstants.OCEANS)
               && (w.getUnitAt(from).getOwner() == currentTurn)){
@@ -92,8 +92,5 @@ public class GameImpl implements Game {
 
   }
 
-  private boolean movable(Position from, Position to){
-    return true;//this will eventually check if to is a neighbor of from
-  }
 
 }
