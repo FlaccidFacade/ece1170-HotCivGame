@@ -54,6 +54,7 @@ public class GameImpl implements Game {
      w.placeUnit(new Position(4,3), new UnitImpl(currentTurn,GameConstants.SETTLER));
      w.placeUnit(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
      w.placeCity(new Position(1,1), new CityImpl(Player.RED));
+     w.placeCity(new Position(4,1), new CityImpl(Player.BLUE));
   }
 
   public GameImpl(String[] layout){
@@ -102,7 +103,6 @@ public class GameImpl implements Game {
   public void endOfRound(){
       //TODO city growth, unit production 'resources', and maximize move counts
       //ages
-
       w.updateAllCityResources();
 
   }
