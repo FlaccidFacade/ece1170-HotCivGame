@@ -37,13 +37,16 @@ public class GameImpl implements Game {
 
   private List<Tile> board = new ArrayList<>();
   private int age;
-  private Player currentTurn;
+  private int round;
+  private Player currentTurn, firstPlayer;
   private World w;
   private Player winner;
 
   public GameImpl(){
      age = GameConstants.START_TIME;
+     round = 1;
      currentTurn = Player.RED;
+     firstPlayer = currentTurn;
      w = new WorldImpl();
      w.placeTile(new Position(1,0), new TileImpl(GameConstants.OCEANS));
      w.placeTile(new Position(3,2), new TileImpl(GameConstants.HILLS));
@@ -79,10 +82,21 @@ public class GameImpl implements Game {
   public void endOfTurn() {
     currentTurn.next();
     age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
+
     //does game have a time limit? if so check here
-      if(age < 3000){
-          winner = Player.RED;
-      }
+    if(age < 3000){
+        winner = Player.RED;
+    }
+
+    if(currentTurn == firstPlayer){
+        round++;
+        endOfRound();
+    }
+
+  }
+
+  public void endOfRound() {
+
   }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
       City c = w.getCityAt(p);

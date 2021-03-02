@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WorldImpl implements  World{
 
-    private Tile[][] world;
+    private final Tile[][] world;
 
     public WorldImpl(){
         world = new Tile[GameConstants.WORLDSIZE][GameConstants.WORLDSIZE];

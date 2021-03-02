@@ -49,7 +49,7 @@ public class TestAlphaCiv {
   @Test
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));
-    // TODO: reenable the assert below to get started...
+
      assertThat(game.getPlayerInTurn(), is(Player.RED));
   }
 
@@ -70,9 +70,9 @@ public class TestAlphaCiv {
 
   @Test
   public void cityFocusChange(){
-    assertThat(game.getCityAt(new Position( 1,1)).getWorkforceFocus(),is(GameConstants.productionFocus));
+    assertThat(game.getCityAt(new Position( 1,1)).getWorkforceBalance(),is(GameConstants.productionFocus));
     game.changeWorkForceFocusInCityAt(new Position(1,1),GameConstants.foodFocus);
-    assertThat(game.getCityAt(new Position(1,1)).getWorkforceFocus(), is(GameConstants.foodFocus));
+    assertThat(game.getCityAt(new Position(1,1)).getWorkforceBalance(), is(GameConstants.foodFocus));
   }
 
 
