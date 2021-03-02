@@ -8,7 +8,7 @@ public class CityImpl implements City{
     private String production;
     private int resourcesProduced;
     private int foodCount;
-    private String workForceFocus = GameConstants.productionFocus;
+    private String workforceBalance = GameConstants.productionFocus;
     private int treasury;
 
     public CityImpl(Player Owner){
@@ -39,8 +39,8 @@ public class CityImpl implements City{
     }
 
     @Override
-    public String getWorkforceFocus() {
-        return workForceFocus;
+    public String getWorkforceBalance() {
+        return workforceBalance;
     }
 
     @Override
@@ -69,13 +69,13 @@ public class CityImpl implements City{
     }
 
     @Override
-    public void setWorkForceFocus(String focus) {
+    public void setWorkforceBalance(String focus) {
         if(focus.equalsIgnoreCase(GameConstants.productionFocus) ){
-            workForceFocus = GameConstants.productionFocus;
+            workforceBalance = GameConstants.productionFocus;
         }else if(focus.equalsIgnoreCase(GameConstants.foodFocus)){
-            workForceFocus = GameConstants.foodFocus;
+            workforceBalance = GameConstants.foodFocus;
         }else{
-            workForceFocus = GameConstants.productionFocus;
+            workforceBalance = GameConstants.productionFocus;
         }
     }
 

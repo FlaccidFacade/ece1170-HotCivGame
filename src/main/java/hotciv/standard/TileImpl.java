@@ -1,13 +1,11 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
-import javafx.geometry.Pos;
 
 import java.io.File;
 
 public class TileImpl implements Tile{
     String type;
-    Position position;
     City city;
     Unit unit;
     boolean movement;

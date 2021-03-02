@@ -60,7 +60,7 @@ public interface City {
    * @return a string type defining the focus, see GameConstants
    * for valid return values.
    */
-  public String getWorkforceFocus();
+  public String getWorkforceBalance();
 
   public void changeProduction(String unitType);
 
@@ -72,6 +72,6 @@ public interface City {
 
   public void spendProduction(int price);
 
-  public void setWorkForceFocus(String focus);
+  public void setWorkforceBalance(String focus);
 
 }

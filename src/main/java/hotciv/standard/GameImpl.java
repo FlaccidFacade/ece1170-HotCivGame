@@ -59,14 +59,18 @@ public class GameImpl implements Game {
   public Player getPlayerInTurn() { return currentTurn; }
   public Player getWinner() { return winner ;}
   public int getAge() { return age; }
+
   public boolean moveUnit( Position from, Position to ) {
-    //check if player has ownership and if unit can move and if distance is allowed
-      if(w.movable(from,to)
-              && (w.getTerrainAt(to) != GameConstants.MOUNTAINS)
-              && (w.getTerrainAt(to) != GameConstants.OCEANS)
-              && (w.getUnitAt(from).getOwner() == currentTurn)){
+
+
+    //check if is unit and player has ownership and if unit can move and if distance is allowed
+      if((w.getUnitAt(from) != null)
+              && (w.movable(from,to))
+              && (w.getUnitAt(from).getOwner() == currentTurn)
+      ){
           Unit temp = w.getUnitAt(from);
           w.removeUnit(from);
+          temp.move();
           w.placeUnit(to,temp);
           return true;
       }
@@ -82,7 +86,7 @@ public class GameImpl implements Game {
   }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
       City c = w.getCityAt(p);
-      c.setWorkForceFocus(balance);
+      c.setWorkforceBalance(balance);
   }
   public void changeProductionInCityAt( Position p, String unitType ) {
       City c = w.getCityAt(p);

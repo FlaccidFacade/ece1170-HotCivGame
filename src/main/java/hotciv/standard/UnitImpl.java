@@ -10,6 +10,7 @@ public class UnitImpl implements Unit {
     private int attack;
     private int defense;
     private int moveCount;
+    private int cost;
 
     public UnitImpl(Player Owner, String UnitType){
         owner = Owner;

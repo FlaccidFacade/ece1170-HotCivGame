@@ -2,6 +2,9 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WorldImpl implements  World{
 
     private Tile[][] world;
@@ -75,18 +78,54 @@ public class WorldImpl implements  World{
 
     @Override
     public boolean movable(Position from, Position to) {
+        boolean ableNeighbor = false;
+        boolean ableTerrain = false;
         boolean able = false;
 
-        Tile[] neighbors = new Tile[]{
-                world[from.getRow() - 1][from.getColumn()],
-                world[from.getRow() - 2][from.getColumn() +1],
-                world[from.getRow() - ][from.getColumn()],
-                world[from.getRow() - 1][from.getColumn()],
-                world[from.getRow() - 1][from.getColumn()]
-        };
+        //Lines 86 through 99 are originally from At
+        // * 09 May 2018
+        // *
+        // * @author Henrik Baerbak Christensen, CS @ AU
+        List<Position> neighbors = new ArrayList<>();
+        // Define the 'delta' to add to the row for the 8 positions
+        int[] rowDelta = new int[] {-1, -1, 0, +1, +1, +1, 0, -1};
+        // Define the 'delta' to add to the column for the 8 positions
+        int[] columnDelta = new int[] {0, +1, +1, +1, 0, -1, -1, -1};
+        //fill neighbor list
+        for (int index = 0; index < rowDelta.length; index++) {
+            int row = from.getRow() + rowDelta[index];
+            int col = from.getColumn() + columnDelta[index];
+            if (row >= 0 && col >= 0
+                    && row < GameConstants.WORLDSIZE
+                    && col < GameConstants.WORLDSIZE)
+                neighbors.add(new Position(row, col));
+        }
+        //Make sure tile is a neighbor
+        for(Position p: neighbors){
+            if(p == to){
+                ableNeighbor = true;
+                break;
+            }else{
+                ableNeighbor = false;
+            }
 
-        if(){
+        }
 
+        //Make sure the terrain is allowed
+        Tile t = world[to.getRow()][to.getColumn()];
+        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS)
+                || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)
+        ){
+            ableTerrain = false;
+        }else{
+            ableTerrain = true;
+        }
+
+        //Make sure the tile is a neighbor and terrain
+        if(ableNeighbor == true && ableTerrain == true){
+            able = true;
+        }else{
+            able = false;
         }
 
         return able;

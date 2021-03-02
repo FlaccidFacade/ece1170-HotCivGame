@@ -47,6 +47,13 @@ public class GameConstants {
   public static final int LEGION_DEFENSIVE_STRENGTH = 2;
   public static final int SETTLER_DEFENSIVE_STRENGTH = 3;
 
+  //Valid unit costs
+  public static final int ARCHER_COST = 10;
+  public static final int LEGION_COST = 15;
+  public static final int SETTLER_COST = 30;
+
+
+
 
   // Valid terrain types
   public static final String PLAINS    = "plains";
@@ -54,6 +61,26 @@ public class GameConstants {
   public static final String FOREST    = "forest";
   public static final String HILLS     = "hills";
   public static final String MOUNTAINS = "mountain";
+  public static final String CITY = "city";
+
+
+  //Terrain production
+  public static final int PLAINS_PRODUCTION    = 0;
+  public static final int OCEANS_PRODUCTION    = 0;
+  public static final int FOREST_PRODUCTION    = 3;
+  public static final int MOUNTAINS_PRODUCTION = 1;
+  public static final int HILLS_PRODUCTION     = 2;
+  public static final int CITY_PRODUCTION     = 1;
+
+
+  //Terrain food
+  public static final int PLAINS_FOOD    = 3;
+  public static final int OCEANS_FOOD    = 1;
+  public static final int FOREST_FOOD    = 0;
+  public static final int MOUNTAINS_FOOD = 0;
+  public static final int HILLS_FOOD     = 0;
+  public static final int CITY_FOOD     = 1;
+
 
   // Valid production balance types
   public static final String productionFocus = "hammer";
@@ -62,6 +89,8 @@ public class GameConstants {
   //City constants
   public static final int POPULATION_SIZE = 1;
   public static final int PRODUCTION = 6;
+
+
   //Valid Number of players
   public static final int NUMBER_OF_PLAYERS = 2;
 
