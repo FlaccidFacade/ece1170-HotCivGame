@@ -111,6 +111,7 @@ public class WorldImpl implements  World{
 
     @Override
     public boolean movable(Position from, Position to) {
+
         boolean ableNeighbor = false;
         boolean ableTerrain = false;
         boolean ableMoveCount = false;
@@ -129,16 +130,7 @@ public class WorldImpl implements  World{
             }
         }
 
-        //Make sure the terrain is allowed
-        Tile t = world.get(to);
-        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS)
-                || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)
-        ){
-            ableTerrain = false;
-        }else{
-            ableTerrain = true;
-        }
-
+        //make sure move count is over 0
         Unit unitFrom = world.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
             ableMoveCount = true;
@@ -146,6 +138,7 @@ public class WorldImpl implements  World{
             ableMoveCount = false;
         }
 
+        //make sure unit 'to' has proper ownership
         Unit unitTo = world.get(to).getUnit();
         if(unitTo != null) {
             if (unitTo.getOwner() != unitFrom.getOwner()) {
@@ -155,11 +148,20 @@ public class WorldImpl implements  World{
             }
         }
 
-        //Make sure the tile is a neighbor and terrain
+        //make sure tile on 'to' is proper terrain
+        Tile t = world.get(to);
+
+        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
+            ableTerrain = false;
+        }else{
+            ableTerrain = true;
+        }
+
+        //Make sure the tile is a neighbor and terrain and can move and proper ownership
         if(ableNeighbor == true
-                && ableTerrain == true
                 && ableMoveCount == true
                 && ableAttack == true
+                && ableTerrain == true
         ){
             able = true;
         }else{
