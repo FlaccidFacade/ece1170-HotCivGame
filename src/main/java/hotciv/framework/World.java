@@ -28,4 +28,6 @@ public interface World {
     public void updateAllCityResources();
 
     public void produceAllCityUnits();
+
+    public void updateAllMoveCounts();
 }

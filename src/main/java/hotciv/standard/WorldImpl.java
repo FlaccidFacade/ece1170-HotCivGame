@@ -16,13 +16,14 @@ public class WorldImpl implements  World{
     public WorldImpl(){
         world = new HashMap<Position,Tile>();
         cities = new ArrayList<>();
+        units = new ArrayList<>();
         setToPlains();
     }
 
     public WorldImpl(String[] layout){
         world = new HashMap<Position,Tile>();
         cities = new ArrayList<>();
-
+        units = new ArrayList<>();
             String line;
             for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
                 line = layout[r];
@@ -67,8 +68,8 @@ public class WorldImpl implements  World{
     @Override
     public void placeUnit(Position p, Unit u) {
         Tile t = world.get(p);
-
         t.addUnit(u);
+        units.add(u);
         world.put(p,t);
     }
 
@@ -76,6 +77,7 @@ public class WorldImpl implements  World{
     public void removeUnit(Position p) {
         Tile t = world.get(p);
         t.removeUnit();
+        units.remove(t.getUnit());
     }
 
     @Override
@@ -167,12 +169,14 @@ public class WorldImpl implements  World{
         return able;
     }
 
+    @Override
     public void updateAllCityResources(){
         for(City c: cities){
             c.harvest();
         }
     }
 
+    @Override
     public void produceAllCityUnits(){
 
         for(int r = 0; r < GameConstants.WORLDSIZE; r++) {
@@ -202,6 +206,13 @@ public class WorldImpl implements  World{
         }
 
 
+    }
+
+    @Override
+    public void updateAllMoveCounts(){
+        for(Unit u: units){
+            u.setMoveCount(1);
+        }
     }
 
     private List<Position> getNeighbors(Position center){

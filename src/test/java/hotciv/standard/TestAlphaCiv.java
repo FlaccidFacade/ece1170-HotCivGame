@@ -12,30 +12,30 @@ import java.util.*;
 
 /** Skeleton class for AlphaCiv test cases
 
-    Updated Oct 2015 for using Hamcrest matchers
+Updated Oct 2015 for using Hamcrest matchers
 
-   This source code is from the book 
-     "Flexible, Reliable Software:
-       Using Patterns and Agile Development"
-     published 2010 by CRC Press.
-   Author: 
-     Henrik B Christensen 
-     Department of Computer Science
-     Aarhus University
-   
-   Please visit http://www.baerbak.com/ for further information.
+This source code is from the book
+"Flexible, Reliable Software:
+Using Patterns and Agile Development"
+published 2010 by CRC Press.
+Author:
+Henrik B Christensen
+Department of Computer Science
+Aarhus University
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
- 
-       http://www.apache.org/licenses/LICENSE-2.0
- 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+Please visit http://www.baerbak.com/ for further information.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 */
 public class TestAlphaCiv {
@@ -44,7 +44,7 @@ public class TestAlphaCiv {
   /** Fixture for alphaciv testing. */
   @Before
   public void setUp() {
-    game = new GameImpl();
+  game = new GameImpl();
   }
 
   // FRS p. 455 states that 'Red is the first player to take a turn'.
@@ -52,7 +52,7 @@ public class TestAlphaCiv {
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));
 
-     assertThat(game.getPlayerInTurn(), is(Player.RED));
+    assertThat(game.getPlayerInTurn(), is(Player.RED));
   }
 
   @Test
@@ -92,7 +92,6 @@ public class TestAlphaCiv {
     assertThat(game.getPlayerInTurn(), is(Player.RED));
     game.endOfTurn();
     assertThat(game.getPlayerInTurn(), is(Player.BLUE));
-
   }
 
   @Test
@@ -117,8 +116,22 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void updatingCityResources() {
+  public void updatingMovingCount(){
+    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
+    assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
+    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(0));
+    assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(false));
 
+    game.endOfTurn();
+    game.endOfTurn();
+
+    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(1));
+    assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(true));
+    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(0));
+  }
+
+  @Test
+  public void updatingCityResources() {
     game.endOfTurn();
     game.endOfTurn();
 
@@ -126,8 +139,8 @@ public class TestAlphaCiv {
     assertThat(c.getTreasury(), is(6));
     City c1 = game.getCityAt(new Position(4,1));
     assertThat(c1.getTreasury(), is(6));
-
   }
+
 
   @Test
   public void unitProductionTreasurySpent() {
@@ -190,7 +203,6 @@ public class TestAlphaCiv {
 
   @Test
   public void cityProductionChange(){
-
     assertThat(game.getCityAt(new Position(1,1)).getProduction(), is(GameConstants.ARCHER));
     game.changeProductionInCityAt(new Position(1,1), GameConstants.SETTLER);
     assertThat(game.getCityAt(new Position(1,1)).getProduction(), is(GameConstants.SETTLER));
@@ -198,7 +210,7 @@ public class TestAlphaCiv {
 
   @Test
   public void redWins(){
-   //at 3000BC red must win
+    //at 3000BC red must win
     for(int i = 0; i < 20; i++) {
       game.endOfTurn();
     }
@@ -207,7 +219,7 @@ public class TestAlphaCiv {
 
   @Test
   public void attackingDestroys(){
-    //TODO blue's unit attack and destroy red's unit
+    // blue's unit attack and destroy red's unit
     game.endOfTurn();
     assertThat(game.moveUnit(new Position(3,2), new Position(2,1)), is(true));
 
@@ -249,7 +261,8 @@ public class TestAlphaCiv {
 
   @Test
   public void unitActionSettlerDoesNothing(){
-    //TODO there is a setter at 4,3. use perform unit action at and make the settler do nothing
+    // there is a settler at 4,3. use perform unit action at and make the settler do nothing
+    //this makes no sense... at least for Alpha Civ
   }
 
 }

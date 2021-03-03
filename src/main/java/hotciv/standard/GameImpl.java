@@ -98,13 +98,13 @@ public class GameImpl implements Game {
     }
 
     public void endOfRound(){
-        //TODO maximize move counts
         age += GameConstants.INCREMENT_TIME;
 
         w.updateAllCityResources();
 
         w.produceAllCityUnits();
 
+        w.updateAllMoveCounts();
         //does game have a time limit? if so check here
         if(age >= -3000){
             winner = Player.RED;
