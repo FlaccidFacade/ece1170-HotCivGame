@@ -78,7 +78,6 @@ public class UnitImpl implements Unit {
         moveCount = 0;
     }
 
-
     @Override
     public void move() {
         moveCount--;

@@ -221,7 +221,7 @@ public class TestAlphaCiv {
     //TODO test move
 
   }
-  
+
 
   @Test
   public void refuseInvalidMove(){
