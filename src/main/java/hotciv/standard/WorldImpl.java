@@ -110,8 +110,10 @@ public class WorldImpl implements  World{
     @Override
     public boolean movable(Position from, Position to) {
         boolean ableNeighbor = false;
-        boolean ableTerrain = true;
+        boolean ableTerrain = false;
+        boolean ableMoveCount = false;
         boolean able = false;
+
 
 
         List<Position> neighbors = getNeighbors(from);
@@ -135,8 +137,18 @@ public class WorldImpl implements  World{
             ableTerrain = true;
         }
 
+        Unit unit = world.get(from).getUnit();
+        if(unit.getMoveCount() > 0) {
+            ableMoveCount = true;
+        }else{
+            ableMoveCount = false;
+        }
+
         //Make sure the tile is a neighbor and terrain
-        if(ableNeighbor == true && ableTerrain == true){
+        if(ableNeighbor == true
+                && ableTerrain == true
+                && ableMoveCount == true
+        ){
             able = true;
         }else{
             able = false;
