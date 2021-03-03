@@ -169,6 +169,19 @@ public class WorldImpl implements  World{
             c.harvest();
         }
     }
+
+    public void produceAllCityUnits(){
+        for(City c: cities){
+            c.produceUnit();
+            Unit unit = new UnitImpl(c.getOwner(),c.getProduction());
+
+            //TODO place the unit
+
+
+        }
+
+
+    }
 }
 
 

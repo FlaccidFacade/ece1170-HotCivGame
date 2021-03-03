@@ -104,6 +104,7 @@ public class GameImpl implements Game {
       //TODO city growth, unit production 'resources', and maximize move counts
       //ages
       w.updateAllCityResources();
+      w.produceAllCityUnits();
 
   }
   public void changeWorkforceFocusInCityAt( Position p, String balance ) {

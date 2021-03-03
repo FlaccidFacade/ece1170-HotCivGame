@@ -18,7 +18,6 @@ public class CityImpl implements City{
         resources = 0;
     }
 
-
     @Override
     public Player getOwner() {
         return owner;
@@ -80,9 +79,25 @@ public class CityImpl implements City{
         }
     }
 
-    @Override
-    public void spend(){
 
+
+    @Override
+    public void produceUnit(){
+        switch (production){
+            case GameConstants.ARCHER:
+                if(resources >= GameConstants.ARCHER_COST)
+                    resources -= GameConstants.ARCHER_COST;
+                break;
+            case GameConstants.LEGION:
+                if(resources >= GameConstants.LEGION_COST)
+                resources -= GameConstants.LEGION_COST;
+                break;
+            case GameConstants.SETTLER:
+                if(resources >= GameConstants.SETTLER_COST)
+                resources -= GameConstants.SETTLER_COST;
+                break;
+
+        }
     }
 
     @Override
