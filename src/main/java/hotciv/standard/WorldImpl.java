@@ -130,16 +130,6 @@ public class WorldImpl implements  World{
             }
         }
 
-        //Make sure the terrain is allowed
-        Tile t = world.get(to);
-        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS)
-                || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)
-        ){
-            ableTerrain = false;
-        }else{
-            ableTerrain = true;
-        }
-
         //make sure move count is over 0
         Unit unitFrom = world.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
@@ -158,11 +148,20 @@ public class WorldImpl implements  World{
             }
         }
 
+        //make sure tile on 'to' is proper terrain
+        Tile t = world.get(to);
+
+        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
+            ableTerrain = false;
+        }else{
+            ableTerrain = true;
+        }
+
         //Make sure the tile is a neighbor and terrain and can move and proper ownership
         if(ableNeighbor == true
-                && ableTerrain == true
                 && ableMoveCount == true
                 && ableAttack == true
+                && ableTerrain == true
         ){
             able = true;
         }else{

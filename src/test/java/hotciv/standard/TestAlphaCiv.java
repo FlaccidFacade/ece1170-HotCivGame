@@ -244,19 +244,24 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void refuseInvalidMove1(){
+  public void refuseInvalidMoveCount(){
     // test move doesn't work if moveCount is 0 or less
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
     assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(false));
   }
 
   @Test
-  public void refuseInvalidMove2(){
+  public void refuseInvalidMoveUnitOnTile(){
     //test move doesn't work if unit is already @ the 'to' position and that unit is its own.
     // i.e. a move to another players unit is an attack
     //NOTE: I ADDED AN ARCHER AT 2,1 FOR THIS TO FAIL
     assertThat(game.moveUnit(new Position(2,0), new Position(2,1)), is(false));
 
+  }
+
+  @Test
+  public void refuseInvalidMoveTileAsMountain(){
+    assertThat(game.moveUnit(new Position(2,1), new Position(2,2)) ,is(false));
   }
 
   @Test
