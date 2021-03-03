@@ -111,6 +111,7 @@ public class WorldImpl implements  World{
 
     @Override
     public boolean movable(Position from, Position to) {
+        
         boolean ableNeighbor = false;
         boolean ableTerrain = false;
         boolean ableMoveCount = false;
