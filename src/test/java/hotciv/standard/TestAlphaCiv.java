@@ -118,11 +118,6 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void updatingMoveCounts(){
-    //TODO end of round should replenish the move count for all units
-  }
-
-  @Test
   public void updatingCityResources() {
 
     game.endOfTurn();
@@ -137,7 +132,7 @@ public class TestAlphaCiv {
 
   @Test
   public void unitProductionTreasurySpent() {
-    //TODO testing if rounds work city growth and unit production... etc?
+    // testing if rounds work city growth and unit production... etc?
 
     // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
 
@@ -152,8 +147,6 @@ public class TestAlphaCiv {
     game.endOfTurn();
 
     assertThat(c.getTreasury(), is(2));
-
-
   }
 
   @Test
@@ -254,7 +247,7 @@ public class TestAlphaCiv {
     //NOTE: I ADDED AN ARCHER AT 2,1 FOR THIS TO FAIL
     assertThat(game.moveUnit(new Position(2,0), new Position(2,1)), is(false));
 
-    
+
 
   }
 
