@@ -218,14 +218,28 @@ public class TestAlphaCiv {
 
   @Test
   public void movingAUnit(){
-    //TODO test move
+
+    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
+  
+    assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
+
+
+    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(0));
+
+
+    assertThat(game.getTileAt(new Position( 2,0)).getUnit(), is(nullValue()));
+
+    assertThat(game.getTileAt(new Position( 3,0)).getUnit(), is(notNullValue()));
+
 
   }
 
 
   @Test
   public void refuseInvalidMove(){
-    //TODO test move
+    //TODO test move doesn't work if moveCount is 0 or less
+
+    //TODO test move doesn't work if unit is already @ the 'to' position
 
   }
 

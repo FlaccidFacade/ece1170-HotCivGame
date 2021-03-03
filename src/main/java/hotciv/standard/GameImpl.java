@@ -70,13 +70,13 @@ public class GameImpl implements Game {
 
   public boolean moveUnit( Position from, Position to ) {
 
-
     //check if is unit and player has ownership and if unit can move and if distance is allowed
-      if((w.getUnitAt(from) != null)
-              && (w.movable(from,to))
+      if( (w.movable(from,to))
+              && (w.getUnitAt(from) != null)
+              && (w.getUnitAt(to) == null)
               && (w.getUnitAt(from).getOwner() == currentTurn)
       ){
-          Unit temp = w.getUnitAt(from);
+          Unit temp = w.getTileAt(from).getUnit();
           w.removeUnit(from);
           temp.move();
           w.placeUnit(to,temp);

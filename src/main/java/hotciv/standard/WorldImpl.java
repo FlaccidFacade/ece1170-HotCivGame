@@ -60,17 +60,15 @@ public class WorldImpl implements  World{
         Tile t = world.get(p);
         t.addCity(c);
         cities.add(c);
-        //todo see if this line is actually needed
-       // world.put(p,t);
+         world.put(p,t);
     }
 
     @Override
     public void placeUnit(Position p, Unit u) {
         Tile t = world.get(p);
-        t.addUnit(u);
 
-        //todo see if this line is actually needed
-        // world.put(p,t);
+        t.addUnit(u);
+        world.put(p,t);
     }
 
     @Override
@@ -111,21 +109,19 @@ public class WorldImpl implements  World{
     @Override
     public boolean movable(Position from, Position to) {
         boolean ableNeighbor = false;
-        boolean ableTerrain = false;
+        boolean ableTerrain = true;
         boolean able = false;
 
 
         List<Position> neighbors = getNeighbors(from);
-
         //Make sure tile is a neighbor
         for(Position p: neighbors){
-            if(p == to){
+            if( p.getRow() == to.getRow() && p.getColumn() == to.getColumn()){
                 ableNeighbor = true;
                 break;
             }else{
                 ableNeighbor = false;
             }
-
         }
 
         //Make sure the terrain is allowed
@@ -166,7 +162,6 @@ public class WorldImpl implements  World{
                         Unit unit = new UnitImpl(city.getOwner(), city.getProduction());
                         Tile tile = getTileAt(new Position(r, c));
                         if (tile.getUnit() == null) {
-                            System.out.println("HIT");
                             tile.addUnit(unit);
                         } else {
                             List<Position> neighbors = getNeighbors(new Position(r, c));
