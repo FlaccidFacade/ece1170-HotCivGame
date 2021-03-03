@@ -131,7 +131,7 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void updatingCityResources() {
+  public void updatingCityTreasury() {
     game.endOfTurn();
     game.endOfTurn();
 
