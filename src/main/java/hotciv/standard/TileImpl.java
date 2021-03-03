@@ -7,7 +7,7 @@ import java.io.File;
 public class TileImpl implements Tile{
     String type;
     City city;
-    Unit unit;
+    Unit unit= null;
     boolean movement;
     File graphic;
 

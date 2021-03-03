@@ -68,7 +68,7 @@ public interface City {
 
   public void setWorkforceBalance(String focus);
 
-  public void produceUnit();
+  public boolean produceUnit();
 
   public void harvest();
 

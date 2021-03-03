@@ -156,22 +156,34 @@ public class TestAlphaCiv {
 
   @Test
   public void unitProductionPlacedOnMap() {
-    //TODO testing if rounds work city growth and unit production... etc?
-
-    // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
-
+    assertThat(game.getUnitAt(new Position(1,1)), is(nullValue()));
     game.endOfTurn();
     game.endOfTurn();
     City c = game.getCityAt(new Position(1,1));
     assertThat(c.getTreasury(), is(6));
-    City c1 = game.getCityAt(new Position(4,1));
-    assertThat(c1.getTreasury(), is(6));
+    assertThat(game.getUnitAt(new Position(1,1)), is(nullValue()));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
+    assertThat(game.getUnitAt(new Position(1,1)), is(notNullValue()));
+    assertThat(game.getTileAt(new Position(1,1)).getUnit().getTypeString(), is("archer"));
 
     game.endOfTurn();
     game.endOfTurn();
+    assertThat(c.getTreasury(), is(8));
 
-    assertThat(c.getTreasury(), is(2));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(c.getTreasury(), is(4));
+    assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
+    assertThat(game.getTileAt(new Position(0,1)).getUnit().getTypeString(), is("archer"));
 
+
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(c.getTreasury(), is(0));
+    assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
+    assertThat(game.getTileAt(new Position(0,2)).getUnit().getTypeString(), is("archer"));
 
   }
 
@@ -209,12 +221,7 @@ public class TestAlphaCiv {
     //TODO test move
 
   }
-
-  @Test
-  public void tileStacking(){
-    //TODO test that a tile can only have one unit on it
-
-  }
+  
 
   @Test
   public void refuseInvalidMove(){

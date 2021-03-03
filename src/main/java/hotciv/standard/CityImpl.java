@@ -68,22 +68,32 @@ public class CityImpl implements City{
 
 
     @Override
-    public void produceUnit(){
+    public boolean produceUnit(){
         switch (production){
             case GameConstants.ARCHER:
-                if(treasury >= GameConstants.ARCHER_COST)
+                if(treasury >= GameConstants.ARCHER_COST) {
                     treasury -= GameConstants.ARCHER_COST;
+                    return true;
+                }
+
                 break;
             case GameConstants.LEGION:
-                if(treasury >= GameConstants.LEGION_COST)
-                treasury -= GameConstants.LEGION_COST;
+                if(treasury >= GameConstants.LEGION_COST){
+                    treasury -= GameConstants.LEGION_COST;
+                    return true;
+                }
+
                 break;
             case GameConstants.SETTLER:
-                if(treasury >= GameConstants.SETTLER_COST)
-                treasury -= GameConstants.SETTLER_COST;
+                if(treasury >= GameConstants.SETTLER_COST){
+                    treasury -= GameConstants.SETTLER_COST;
+                    return true;
+                }
+
                 break;
 
         }
+        return false;
     }
 
     @Override

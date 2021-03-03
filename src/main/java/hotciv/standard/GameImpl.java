@@ -90,7 +90,7 @@ public class GameImpl implements Game {
 
 
 
-    if(currentTurn == firstPlayer){
+    if(currentTurn == firstPlayer && round > 0){
         round++;
         endOfRound();
     }
