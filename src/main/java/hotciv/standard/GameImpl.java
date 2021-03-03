@@ -102,6 +102,7 @@ public class GameImpl implements Game {
       age += GameConstants.INCREMENT_TIME;
 
       w.updateAllCityResources();
+
       w.produceAllCityUnits();
 
       //does game have a time limit? if so check here

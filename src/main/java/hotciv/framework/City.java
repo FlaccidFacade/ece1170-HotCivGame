@@ -64,16 +64,9 @@ public interface City {
 
   public void changeProduction(String unitType);
 
-  public int getResources();
-
-  public void setResources(int newCount);
-
   public void setOwner(Player player);
 
-  public void spendResources(int price);
-
   public void setWorkforceBalance(String focus);
-
 
   public void produceUnit();
 

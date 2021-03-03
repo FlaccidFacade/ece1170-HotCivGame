@@ -6,16 +6,16 @@ public class CityImpl implements City{
     private int size;
     private Player owner;
     private String production;
-    private int resources;
+    private int treasury;
     private int food;
     private String workforceBalance = GameConstants.productionFocus;
-    private int treasury;
+    
 
     public CityImpl(Player Owner){
         owner = Owner;
         size = GameConstants.POPULATION_SIZE;
         production = GameConstants.ARCHER;
-        resources = 0;
+        treasury = 0;
     }
 
     @Override
@@ -27,12 +27,7 @@ public class CityImpl implements City{
     public int getSize() {
         return size;
     }
-
-    @Override
-    public int getTreasury() {
-        return treasury;
-    }
-
+    
     @Override
     public String getProduction() {
         return production;
@@ -49,23 +44,14 @@ public class CityImpl implements City{
     }
 
     @Override
-    public int getResources() {
-        return resources;
+    public int getTreasury() {
+        return treasury;
     }
 
-    @Override
-    public void setResources(int newCount) {
-        resources = newCount;
-    }
 
     @Override
     public void setOwner(Player player) {
         owner = player;
-    }
-
-    @Override
-    public void spendResources(int price) {
-        resources -= price;
     }
 
     @Override
@@ -85,16 +71,16 @@ public class CityImpl implements City{
     public void produceUnit(){
         switch (production){
             case GameConstants.ARCHER:
-                if(resources >= GameConstants.ARCHER_COST)
-                    resources -= GameConstants.ARCHER_COST;
+                if(treasury >= GameConstants.ARCHER_COST)
+                    treasury -= GameConstants.ARCHER_COST;
                 break;
             case GameConstants.LEGION:
-                if(resources >= GameConstants.LEGION_COST)
-                resources -= GameConstants.LEGION_COST;
+                if(treasury >= GameConstants.LEGION_COST)
+                treasury -= GameConstants.LEGION_COST;
                 break;
             case GameConstants.SETTLER:
-                if(resources >= GameConstants.SETTLER_COST)
-                resources -= GameConstants.SETTLER_COST;
+                if(treasury >= GameConstants.SETTLER_COST)
+                treasury -= GameConstants.SETTLER_COST;
                 break;
 
         }
@@ -102,7 +88,7 @@ public class CityImpl implements City{
 
     @Override
     public void harvest(){
-        resources += 6;
+        treasury += 6;
     }
 
 }

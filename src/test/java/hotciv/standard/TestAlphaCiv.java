@@ -118,9 +118,9 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void roundTest() {
+  public void updatingCityResources() {
     //TODO testing if rounds work city growth and unit production... etc?
- 
+
     // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
 
     game.endOfTurn();
@@ -130,6 +130,27 @@ public class TestAlphaCiv {
     assertThat(c.getResources(), is(6));
     City c1 = game.getCityAt(new Position(4,1));
     assertThat(c1.getResources(), is(6));
+
+  }
+
+  @Test
+  public void UnitProductionTreasurySpent() {
+    //TODO testing if rounds work city growth and unit production... etc?
+
+    // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
+
+    game.endOfTurn();
+    game.endOfTurn();
+    City c = game.getCityAt(new Position(1,1));
+    assertThat(c.getResources(), is(6));
+    City c1 = game.getCityAt(new Position(4,1));
+    assertThat(c1.getResources(), is(6));
+
+    game.endOfTurn();
+    game.endOfTurn();
+
+    assertThat(c.get)
+
 
   }
 
