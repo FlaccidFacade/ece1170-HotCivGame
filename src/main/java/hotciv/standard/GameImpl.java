@@ -88,8 +88,6 @@ public class GameImpl implements Game {
         currentTurn = currentTurn.next();
         //age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
 
-
-
         if(currentTurn == firstPlayer && round > 0){
             round++;
             endOfRound();
