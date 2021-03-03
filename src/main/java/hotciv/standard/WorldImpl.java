@@ -139,6 +139,7 @@ public class WorldImpl implements  World{
             ableTerrain = true;
         }
 
+        //make sure move count is over 0
         Unit unitFrom = world.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
             ableMoveCount = true;
@@ -146,6 +147,7 @@ public class WorldImpl implements  World{
             ableMoveCount = false;
         }
 
+        //make sure unit 'to' has proper ownership
         Unit unitTo = world.get(to).getUnit();
         if(unitTo != null) {
             if (unitTo.getOwner() != unitFrom.getOwner()) {
@@ -155,7 +157,7 @@ public class WorldImpl implements  World{
             }
         }
 
-        //Make sure the tile is a neighbor and terrain
+        //Make sure the tile is a neighbor and terrain and can move and proper ownership
         if(ableNeighbor == true
                 && ableTerrain == true
                 && ableMoveCount == true
