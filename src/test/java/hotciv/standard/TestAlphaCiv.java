@@ -118,10 +118,12 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void updatingCityResources() {
-    //TODO testing if rounds work city growth and unit production... etc?
+  public void updatingMoveCounts(){
+    //TODO end of round should replenish the move count for all units
+  }
 
-    // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
+  @Test
+  public void updatingCityResources() {
 
     game.endOfTurn();
     game.endOfTurn();
@@ -238,6 +240,8 @@ public class TestAlphaCiv {
   @Test
   public void refuseInvalidMove(){
     //TODO test move doesn't work if moveCount is 0 or less
+    assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
+    assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(false));
 
     //TODO test move doesn't work if unit is already @ the 'to' position and that unit is its own.
     // i.e. a move to another players unit is an attack

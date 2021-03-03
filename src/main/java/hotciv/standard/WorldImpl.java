@@ -11,6 +11,7 @@ public class WorldImpl implements  World{
 
     private final Map<Position,Tile> world;
     private List<City> cities;
+    private List<Unit> units;
 
     public WorldImpl(){
         world = new HashMap<Position,Tile>();
