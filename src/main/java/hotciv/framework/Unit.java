@@ -64,12 +64,26 @@ public interface Unit {
    */
   public int getAttackingStrength();
 
+  /** adds to defense and immobilizes
+   *
+   */
   public void fortify();
 
+  /** reduces move count by one
+   *
+   */
   public void move();
 
+  /** sets the move count variable
+   *
+   * @param m the move count value to be set to
+   */
   public void setMoveCount(int m);
 
+  /** returns the action of this unit
+   *
+   * @return action the string value of the action this unit has
+   */
   public String getAction();
 
 }

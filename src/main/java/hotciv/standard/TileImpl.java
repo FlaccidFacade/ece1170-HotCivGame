@@ -39,7 +39,6 @@ public class TileImpl implements Tile{
         unit = u;
     }
 
-
     @Override
     public void addCity(City c){
         city = c;

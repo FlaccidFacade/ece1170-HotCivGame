@@ -62,14 +62,33 @@ public interface City {
    */
   public String getWorkforceBalance();
 
+  /**change the type of unit the city is going to produce
+   *
+   * @param unitType the type of unit the city should be producing
+   */
   public void changeProduction(String unitType);
 
+  /** declare the owner of the city
+   *
+   * @param player the player that owns this city
+   */
   public void setOwner(Player player);
 
+  /** set the work force focus/balance
+   *
+   * @param focus the focus of the city either units/productionFocus or people/foodFocus
+   */
   public void setWorkforceBalance(String focus);
 
+  /** returns true if it spends treasury to produce a unit
+   * precondition: city has enough treasury
+   * @return if the city had enough treasury to create a unit
+   */
   public boolean produceUnit();
 
+  /** adds to the treasury
+   *
+   */
   public void harvest();
 
 }

@@ -100,7 +100,7 @@ public class GameImpl implements Game {
     public void endOfRound(){
         age += GameConstants.INCREMENT_TIME;
 
-        w.updateAllCityResources();
+        w.updateAllCityTreasury();
 
         w.produceAllCityUnits();
 

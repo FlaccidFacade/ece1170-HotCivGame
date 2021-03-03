@@ -170,7 +170,7 @@ public class WorldImpl implements  World{
     }
 
     @Override
-    public void updateAllCityResources(){
+    public void updateAllCityTreasury(){
         for(City c: cities){
             c.harvest();
         }

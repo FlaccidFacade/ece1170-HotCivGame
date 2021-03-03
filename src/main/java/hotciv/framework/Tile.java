@@ -39,14 +39,34 @@ public interface Tile {
    */
   public String getTypeString();
 
+  /** adds a unit to this
+   *
+   * @param u
+   */
   public void addUnit(Unit u);
 
+  /** adds a city to this tile
+   *
+   * @param c the city that will be added to this tile
+   */
   public void addCity(City c);
 
+  /** gives this tile's unit
+   *
+   * @return unit this is the unit on this tile
+   */
   public Unit getUnit();
 
+  /** gives this tile's city
+   *
+   * @return city this is the city on this tile
+   *
+   */
   public City getCity();
 
+  /** makes this tile's unit null
+   *
+   */
   public void removeUnit();
 
 
