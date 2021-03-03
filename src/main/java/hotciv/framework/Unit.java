@@ -66,8 +66,6 @@ public interface Unit {
 
   public void fortify();
 
-  public void buildCity();
-
   public void move();
 
   public void setMoveCount(int m);

@@ -22,24 +22,28 @@ public class UnitImpl implements Unit {
                 defense = GameConstants.ARCHER_DEFENSIVE_STRENGTH;
                 attack = GameConstants.ARCHER_ATTACKING_STRENGTH;
                 action = GameConstants.ARCHER_ACTION;
+                cost = GameConstants.ARCHER_COST;
                 break;
             case GameConstants.LEGION:
                 unitType = UnitType;
                 defense = GameConstants.LEGION_DEFENSIVE_STRENGTH;
                 attack = GameConstants.LEGION_ATTACKING_STRENGTH;
                 action = GameConstants.LEGION_ACTION;
+                cost = GameConstants.LEGION_COST;
                 break;
             case GameConstants.SETTLER:
                 unitType = UnitType;
                 defense = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
                 attack = GameConstants.SETTLER_ATTACKING_STRENGTH;
                 action = GameConstants.SETTLER_ACTION;
+                cost = GameConstants.SETTLER_COST;
                 break;
             default:
                 unitType = GameConstants.SETTLER;
                 defense = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
                 attack = GameConstants.SETTLER_ATTACKING_STRENGTH;
                 action = GameConstants.SETTLER_ACTION;
+                cost = GameConstants.SETTLER_COST;
         }
     }
 
@@ -74,10 +78,6 @@ public class UnitImpl implements Unit {
         moveCount = 0;
     }
 
-    @Override
-    public void buildCity() {
-
-    }
 
     @Override
     public void move() {
