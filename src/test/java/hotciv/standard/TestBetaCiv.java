@@ -33,7 +33,41 @@ public class TestBetaCiv {
     @Before
     public void setUp() {
         game = new GameImpl(layout);
+        game.setAgingStrategy( new BetaAgingStrategy());
     }
+
+
+    @Test
+    public void startAge(){
+
+    }
+
+    @Test
+    public void stage1(){
+
+    }
+    @Test
+    public void stage2(){
+
+    }
+    @Test
+    public void stage3(){
+
+    }
+
+    @Test
+    public void stage4(){
+
+    }
+    @Test
+    public void stage5(){
+
+    }
+    @Test
+    public void stage6(){
+
+    }
+
 
 
 

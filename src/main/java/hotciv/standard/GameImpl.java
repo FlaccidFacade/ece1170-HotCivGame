@@ -40,6 +40,7 @@ public class GameImpl implements Game {
     private Player currentTurn, firstPlayer;
     private World w;
     private Player winner;
+    private AgingStrategy agingStrat;
 
     public GameImpl(){
         age = GameConstants.START_TIME;
@@ -58,16 +59,23 @@ public class GameImpl implements Game {
         w.placeCity(new Position(4,1), new CityImpl(Player.BLUE));
     }
 
-    public GameImpl(String[] layout){
-        w = new WorldImpl(layout);
 
+    public GameImpl(String[] layout){
+        age = GameConstants.START_TIME;
+        w = new WorldImpl(layout);
     }
+
+    public void setAgingStrategy(AgingStrategy as){
+        agingStrat = as;
+    }
+
     public Tile getTileAt( Position p ) { return w.getTileAt(p); }
     public Unit getUnitAt( Position p ) { return w.getUnitAt(p); }
     public City getCityAt( Position p ) { return w.getCityAt(p); }
     public Player getPlayerInTurn() { return currentTurn; }
     public Player getWinner() { return winner ;}
     public int getAge() { return age; }
+
 
     public boolean moveUnit( Position from, Position to ) {
 
@@ -96,7 +104,8 @@ public class GameImpl implements Game {
     }
 
     public void endOfRound(){
-        age += GameConstants.INCREMENT_TIME;
+
+        age = agingStrat.ageWorld(age);
 
         w.updateAllCityTreasury();
 

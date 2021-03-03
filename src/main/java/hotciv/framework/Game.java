@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import hotciv.standard.BetaAgingStrategy;
+
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
 
@@ -135,5 +137,5 @@ public interface Game {
    */
   public void performUnitActionAt( Position p );
 
-
+  public  void setAgingStrategy(AgingStrategy as);
 }
