@@ -97,7 +97,7 @@ public class GameConstants {
   public static final int NUMBER_OF_PLAYERS = 2;
 
   //Game time
-  public static final int START_TIME = 4000;
+  public static final int START_TIME = -4000;
   public static final int INCREMENT_TIME = 100;
 
   //

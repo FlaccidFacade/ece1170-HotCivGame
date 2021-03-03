@@ -86,12 +86,9 @@ public class GameImpl implements Game {
   }
   public void endOfTurn() {
     currentTurn = currentTurn.next();
-    age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
+    //age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
 
-    //does game have a time limit? if so check here
-    if(age < 3000){
-        winner = Player.RED;
-    }
+
 
     if(currentTurn == firstPlayer){
         round++;
@@ -102,11 +99,19 @@ public class GameImpl implements Game {
 
   public void endOfRound(){
       //TODO city growth, unit production 'resources', and maximize move counts
-      //ages
+      age += GameConstants.INCREMENT_TIME;
+
       w.updateAllCityResources();
       w.produceAllCityUnits();
 
+      //does game have a time limit? if so check here
+      if(age >= -3000){
+          winner = Player.RED;
+      }
+
   }
+
+
   public void changeWorkforceFocusInCityAt( Position p, String balance ) {
       City c = w.getCityAt(p);
       c.setWorkforceBalance(balance);

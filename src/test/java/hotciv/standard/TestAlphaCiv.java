@@ -3,6 +3,8 @@ package hotciv.standard;
 import hotciv.framework.*;
 
 import org.junit.*;
+import org.junit.experimental.theories.suppliers.TestedOn;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -104,11 +106,21 @@ public class TestAlphaCiv {
   }
 
   @Test
+  public void aging(){
+    assertThat(game.getAge(), is(-4000));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getAge(), is(-3900));
+    for( int i = 0; i < 100; i++){
+      game.endOfTurn();
+    }
+    assertThat(game.getAge(), is(1100));
+  }
+
+  @Test
   public void roundTest() {
     //TODO testing if rounds work city growth and unit production... etc?
-    //round is 100 years
-    //game starts at 4,000BC
-
+ 
     // production is 6 resources red has a city at 1,1 and blue at 4,1 make sure they both have 6
 
     game.endOfTurn();
@@ -139,9 +151,9 @@ public class TestAlphaCiv {
   @Test
   public void redWins(){
    //at 3000BC red must win
-    for(int i = 0; i < 21; i++)
+    for(int i = 0; i < 20; i++) {
       game.endOfTurn();
-
+    }
     assertThat(game.getWinner(),is(Player.RED));
   }
 
