@@ -220,7 +220,7 @@ public class TestAlphaCiv {
   public void movingAUnit(){
 
     assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
-  
+
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
 
 
@@ -239,7 +239,8 @@ public class TestAlphaCiv {
   public void refuseInvalidMove(){
     //TODO test move doesn't work if moveCount is 0 or less
 
-    //TODO test move doesn't work if unit is already @ the 'to' position
+    //TODO test move doesn't work if unit is already @ the 'to' position and that unit is its own.
+    // i.e. a move to another players unit is an attack
 
   }
 
