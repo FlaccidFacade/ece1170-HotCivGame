@@ -65,7 +65,6 @@ public class TestAlphaCiv {
     assertThat(game.getTileAt(new Position(1,0)).getTypeString(),is(GameConstants.OCEANS));
   }
 
-
   @Test
   public void ownershipForMovement(){
     assertThat(game.moveUnit(new Position(3,2),new Position(3,3)),is(Boolean.FALSE));
@@ -208,46 +207,43 @@ public class TestAlphaCiv {
 
   @Test
   public void attackingDestroys(){
-    //TODO red's unit attack and destroy blue's unit
+    //TODO blue's unit attack and destroy red's unit
+    game.endOfTurn();
+    assertThat(game.moveUnit(new Position(3,2), new Position(2,1)), is(true));
+
+    assertThat(game.getTileAt(new Position( 3,2)).getUnit(), is(nullValue()));
+
+    assertThat(game.getTileAt(new Position(2,1)).getUnit().getOwner(), is(Player.BLUE));
+
+    assertThat(game.getTileAt( new Position(2,1)).getUnit().getTypeString(), is(GameConstants.LEGION));
   }
 
   @Test
   public void movingAUnit(){
-
     assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
 
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
 
-
     assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(0));
-
 
     assertThat(game.getTileAt(new Position( 2,0)).getUnit(), is(nullValue()));
 
     assertThat(game.getTileAt(new Position( 3,0)).getUnit(), is(notNullValue()));
-
-
   }
-
 
   @Test
   public void refuseInvalidMove1(){
     // test move doesn't work if moveCount is 0 or less
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
     assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(false));
-
-
   }
 
   @Test
   public void refuseInvalidMove2(){
-
     //test move doesn't work if unit is already @ the 'to' position and that unit is its own.
     // i.e. a move to another players unit is an attack
     //NOTE: I ADDED AN ARCHER AT 2,1 FOR THIS TO FAIL
     assertThat(game.moveUnit(new Position(2,0), new Position(2,1)), is(false));
-
-
 
   }
 

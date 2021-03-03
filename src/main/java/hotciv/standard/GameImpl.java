@@ -74,7 +74,6 @@ public class GameImpl implements Game {
         //check if is unit and player has ownership and if unit can move and if distance is allowed
         if( (w.movable(from,to))
             && (w.getUnitAt(from) != null)
-            && (w.getUnitAt(to) == null)
             && (w.getUnitAt(from).getOwner() == currentTurn)
         ){
             Unit temp = w.getTileAt(from).getUnit();
@@ -99,7 +98,7 @@ public class GameImpl implements Game {
     }
 
     public void endOfRound(){
-        //TODO city growth, unit production 'resources', and maximize move counts
+        //TODO maximize move counts
         age += GameConstants.INCREMENT_TIME;
 
         w.updateAllCityResources();

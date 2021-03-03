@@ -112,8 +112,8 @@ public class WorldImpl implements  World{
         boolean ableNeighbor = false;
         boolean ableTerrain = false;
         boolean ableMoveCount = false;
+        boolean ableAttack = true;
         boolean able = false;
-
 
 
         List<Position> neighbors = getNeighbors(from);
@@ -137,17 +137,27 @@ public class WorldImpl implements  World{
             ableTerrain = true;
         }
 
-        Unit unit = world.get(from).getUnit();
-        if(unit.getMoveCount() > 0) {
+        Unit unitFrom = world.get(from).getUnit();
+        if(unitFrom.getMoveCount() > 0) {
             ableMoveCount = true;
         }else{
             ableMoveCount = false;
+        }
+
+        Unit unitTo = world.get(to).getUnit();
+        if(unitTo != null) {
+            if (unitTo.getOwner() != unitFrom.getOwner()) {
+                ableAttack = true;
+            } else {
+                ableAttack = false;
+            }
         }
 
         //Make sure the tile is a neighbor and terrain
         if(ableNeighbor == true
                 && ableTerrain == true
                 && ableMoveCount == true
+                && ableAttack == true
         ){
             able = true;
         }else{
@@ -156,7 +166,6 @@ public class WorldImpl implements  World{
 
         return able;
     }
-
 
     public void updateAllCityResources(){
         for(City c: cities){
