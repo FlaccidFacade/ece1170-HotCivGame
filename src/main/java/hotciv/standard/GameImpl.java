@@ -39,13 +39,11 @@ public class GameImpl implements Game {
     private int round =1;
     private Player currentTurn = Player.RED, firstPlayer = currentTurn;
     private World w;
-    private Player winner;
     private AgingStrategy agingStrat;
+    private WinningStrategy winningStrat;
 
     public GameImpl(){
         age = GameConstants.START_TIME;
-
-
         w = new WorldImpl();
         w.placeTile(new Position(1,0), new TileImpl(GameConstants.OCEANS));
         w.placeTile(new Position(3,2), new TileImpl(GameConstants.HILLS));
@@ -58,7 +56,6 @@ public class GameImpl implements Game {
         w.placeCity(new Position(4,1), new CityImpl(Player.BLUE));
     }
 
-
     public GameImpl(String[] layout){
         age = GameConstants.START_TIME;
         w = new WorldImpl(layout);
@@ -68,13 +65,29 @@ public class GameImpl implements Game {
         agingStrat = as;
     }
 
-    public Tile getTileAt( Position p ) { return w.getTileAt(p); }
-    public Unit getUnitAt( Position p ) { return w.getUnitAt(p); }
-    public City getCityAt( Position p ) { return w.getCityAt(p); }
-    public Player getPlayerInTurn() { return currentTurn; }
-    public Player getWinner() { return winner ;}
-    public int getAge() { return age; }
+    public void setWinningStrategy(WinningStrategy ws){
+        winningStrat = ws;
+    }
 
+    public Tile getTileAt( Position p ) { return w.getTileAt(p); }
+
+    public void placeTileAt( Position p , Tile t) { w.placeTile(p,t);}
+
+    public Unit getUnitAt( Position p ) { return w.getUnitAt(p); }
+
+    public void placeUnitAt( Position p , Unit u) { w.placeUnit(p,u);}
+
+    public City getCityAt( Position p ) { return w.getCityAt(p); }
+
+    public void placeCityAt(Position p , City c) { w.placeCity(p,c);}
+
+    public Player getPlayerInTurn() { return currentTurn; }
+
+    public Player getWinner() {
+        return winningStrat.getWinner(age,w) ;
+    }
+
+    public int getAge() { return age; }
 
     public boolean moveUnit( Position from, Position to ) {
 
@@ -91,9 +104,9 @@ public class GameImpl implements Game {
         }
         return false;
     }
+
     public void endOfTurn() {
         currentTurn = currentTurn.next();
-        //age -= GameConstants.INCREMENT_TIME/GameConstants.NUMBER_OF_PLAYERS;
 
         if(currentTurn == firstPlayer && round > 0){
             round++;
@@ -103,30 +116,23 @@ public class GameImpl implements Game {
     }
 
     public void endOfRound(){
-
         age = agingStrat.ageWorld(age);
-
         w.updateAllCityTreasury();
-
         w.produceAllCityUnits();
-
         w.updateAllMoveCounts();
-        //does game have a time limit? if so check here
-        if(age >= -3000){
-            winner = Player.RED;
-        }
 
     }
-
 
     public void changeWorkforceFocusInCityAt( Position p, String balance ) {
         City c = w.getCityAt(p);
         c.setWorkforceBalance(balance);
     }
+
     public void changeProductionInCityAt( Position p, String unitType ) {
         City c = w.getCityAt(p);
         c.changeProduction(unitType);
     }
+
     public void performUnitActionAt( Position p ) {
         //
     }

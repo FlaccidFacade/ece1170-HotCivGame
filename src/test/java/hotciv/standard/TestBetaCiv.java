@@ -11,37 +11,58 @@ import java.util.*;
 
 public class TestBetaCiv {
     private Game game;
-     String[] layout = new String[] {
-            "...ooMooooo.....",
-            "..ohhoooofffoo..",
-            ".oooooMooo...oo.",
-            ".ooMMMoooo..oooo",
-            "...ofooohhoooo..",
-            ".ofoofooooohhoo.",
-            "...ooo..........",
-            ".ooooo.ooohooM..",
-            ".ooooo.oohooof..",
-            "offfoooo.offoooo",
-            "oooooooo...ooooo",
-            ".ooMMMoooo......",
-            "..ooooooffoooo..",
-            "....ooooooooo...",
-            "..ooohhoo.......",
-            ".....ooooooooo..",
+//     String[] layout = new String[] {
+//            "...ooMooooo.....",
+//            "..ohhoooofffoo..",
+//            ".oooooMooo...oo.",
+//            ".ooMMMoooo..oooo",
+//            "...ofooohhoooo..",
+//            ".ofoofooooohhoo.",
+//            "...ooo..........",
+//            ".ooooo.ooohooM..",
+//            ".ooooo.oohooof..",
+//            "offfoooo.offoooo",
+//            "oooooooo...ooooo",
+//            ".ooMMMoooo......",
+//            "..ooooooffoooo..",
+//            "....ooooooooo...",
+//            "..ooohhoo.......",
+//            ".....ooooooooo..",
+//    };
+    String[] layout = new String[] {
+            "ohoooooooooooooo",
+            ".ooooooooooooooo",
+            "ooMooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo"
     };
-    /** Fixture for alphaciv testing. */
     @Before
     public void setUp() {
         game = new GameImpl(layout);
         game.setAgingStrategy( new BetaAgingStrategy());
+        game.setWinningStrategy( new BetaWinningStrategy());
+
     }
 
-    //TODO create beta aging algorithm and test
+    @Test
+    public void spotTest(){
+        //TODO spot test map
+    }
     @Test
     public void startAge(){
         assertThat(game.getAge(), is(-4000));
     }
-
     @Test
     public void stage1(){
         game.endOfTurn();
@@ -86,7 +107,6 @@ public class TestBetaCiv {
         assertThat(game.getAge(), is(1750));
 
     }
-
     @Test
     public void stage4(){
         for(int i = 0; i < 152; i ++){
@@ -123,6 +143,20 @@ public class TestBetaCiv {
         }
         assertThat(game.getAge(), is(2021));
     }
+    @Test
+    public void winningStrategyTest(){
+        //"conquers all cities in the world"
+        //
+        //FAKE that red has ownership of all cities
+        game.placeCityAt(new Position(1,5), new CityImpl(Player.BLUE));
+        game.placeCityAt(new Position(3,8), new CityImpl(Player.BLUE));
 
+        assertThat(game.getWinner(), is(Player.BLUE));
+        assertThat(game.getWinner(), is(not(Player.RED)));
+        game.placeCityAt(new Position(1,5), new CityImpl(Player.RED));
+
+        assertThat(game.getWinner(), is(nullValue()));
+
+    }
 
 }

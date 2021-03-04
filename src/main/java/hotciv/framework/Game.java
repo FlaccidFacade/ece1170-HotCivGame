@@ -1,5 +1,6 @@
 package hotciv.framework;
 
+import hotciv.standard.AlphaWinningStrategy;
 import hotciv.standard.BetaAgingStrategy;
 
 /** Game is the central interface allowing a client to access and
@@ -138,4 +139,11 @@ public interface Game {
   public void performUnitActionAt( Position p );
 
   public  void setAgingStrategy(AgingStrategy as);
+
+  public void setWinningStrategy(WinningStrategy ws);
+
+  public void placeTileAt(Position p, Tile t);
+  public void placeUnitAt(Position p, Unit u);
+  public void placeCityAt(Position p, City c);
+
 }

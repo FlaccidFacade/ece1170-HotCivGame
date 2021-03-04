@@ -46,6 +46,7 @@ public class TestAlphaCiv {
   public void setUp() {
     game = new GameImpl();
     game.setAgingStrategy(new AlphaAgingStrategy());
+    game.setWinningStrategy(new AlphaWinningStrategy());
   }
 
   // FRS p. 455 states that 'Red is the first player to take a turn'.
@@ -212,7 +213,7 @@ public class TestAlphaCiv {
   @Test
   public void redWins(){
     //at 3000BC red must win
-    for(int i = 0; i < 20; i++) {
+    for(int i = 0; i < 40; i++) {
       game.endOfTurn();
     }
     assertThat(game.getWinner(),is(Player.RED));
