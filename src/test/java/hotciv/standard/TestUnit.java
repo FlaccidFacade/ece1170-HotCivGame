@@ -35,9 +35,6 @@ public class TestUnit{
         unit.setMoveCount(2);
 
         assertThat(unit.getMoveCount(),is(2));
-        unit.fortify();
-
-        assertThat(unit.getMoveCount(),is(0));
     }
     @Test
     public void checkAttack(){
