@@ -3,7 +3,6 @@ package hotciv.standard;
 import hotciv.framework.*;
 
 import org.junit.*;
-import org.junit.experimental.theories.suppliers.TestedOn;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -47,9 +46,19 @@ public class TestAlphaCiv {
     game = new GameImpl();
     game.setAgingStrategy(new AlphaAgingStrategy());
     game.setWinningStrategy(new AlphaWinningStrategy());
+    game.setActionStrategy(new AlphaActionStrategy());
   }
 
-  // FRS p. 455 states that 'Red is the first player to take a turn'.
+
+  @Test
+  public void testUnitAction(){
+    assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(),is(1));
+    assertThat(game.getUnitAt(new Position(2,0)).getDefensiveStrength(),is(3));
+    game.performUnitActionAt(new Position(2,0));
+    assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(),is(0));
+    assertThat(game.getUnitAt(new Position(2,0)).getDefensiveStrength(),is(4));
+  }
+
   @Test
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));

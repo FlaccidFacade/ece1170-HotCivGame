@@ -60,17 +60,26 @@ public class WorldImpl implements  World{
     @Override
     public void placeCity(Position p, City c) {
         Tile t = world.get(p);
-        t.addCity(c);
-        cities.add(c);
-         world.put(p,t);
+        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
+            return;
+        }else{
+            t.addCity(c);
+            cities.add(c);
+            world.put(p,t);
+        }
+
     }
 
     @Override
     public void placeUnit(Position p, Unit u) {
         Tile t = world.get(p);
-        t.addUnit(u);
-        units.add(u);
-        world.put(p,t);
+        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
+           return;
+        }else{
+            t.addUnit(u);
+            units.add(u);
+            world.put(p,t);
+        }
     }
 
     @Override

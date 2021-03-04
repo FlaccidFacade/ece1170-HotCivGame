@@ -41,6 +41,7 @@ public class GameImpl implements Game {
     private World w;
     private AgingStrategy agingStrat;
     private WinningStrategy winningStrat;
+    private ActionStrategy actionStrat;
 
     public GameImpl(){
         age = GameConstants.START_TIME;
@@ -61,12 +62,16 @@ public class GameImpl implements Game {
         w = new WorldImpl(layout);
     }
 
-    public void setAgingStrategy(AgingStrategy as){
-        agingStrat = as;
+    public void setAgingStrategy(AgingStrategy aging){
+        agingStrat = aging;
     }
 
-    public void setWinningStrategy(WinningStrategy ws){
-        winningStrat = ws;
+    public void setWinningStrategy(WinningStrategy winning){
+        winningStrat = winning;
+    }
+
+    public void setActionStrategy(ActionStrategy action){
+        actionStrat = action;
     }
 
     public Tile getTileAt( Position p ) { return w.getTileAt(p); }
@@ -134,7 +139,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt( Position p ) {
-        //
+       actionStrat.performAction(p,w);
     }
 
 

@@ -12,9 +12,11 @@ public class UnitImpl implements Unit {
     private int moveCount;
     private int cost;
     private String action;
+    private boolean fortified;
 
     public UnitImpl(Player Owner, String UnitType){
         owner = Owner;
+        fortified = false;
         moveCount = 1;
         switch (UnitType){
             case GameConstants.ARCHER:
@@ -73,9 +75,8 @@ public class UnitImpl implements Unit {
     }
 
     @Override
-    public void fortify() {
-        defense += 1;
-        moveCount = 0;
+    public void setDefensiveStrength(int strength) {
+        defense = strength;
     }
 
     @Override

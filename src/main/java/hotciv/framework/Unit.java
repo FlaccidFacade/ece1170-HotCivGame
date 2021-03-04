@@ -64,10 +64,10 @@ public interface Unit {
    */
   public int getAttackingStrength();
 
-  /** adds to defense and immobilizes
+  /** sets defense
    *
    */
-  public void fortify();
+  public void setDefensiveStrength(int strength);
 
   /** reduces move count by one
    *

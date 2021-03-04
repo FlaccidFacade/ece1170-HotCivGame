@@ -6,29 +6,9 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import java.util.*;
-
 
 public class TestBetaCiv {
     private Game game;
-//     String[] layout = new String[] {
-//            "...ooMooooo.....",
-//            "..ohhoooofffoo..",
-//            ".oooooMooo...oo.",
-//            ".ooMMMoooo..oooo",
-//            "...ofooohhoooo..",
-//            ".ofoofooooohhoo.",
-//            "...ooo..........",
-//            ".ooooo.ooohooM..",
-//            ".ooooo.oohooof..",
-//            "offfoooo.offoooo",
-//            "oooooooo...ooooo",
-//            ".ooMMMoooo......",
-//            "..ooooooffoooo..",
-//            "....ooooooooo...",
-//            "..ooohhoo.......",
-//            ".....ooooooooo..",
-//    };
     String[] layout = new String[] {
             "ohoooooooooooooo",
             ".ooooooooooooooo",
@@ -55,10 +35,6 @@ public class TestBetaCiv {
 
     }
 
-    @Test
-    public void spotTest(){
-        //TODO spot test map
-    }
     @Test
     public void startAge(){
         assertThat(game.getAge(), is(-4000));
@@ -158,5 +134,6 @@ public class TestBetaCiv {
         assertThat(game.getWinner(), is(nullValue()));
 
     }
+
 
 }

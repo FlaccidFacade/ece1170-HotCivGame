@@ -138,9 +138,13 @@ public interface Game {
    */
   public void performUnitActionAt( Position p );
 
-  public  void setAgingStrategy(AgingStrategy as);
+  public  void setAgingStrategy(AgingStrategy aging);
 
-  public void setWinningStrategy(WinningStrategy ws);
+  public void setWinningStrategy(WinningStrategy winning);
+
+  public void setActionStrategy(ActionStrategy action);
+
+
 
   public void placeTileAt(Position p, Tile t);
   public void placeUnitAt(Position p, Unit u);
