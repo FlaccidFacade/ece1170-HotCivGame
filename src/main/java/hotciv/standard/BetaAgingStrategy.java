@@ -8,7 +8,7 @@ public class BetaAgingStrategy implements AgingStrategy {
     public int ageWorld(int currentAge) {
 
         //first determine what stage we are in
-        if(currentAge <100){
+        if(currentAge < -100){
            currentAge += 100;
         }else if( currentAge < -1) {
             currentAge += 99;

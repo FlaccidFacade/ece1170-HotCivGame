@@ -36,17 +36,16 @@ limitations under the License.
 public class GameImpl implements Game {
     //hot fix change
     private int age;
-    private int round;
-    private Player currentTurn, firstPlayer;
+    private int round =1;
+    private Player currentTurn = Player.RED, firstPlayer = currentTurn;
     private World w;
     private Player winner;
     private AgingStrategy agingStrat;
 
     public GameImpl(){
         age = GameConstants.START_TIME;
-        round = 1;
-        currentTurn = Player.RED;
-        firstPlayer = currentTurn;
+
+
         w = new WorldImpl();
         w.placeTile(new Position(1,0), new TileImpl(GameConstants.OCEANS));
         w.placeTile(new Position(3,2), new TileImpl(GameConstants.HILLS));
