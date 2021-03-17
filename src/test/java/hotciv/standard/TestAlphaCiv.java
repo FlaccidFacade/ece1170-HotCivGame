@@ -221,6 +221,7 @@ public class TestAlphaCiv {
 
   @Test
   public void redWins(){
+    assertThat(game.getWinner(),is(nullValue()));
     //at 3000BC red must win
     for(int i = 0; i < 40; i++) {
       game.endOfTurn();

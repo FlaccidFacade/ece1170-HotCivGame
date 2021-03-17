@@ -32,7 +32,6 @@ public class TestBetaCiv {
         game = new GameImpl(layout);
         game.setAgingStrategy( new BetaAgingStrategy());
         game.setWinningStrategy( new BetaWinningStrategy());
-
     }
 
     @Test
