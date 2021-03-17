@@ -95,11 +95,14 @@ public class GameImpl implements Game {
     public int getAge() { return age; }
 
     public boolean moveUnit( Position from, Position to ) {
+        boolean existsOnFromTile = w.getUnitAt(from) != null;
+        boolean playerHasOwnerShip = w.getUnitAt(from).getOwner() == currentTurn;
+        boolean unitIsMovable = w.movable(from,to);
 
         //check if is unit and player has ownership and if unit can move and if distance is allowed
-        if( (w.movable(from,to))
-            && (w.getUnitAt(from) != null)
-            && (w.getUnitAt(from).getOwner() == currentTurn)
+        if( unitIsMovable &&
+            existsOnFromTile &&
+            playerHasOwnerShip
         ){
             Unit temp = w.getTileAt(from).getUnit();
             w.removeUnit(from);
@@ -111,6 +114,7 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
+
         currentTurn = currentTurn.next();
 
         if(currentTurn == firstPlayer && round > 0){
