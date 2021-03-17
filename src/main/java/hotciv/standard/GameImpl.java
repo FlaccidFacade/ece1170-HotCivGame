@@ -89,7 +89,7 @@ public class GameImpl implements Game {
     public Player getPlayerInTurn() { return currentTurn; }
 
     public Player getWinner() {
-        return winningStrat.getWinner(age,w) ;
+       return  winningStrat.getWinner(age,w) ;
     }
 
     public int getAge() { return age; }
