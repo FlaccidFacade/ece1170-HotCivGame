@@ -38,7 +38,7 @@ public class GameImpl implements Game {
     private int age;
     private int round =1;
     private Player currentTurn = Player.RED, firstPlayer = currentTurn;
-    private World w;
+    private World w;//TODO rename this variable to something more comprehensive. from Reagan Dowling
     private AgingStrategy agingStrat;
     private WinningStrategy winningStrat;
     private ActionStrategy actionStrat;
@@ -46,6 +46,7 @@ public class GameImpl implements Game {
     public GameImpl(){
         age = GameConstants.START_TIME;
         w = new WorldImpl();
+        //TODO from Reagan Dowling's code review make this a layout and pass to world, "same thing same way"
         w.placeTile(new Position(1,0), new TileImpl(GameConstants.OCEANS));
         w.placeTile(new Position(3,2), new TileImpl(GameConstants.HILLS));
         w.placeTile(new Position(2,2), new TileImpl(GameConstants.MOUNTAINS));
@@ -96,8 +97,16 @@ public class GameImpl implements Game {
 
     public boolean moveUnit( Position from, Position to ) {
         boolean existsOnFromTile = w.getUnitAt(from) != null;
+
+        if( ! existsOnFromTile) return false;
+
         boolean playerHasOwnerShip = w.getUnitAt(from).getOwner() == currentTurn;
+
+        if( ! playerHasOwnerShip) return false;
+
         boolean unitIsMovable = w.movable(from,to);
+
+        if( ! unitIsMovable) return false;
 
         //check if is unit and player has ownership and if unit can move and if distance is allowed
         if( unitIsMovable &&
