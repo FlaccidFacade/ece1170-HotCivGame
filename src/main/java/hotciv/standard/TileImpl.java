@@ -2,8 +2,6 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import java.io.File;
-
 public class TileImpl implements Tile{
     String type;
     City city;
