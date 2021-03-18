@@ -91,7 +91,6 @@ public class CityImpl implements City{
                 }
 
                 break;
-
         }
         return false;
     }

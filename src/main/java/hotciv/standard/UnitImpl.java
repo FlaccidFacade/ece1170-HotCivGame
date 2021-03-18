@@ -7,45 +7,45 @@ public class UnitImpl implements Unit {
     private Player owner;
 
     private String unitType;
-    private int attack;
-    private int defense;
+    private int attackStrength;
+    private int defenseStrength;
     private int moveCount;
     private int cost;
     private String action;
     private boolean fortified;
 
-    public UnitImpl(Player Owner, String UnitType){
-        owner = Owner;
+    public UnitImpl(Player owner, String unittype){
+        this.owner = owner;
         fortified = false;
         moveCount = 1;
-        switch (UnitType){
+        switch (unittype){
             case GameConstants.ARCHER:
-                unitType = UnitType;
-                defense = GameConstants.ARCHER_DEFENSIVE_STRENGTH;
-                attack = GameConstants.ARCHER_ATTACKING_STRENGTH;
-                action = GameConstants.ARCHER_ACTION;
-                cost = GameConstants.ARCHER_COST;
+                this.unitType = unittype;
+                this.defenseStrength = GameConstants.ARCHER_DEFENSIVE_STRENGTH;
+                this.attackStrength = GameConstants.ARCHER_ATTACKING_STRENGTH;
+                this.action = GameConstants.ARCHER_ACTION;
+                this.cost = GameConstants.ARCHER_COST;
                 break;
             case GameConstants.LEGION:
-                unitType = UnitType;
-                defense = GameConstants.LEGION_DEFENSIVE_STRENGTH;
-                attack = GameConstants.LEGION_ATTACKING_STRENGTH;
-                action = GameConstants.LEGION_ACTION;
-                cost = GameConstants.LEGION_COST;
+                this.unitType = unittype;
+                this.defenseStrength = GameConstants.LEGION_DEFENSIVE_STRENGTH;
+                this.attackStrength = GameConstants.LEGION_ATTACKING_STRENGTH;
+                this.action = GameConstants.LEGION_ACTION;
+                this.cost = GameConstants.LEGION_COST;
                 break;
             case GameConstants.SETTLER:
-                unitType = UnitType;
-                defense = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
-                attack = GameConstants.SETTLER_ATTACKING_STRENGTH;
-                action = GameConstants.SETTLER_ACTION;
-                cost = GameConstants.SETTLER_COST;
+                this.unitType = unittype;
+                this.defenseStrength = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
+                this.attackStrength = GameConstants.SETTLER_ATTACKING_STRENGTH;
+                this.action = GameConstants.SETTLER_ACTION;
+                this.cost = GameConstants.SETTLER_COST;
                 break;
             default:
-                unitType = GameConstants.SETTLER;
-                defense = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
-                attack = GameConstants.SETTLER_ATTACKING_STRENGTH;
-                action = GameConstants.SETTLER_ACTION;
-                cost = GameConstants.SETTLER_COST;
+                this.unitType = GameConstants.SETTLER;
+                this.defenseStrength = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
+                this.attackStrength = GameConstants.SETTLER_ATTACKING_STRENGTH;
+                this.action = GameConstants.SETTLER_ACTION;
+                this.cost = GameConstants.SETTLER_COST;
         }
     }
 
@@ -66,17 +66,17 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getDefensiveStrength() {
-        return defense;
+        return defenseStrength;
     }
 
     @Override
     public int getAttackingStrength() {
-        return attack;
+        return attackStrength;
     }
 
     @Override
-    public void setDefensiveStrength(int strength) {
-        defense = strength;
+    public void setDefensiveStrength(int defenseStrength) {
+        this.defenseStrength = defenseStrength;
     }
 
     @Override

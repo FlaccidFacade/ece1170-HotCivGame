@@ -12,17 +12,17 @@ public class TileImpl implements Tile{
     File graphic;
 
 
-    public TileImpl(String t){
+    public TileImpl(String type){
 
-        if(t.equalsIgnoreCase(GameConstants.PLAINS)
-                || t.equalsIgnoreCase(GameConstants.OCEANS)
-                || t.equalsIgnoreCase(GameConstants.FOREST)
-                || t.equalsIgnoreCase(GameConstants.HILLS)
-                || t.equalsIgnoreCase(GameConstants.MOUNTAINS)
+        if(type.equalsIgnoreCase(GameConstants.PLAINS)
+                || type.equalsIgnoreCase(GameConstants.OCEANS)
+                || type.equalsIgnoreCase(GameConstants.FOREST)
+                || type.equalsIgnoreCase(GameConstants.HILLS)
+                || type.equalsIgnoreCase(GameConstants.MOUNTAINS)
         ) {
-            type = t;
+            this.type = type;
         }else{
-            type = GameConstants.PLAINS;
+            this.type = GameConstants.PLAINS;
         }
         city = null;
         unit = null;
@@ -35,13 +35,13 @@ public class TileImpl implements Tile{
     }
 
     @Override
-    public void addUnit(Unit u){
-        unit = u;
+    public void addUnit(Unit unit){
+        this.unit = unit;
     }
 
     @Override
-    public void addCity(City c){
-        city = c;
+    public void addCity(City city){
+        this.city = city;
     }
 
     @Override
