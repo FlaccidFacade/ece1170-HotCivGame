@@ -30,7 +30,6 @@ limitations under the License.
 */
 
 public class GameImpl implements Game {
-    //hot fix change
     private int age;
     private int round =1;
     private Player currentTurn = Player.RED, firstPlayer = currentTurn;
@@ -40,12 +39,8 @@ public class GameImpl implements Game {
     private ActionStrategy actionStrat;
 
     public GameImpl(){
-
         age = GameConstants.START_TIME;
-
         world = new WorldImpl();
-
-
     }
 
     public GameImpl(String[] layout){

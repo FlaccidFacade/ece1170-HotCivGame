@@ -8,9 +8,6 @@ public class TileImpl implements Tile{
     String type;
     City city;
     Unit unit= null;
-    boolean movement;
-    File graphic;
-
 
     public TileImpl(String type){
 

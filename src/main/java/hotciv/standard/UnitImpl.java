@@ -12,11 +12,9 @@ public class UnitImpl implements Unit {
     private int moveCount;
     private int cost;
     private String action;
-    private boolean fortified;
 
     public UnitImpl(Player owner, String unittype){
         this.owner = owner;
-        fortified = false;
         moveCount = 1;
         switch (unittype){
             case GameConstants.ARCHER:
