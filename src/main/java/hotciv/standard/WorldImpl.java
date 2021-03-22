@@ -138,13 +138,15 @@ public class WorldImpl implements  World{
                 ableNeighbor = false;
             }
         }
+        if(!ableNeighbor) return false;
+
 
         //make sure move count is over 0
         Unit unitFrom = map.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
             ableMoveCount = true;
         }else{
-            ableMoveCount = false;
+            return false;
         }
 
         //make sure unit 'to' has proper ownership
@@ -153,7 +155,7 @@ public class WorldImpl implements  World{
             if (unitTo.getOwner() != unitFrom.getOwner()) {
                 ableAttack = true;
             } else {
-                ableAttack = false;
+                return false;
             }
         }
 
@@ -161,7 +163,7 @@ public class WorldImpl implements  World{
         Tile t = map.get(to);
 
         if(! this.ableTerrain(t)){
-            ableTerrain = false;
+            return false;
         }else{
             ableTerrain = true;
         }
@@ -174,7 +176,7 @@ public class WorldImpl implements  World{
         ){
             able = true;
         }else{
-            able = false;
+            return false;
         }
 
         return able;
