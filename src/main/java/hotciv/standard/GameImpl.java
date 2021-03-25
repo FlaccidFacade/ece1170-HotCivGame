@@ -76,6 +76,7 @@ public class GameImpl implements Game {
 
     public Player getWinner() {
         return winningStrat.getWinner(age, world) ;
+
     }
 
     public int getAge() { return age; }
