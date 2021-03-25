@@ -43,10 +43,36 @@ public class TestAlphaCiv {
   /** Fixture for alphaciv testing. */
   @Before
   public void setUp() {
-    game = new GameImpl();
+    String[] layout = new String[] {
+            "oooooooooooooooo",
+            ".ooooooooooooooo",
+            "ooMooooooooooooo",
+            "oohooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo"
+    };
+    game = new GameImpl(layout);
     game.setAgingStrategy(new AlphaAgingStrategy());
     game.setWinningStrategy(new AlphaWinningStrategy());
     game.setActionStrategy(new AlphaActionStrategy());
+
+
+    game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED,GameConstants.ARCHER));
+    game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED,GameConstants.ARCHER));
+    game.placeUnitAt(new Position(4,3), new UnitImpl(Player.RED,GameConstants.SETTLER));
+    game.placeUnitAt(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
+    game.placeCityAt(new Position(1,1), new CityImpl(Player.RED));
+    game.placeCityAt(new Position(4,1), new CityImpl(Player.BLUE));
   }
 
 
@@ -128,17 +154,17 @@ public class TestAlphaCiv {
 
   @Test
   public void updatingMovingCount(){
-    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
+    assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(), is(1));
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
-    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(0));
+    assertThat(game.getUnitAt(new Position(3,0)).getMoveCount(), is(0));
     assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(false));
 
     game.endOfTurn();
     game.endOfTurn();
 
-    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(1));
+    assertThat(game.getUnitAt(new Position(3,0)).getMoveCount(), is(1));
     assertThat(game.moveUnit(new Position(3,0), new Position(2,0)), is(true));
-    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(0));
+    assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(), is(0));
   }
 
   @Test
@@ -184,7 +210,7 @@ public class TestAlphaCiv {
     game.endOfTurn();
     assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
     assertThat(game.getUnitAt(new Position(1,1)), is(notNullValue()));
-    assertThat(game.getTileAt(new Position(1,1)).getUnit().getTypeString(), is("archer"));
+    assertThat(game.getUnitAt(new Position(1,1)).getTypeString(), is("archer"));
 
     game.endOfTurn();
     game.endOfTurn();
@@ -194,14 +220,14 @@ public class TestAlphaCiv {
     game.endOfTurn();
     assertThat(c.getTreasury(), is(4));
     assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
-    assertThat(game.getTileAt(new Position(0,1)).getUnit().getTypeString(), is("archer"));
+    assertThat(game.getUnitAt(new Position(0,1)).getTypeString(), is("archer"));
 
 
     game.endOfTurn();
     game.endOfTurn();
     assertThat(c.getTreasury(), is(0));
     assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
-    assertThat(game.getTileAt(new Position(0,2)).getUnit().getTypeString(), is("archer"));
+    assertThat(game.getUnitAt(new Position(0,2)).getTypeString(), is("archer"));
 
   }
 
@@ -235,24 +261,25 @@ public class TestAlphaCiv {
     game.endOfTurn();
     assertThat(game.moveUnit(new Position(3,2), new Position(2,1)), is(true));
 
-    assertThat(game.getTileAt(new Position( 3,2)).getUnit(), is(nullValue()));
+    assertThat(game.getUnitAt(new Position( 3,2)), is(nullValue()));
 
-    assertThat(game.getTileAt(new Position(2,1)).getUnit().getOwner(), is(Player.BLUE));
+    assertThat(game.getUnitAt(new Position(2,1)).getOwner(), is(Player.BLUE));
 
-    assertThat(game.getTileAt( new Position(2,1)).getUnit().getTypeString(), is(GameConstants.LEGION));
+    assertThat(game.getUnitAt( new Position(2,1)).getTypeString(), is(GameConstants.LEGION));
   }
 
   @Test
   public void movingAUnit(){
-    assertThat(game.getTileAt(new Position(2,0)).getUnit().getMoveCount(), is(1));
+
+    assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(), is(1));
 
     assertThat(game.moveUnit(new Position(2,0), new Position(3,0)), is(true));
 
-    assertThat(game.getTileAt(new Position(3,0)).getUnit().getMoveCount(), is(0));
+    assertThat(game.getUnitAt(new Position(3,0)).getMoveCount(), is(0));
 
-    assertThat(game.getTileAt(new Position( 2,0)).getUnit(), is(nullValue()));
+    assertThat(game.getUnitAt(new Position( 2,0)), is(nullValue()));
 
-    assertThat(game.getTileAt(new Position( 3,0)).getUnit(), is(notNullValue()));
+    assertThat(game.getUnitAt(new Position( 3,0)), is(notNullValue()));
   }
 
   @Test

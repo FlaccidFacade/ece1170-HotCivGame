@@ -9,19 +9,19 @@ import java.util.Map;
 
 public class WorldImpl implements  World{
 
-    private final Map<Position,Tile> world;
+    private final Map<Position,Tile> map;
     private List<City> cities;
     private List<Unit> units;
 
     public WorldImpl(){
-        world = new HashMap<Position,Tile>();
+        map = new HashMap<Position,Tile>();
         cities = new ArrayList<>();
         units = new ArrayList<>();
         setToPlains();
     }
 
     public WorldImpl(String[] layout){
-        world = new HashMap<Position,Tile>();
+        map = new HashMap<Position,Tile>();
         cities = new ArrayList<>();
         units = new ArrayList<>();
             String line;
@@ -36,7 +36,7 @@ public class WorldImpl implements  World{
                     if ( tileChar == 'f' ) { type = GameConstants.FOREST; }
                     if ( tileChar == 'h' ) { type = GameConstants.HILLS; }
                     Position p = new Position(r,c);
-                    world.put( p, new TileImpl(type));
+                    map.put( p, new TileImpl(type));
                 }
             }
     }
@@ -54,67 +54,67 @@ public class WorldImpl implements  World{
 
     @Override
     public void placeTile(Position p, Tile t) {
-       world.put(p, t);
+       map.put(p, t);
     }
 
     @Override
     public void placeCity(Position p, City c) {
-        Tile t = world.get(p);
-        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
+        Tile tile = map.get(p);
+        if(!this.ableTerrain(tile)){
             return;
         }else{
-            t.addCity(c);
+            tile.addCity(c);
             cities.add(c);
-            world.put(p,t);
+            map.put(p,tile);
         }
 
     }
 
     @Override
     public void placeUnit(Position p, Unit u) {
-        Tile t = world.get(p);
-        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
-           return;
+        Tile tile = map.get(p);
+        if(!this.ableTerrain(tile)){
+            return;
         }else{
-            t.addUnit(u);
+            tile.addUnit(u);
             units.add(u);
-            world.put(p,t);
+            map.put(p,tile);
         }
     }
 
     @Override
     public void removeUnit(Position p) {
-        Tile t = world.get(p);
+        Tile t = map.get(p);
         t.removeUnit();
         units.remove(t.getUnit());
     }
 
     @Override
     public int getSize() {
-        return world.size();
+        return map.size();
     }
 
     @Override
     public Tile getTileAt(Position p) {
-        Tile t = world.get(p);
+        Tile t = map.get(p);
         return t;
     }
 
     @Override
     public City getCityAt(Position p) {
-        Tile t = world.get(p);
+        Tile t = map.get(p);
         return t.getCity();
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        Tile t = world.get(p);
+        Tile t = map.get(p);
         return t.getUnit();
     }
 
     @Override
     public String getTerrainAt(Position p) {
-        Tile t = world.get(p);
+        Tile t = map.get(p);
         return t.getTypeString();
     }
 
@@ -138,30 +138,32 @@ public class WorldImpl implements  World{
                 ableNeighbor = false;
             }
         }
+        if(!ableNeighbor) return false;
+
 
         //make sure move count is over 0
-        Unit unitFrom = world.get(from).getUnit();
+        Unit unitFrom = map.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
             ableMoveCount = true;
         }else{
-            ableMoveCount = false;
+            return false;
         }
 
         //make sure unit 'to' has proper ownership
-        Unit unitTo = world.get(to).getUnit();
+        Unit unitTo = map.get(to).getUnit();
         if(unitTo != null) {
             if (unitTo.getOwner() != unitFrom.getOwner()) {
                 ableAttack = true;
             } else {
-                ableAttack = false;
+                return false;
             }
         }
 
         //make sure tile on 'to' is proper terrain
-        Tile t = world.get(to);
+        Tile t = map.get(to);
 
-        if(t.getTypeString().equalsIgnoreCase(GameConstants.OCEANS) || t.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS)){
-            ableTerrain = false;
+        if(! this.ableTerrain(t)){
+            return false;
         }else{
             ableTerrain = true;
         }
@@ -174,7 +176,7 @@ public class WorldImpl implements  World{
         ){
             able = true;
         }else{
-            able = false;
+            return false;
         }
 
         return able;
@@ -243,6 +245,16 @@ public class WorldImpl implements  World{
         }
         return neighbors;
     }
+
+    private boolean ableTerrain(Tile tile){
+        boolean properTerrain =
+                !(tile.getTypeString().equalsIgnoreCase(GameConstants.OCEANS)
+                || tile.getTypeString().equalsIgnoreCase(GameConstants.MOUNTAINS));
+
+        return properTerrain;
+    }
+
+
 }
 
 
