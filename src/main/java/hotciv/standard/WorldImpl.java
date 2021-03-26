@@ -214,7 +214,7 @@ public class WorldImpl implements  World{
         }
     }
 
-
+    @Override
     public int getCombinedDefenseStrength(Position center){
         int unitsDefense = getUnitAt(center).getDefensiveStrength();
         int terrainMultiplier = getTerrainMultiplier(center);
@@ -235,7 +235,7 @@ public class WorldImpl implements  World{
 
         return combinedDefense;
     }
-
+    @Override
     public int getCombinedAttackStrength(Position center){
         int unitsAttack = getUnitAt(center).getAttackingStrength();
         int terrainMultiplier = getTerrainMultiplier(center);
@@ -257,10 +257,15 @@ public class WorldImpl implements  World{
         return combinedAttack;
     }
 
+    @Override
     public List<Unit> getAllUnits(){
         return units;
     }
 
+    @Override
+    public List<City> getAllCities(){
+        return cities;
+    }
 
     private int getTerrainMultiplier(Position position){
         int multiplier = 1;

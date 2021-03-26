@@ -134,7 +134,8 @@ public class GameImpl implements Game {
     }
 
     public boolean attack(Position attacker, Position defender) {
-        boolean attackerWins = getUnitAt(attacker).getOwner() == battleStrategy.getVictor(attacker, defender, world).getOwner();
+        boolean attackerWins =
+                getUnitAt(attacker).getOwner() == battleStrategy.getVictor(attacker, defender, world).getOwner();
 
         if (attackerWins) {
             Unit temp = world.getTileAt(attacker).getUnit();
@@ -142,11 +143,13 @@ public class GameImpl implements Game {
             temp.move();
             world.placeUnit(defender, temp);
             //map.put(key, map.get(key) + 1);
+
             if(playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
                 playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
             }else{
                 playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
             }
+
         } else{
             world.removeUnit(attacker);
         }

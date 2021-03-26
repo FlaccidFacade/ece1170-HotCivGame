@@ -11,9 +11,12 @@ public class EpsilonBattleStrategy implements BattleStrategy {
         int combinedAttackStrength = world.getCombinedAttackStrength(attacker);
         int combinedDefenseStrength = world.getCombinedDefenseStrength(defender);
 
-        if(combinedAttackStrength > combinedDefenseStrength){
+        int die1 = (int)(Math.random()*6) + 1;
+        int die2 = (int)(Math.random()*6) + 1;
+
+        if((combinedAttackStrength * die1) > (combinedDefenseStrength * die2)){
             return world.getUnitAt(attacker);
-        }else if (combinedAttackStrength < combinedDefenseStrength){
+        }else if ((combinedAttackStrength * die1) < (combinedDefenseStrength * die2)){
             return world.getUnitAt(defender);
         }else{
             return world.getUnitAt(attacker);

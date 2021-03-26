@@ -96,5 +96,7 @@ public interface World {
 
     public int getCombinedAttackStrength(Position center);
 
-    public List getAllUnits();
+    public List<Unit> getAllUnits();
+
+    public List<City> getAllCities();
 }
