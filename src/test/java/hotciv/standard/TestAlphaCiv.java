@@ -65,11 +65,12 @@ public class TestAlphaCiv {
     game.setAgingStrategy(new AlphaAgingStrategy());
     game.setWinningStrategy(new AlphaWinningStrategy());
     game.setActionStrategy(new AlphaActionStrategy());
+    game.setBattleStrategy(new AlphaBattleStrategy());
 
 
-    game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED,GameConstants.ARCHER));
-    game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED,GameConstants.ARCHER));
-    game.placeUnitAt(new Position(4,3), new UnitImpl(Player.RED,GameConstants.SETTLER));
+    game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED, GameConstants.ARCHER));
+    game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED, GameConstants.ARCHER));
+    game.placeUnitAt(new Position(4,3), new UnitImpl(Player.RED, GameConstants.SETTLER));
     game.placeUnitAt(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
     game.placeCityAt(new Position(1,1), new CityImpl(Player.RED));
     game.placeCityAt(new Position(4,1), new CityImpl(Player.BLUE));

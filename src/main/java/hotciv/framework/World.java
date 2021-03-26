@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import java.util.List;
+
 public interface World {
 
 
@@ -86,4 +88,13 @@ public interface World {
      *
      */
     public void updateAllMoveCounts();
+
+    /**
+     *
+     */
+    public int getCombinedDefenseStrength(Position center);
+
+    public int getCombinedAttackStrength(Position center);
+
+    public List getAllUnits();
 }
