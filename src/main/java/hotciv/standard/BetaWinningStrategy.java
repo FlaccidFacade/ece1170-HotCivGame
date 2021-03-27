@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class BetaWinningStrategy implements WinningStrategy {
     @Override
-    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap) {
+    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap, int round) {
         List<City> cityList = world.getAllCities();
         Player winner = cityList.get(0).getOwner();
 

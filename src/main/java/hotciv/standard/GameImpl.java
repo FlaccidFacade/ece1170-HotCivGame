@@ -143,13 +143,20 @@ public class GameImpl implements Game {
             temp.move();
             world.placeUnit(defender, temp);
             //map.put(key, map.get(key) + 1);
-
-            if(playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
-                playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
+            //round test is 19
+            if( (winningStrategy instanceof ZetaWinningStrategy && round > 19)) {
+                if (playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
+                    playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
+                } else {
+                    playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
+                }
             }else{
-                playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
+                if (playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
+                    playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
+                } else {
+                    playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
+                }
             }
-
         } else{
             world.removeUnit(attacker);
         }

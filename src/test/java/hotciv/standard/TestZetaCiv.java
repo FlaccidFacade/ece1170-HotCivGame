@@ -35,7 +35,7 @@ public class TestZetaCiv {
     public void setUp() {
         game = new GameImpl(layout);
         game.setAgingStrategy( new AlphaAgingStrategy());
-        game.setWinningStrategy( new AlphaWinningStrategy());
+        game.setWinningStrategy( new ZetaWinningStrategy());
     }
 
 

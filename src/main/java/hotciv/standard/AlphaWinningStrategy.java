@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class AlphaWinningStrategy implements WinningStrategy {
     @Override
-    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap) {
+    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap, int round) {
         if(age >= -3000){
             return Player.RED;
         }

@@ -10,12 +10,14 @@ import java.util.HashMap;
 public class EpsilonWinningStrategy implements WinningStrategy {
 
     @Override
-    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap) {
-        for(Map.Entry<Player,Integer> entry : playerIntegerMap.entrySet()){
-            if(entry.getValue() == 3){
-                return entry.getKey();
+    public Player getWinner(int age, World world, Map<Player, Integer> playerIntegerMap, int round) {
+
+            for (Map.Entry<Player, Integer> entry : playerIntegerMap.entrySet()) {
+                if (entry.getValue() == 3) {
+                    return entry.getKey();
+                }
             }
-        }
+
       return null;
     }
 }
