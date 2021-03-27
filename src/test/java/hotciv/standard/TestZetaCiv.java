@@ -14,9 +14,9 @@ public class TestZetaCiv {
 
     private Game game;
     String[] layout = new String[] {
-            "ohoooooooooooooo",
-            ".ooooooooooooooo",
-            "ooMooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
+            "oooooooooooooooo",
             "oooooooooooooooo",
             "oooooooooooooooo",
             "oooooooooooooooo",
@@ -36,6 +36,8 @@ public class TestZetaCiv {
         game = new GameImpl(layout);
         game.setAgingStrategy( new AlphaAgingStrategy());
         game.setWinningStrategy( new ZetaWinningStrategy());
+        game.setBattleStrategy( new AlphaBattleStrategy());
+        game.setActionStrategy( new AlphaActionStrategy());
     }
 
 
@@ -78,6 +80,7 @@ public class TestZetaCiv {
         game.placeUnitAt(new Position(0,1), new UnitImpl(Player.BLUE, GameConstants.LEGION));
         // blue's unit attack and destroy red's unit
         game.endOfTurn();
+        assertThat(game.getPlayerInTurn(), is(Player.BLUE));
         assertThat(game.moveUnit(new Position(3,2), new Position(2,1)), is(true));
         //TODO Fake it
         game.placeUnitAt(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
@@ -85,6 +88,7 @@ public class TestZetaCiv {
         game.placeUnitAt(new Position(1,0), new UnitImpl(Player.RED, GameConstants.LEGION));
         game.endOfTurn();
         game.endOfTurn();
+        assertThat(game.getPlayerInTurn(), is(Player.BLUE));
         assertThat(game.moveUnit(new Position(2,1), new Position(1,0)) , is(true));
 
         game.placeUnitAt(new Position(2,1), new UnitImpl(Player.BLUE, GameConstants.LEGION));
