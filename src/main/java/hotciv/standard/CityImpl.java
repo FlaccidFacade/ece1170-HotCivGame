@@ -97,7 +97,10 @@ public class CityImpl implements City{
 
     @Override
     public void harvest(){
-        treasury += 6;
+        if(workforceBalance == GameConstants.productionFocus){
+            treasury += 6;
+        }
+
     }
 
 }

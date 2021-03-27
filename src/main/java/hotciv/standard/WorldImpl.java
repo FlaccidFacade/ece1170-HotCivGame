@@ -13,7 +13,10 @@ public class WorldImpl implements  World{
     private final Map<Position,Tile> map;
     private List<City> cities;
     private List<Unit> units;
-
+    //TODO add population strategy
+    //TODO add workforceFocus strategy
+    //TODO pass these from Game to here and access cities to harvest and populate properly
+    //TODO do this for alpha then go to Eta
     public WorldImpl(){
         map = new HashMap<>();
         cities = new ArrayList<>();
@@ -173,7 +176,6 @@ public class WorldImpl implements  World{
             c.harvest();
         }
     }
-
 
     @Override
     public void produceAllCityUnits(){
