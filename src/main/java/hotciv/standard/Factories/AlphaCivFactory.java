@@ -2,35 +2,36 @@ package hotciv.standard.Factories;
 
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
+import hotciv.standard.Strategies.*;
 
 public class AlphaCivFactory implements HotCivFactory {
     @Override
     public ActionStrategy createActionStrategy() {
-        return null;
+        return new AlphaActionStrategy();
     }
 
     @Override
     public AgingStrategy createAgingStrategy() {
-        return null;
+        return new AlphaAgingStrategy();
     }
 
     @Override
     public BattleStrategy createBattleStrategy() {
-        return null;
+        return new AlphaBattleStrategy();
     }
 
     @Override
     public GrowthStrategy createGrowthStrategy() {
-        return null;
+        return new AlphaGrowthStrategy();
     }
 
     @Override
     public ProductionStrategy createProductionStrategy() {
-        return null;
+        return new AlphaProductionStrategy();
     }
 
     @Override
     public WinningStrategy createWinningStrategy() {
-        return null;
+        return new AlphaWinningStrategy();
     }
 }
