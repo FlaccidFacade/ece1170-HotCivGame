@@ -1,4 +1,4 @@
-package hotciv.framework;
+package hotciv.framework.Strategies;
 
 public interface AgingStrategy {
     /** returns the age of the world

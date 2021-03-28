@@ -1,5 +1,6 @@
-package hotciv.framework;
+package hotciv.framework.Strategies;
 
+import hotciv.framework.Player;
 import hotciv.framework.World;
 
 import java.util.Map;

@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.standard.Strategies.*;
 import org.junit.Before;
 import org.junit.Test;
 

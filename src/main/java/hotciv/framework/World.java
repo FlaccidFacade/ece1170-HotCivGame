@@ -1,5 +1,8 @@
 package hotciv.framework;
 
+import hotciv.framework.Strategies.GrowthStrategy;
+import hotciv.framework.Strategies.ProductionStrategy;
+
 import java.util.List;
 
 public interface World {

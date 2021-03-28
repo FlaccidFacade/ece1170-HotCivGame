@@ -1,11 +1,10 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
 import hotciv.framework.Player;
-import hotciv.framework.WinningStrategy;
+import hotciv.framework.Strategies.WinningStrategy;
 import hotciv.framework.World;
 
 import java.util.Map;
-import java.util.HashMap;
 
 public class EpsilonWinningStrategy implements WinningStrategy {
 

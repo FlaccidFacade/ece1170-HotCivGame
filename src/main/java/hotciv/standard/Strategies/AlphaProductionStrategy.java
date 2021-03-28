@@ -1,7 +1,7 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
 import hotciv.framework.City;
-import hotciv.framework.ProductionStrategy;
+import hotciv.framework.Strategies.ProductionStrategy;
 
 public class AlphaProductionStrategy implements ProductionStrategy {
     @Override

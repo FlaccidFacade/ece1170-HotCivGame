@@ -1,7 +1,7 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
 import hotciv.framework.City;
-import hotciv.framework.GrowthStrategy;
+import hotciv.framework.Strategies.GrowthStrategy;
 
 public class AlphaGrowthStrategy implements GrowthStrategy {
     @Override

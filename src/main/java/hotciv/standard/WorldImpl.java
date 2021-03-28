@@ -1,7 +1,8 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
-import javafx.geometry.Pos;
+import hotciv.framework.Strategies.GrowthStrategy;
+import hotciv.framework.Strategies.ProductionStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

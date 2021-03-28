@@ -1,6 +1,9 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.framework.Factories.HotCivFactory;
+import hotciv.framework.Strategies.*;
+import hotciv.standard.Strategies.ZetaWinningStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +56,18 @@ public class GameImpl implements Game {
         age = GameConstants.START_TIME;
         world = new WorldImpl(layout);
         playerSuccessfulAttackMap = new HashMap<>();
+    }
+
+    public GameImpl(String[] layout, HotCivFactory factory){
+        age = GameConstants.START_TIME;
+        world = new WorldImpl(layout);
+        playerSuccessfulAttackMap = new HashMap<>();
+        this.actionStrategy = factory.createActionStrategy();
+        this.agingStrategy = factory.createAgingStrategy();
+        this.battleStrategy = factory.createBattleStrategy();
+        this.setGrowthStrategy(factory.createGrowthStrategy());
+        this.setProductionStrategy(factory.createProductionStrategy());
+        this.winningStrategy = factory.createWinningStrategy();
     }
 
     public void setAgingStrategy(AgingStrategy agingStrategy){

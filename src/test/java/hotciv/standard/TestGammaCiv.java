@@ -3,6 +3,7 @@ import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
+import hotciv.standard.Strategies.GammaActionStrategy;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;

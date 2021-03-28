@@ -1,6 +1,6 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
-import hotciv.framework.BattleStrategy;
+import hotciv.framework.Strategies.BattleStrategy;
 import hotciv.framework.Position;
 import hotciv.framework.Unit;
 import hotciv.framework.World;

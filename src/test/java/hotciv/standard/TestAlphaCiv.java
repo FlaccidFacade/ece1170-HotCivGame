@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import hotciv.standard.Strategies.*;
 import org.junit.*;
 
 import static org.junit.Assert.*;

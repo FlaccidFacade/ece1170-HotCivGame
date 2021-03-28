@@ -1,6 +1,7 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
 import hotciv.framework.*;
+import hotciv.framework.Strategies.WinningStrategy;
 
 import java.util.List;
 import java.util.Map;

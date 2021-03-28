@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import hotciv.framework.Strategies.*;
+
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
 

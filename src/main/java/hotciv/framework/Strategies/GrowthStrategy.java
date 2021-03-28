@@ -1,4 +1,6 @@
-package hotciv.framework;
+package hotciv.framework.Strategies;
+
+import hotciv.framework.City;
 
 public interface GrowthStrategy {
 
