@@ -34,6 +34,8 @@ public class TestEpsilonCiv {
         game.setWinningStrategy(new EpsilonWinningStrategy());
         game.setBattleStrategy(new EpsilonBattleStrategy());
         game.setAgingStrategy(new AlphaAgingStrategy());
+        game.setGrowthStrategy(new AlphaGrowthStrategy());
+        game.setProductionStrategy(new AlphaProductionStrategy());
 
     }
 

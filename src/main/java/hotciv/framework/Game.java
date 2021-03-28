@@ -135,13 +135,41 @@ public interface Game {
    */
   public void performUnitActionAt( Position p );
 
+  /**
+   * //TODO
+   * @param agingStrategy
+   */
   public  void setAgingStrategy(AgingStrategy agingStrategy);
 
+  /**
+   * //TODO
+   * @param winningStrategy
+   */
   public void setWinningStrategy(WinningStrategy winningStrategy);
 
+  /**
+   * //TODO
+   * @param actionStrategy
+   */
   public void setActionStrategy(ActionStrategy actionStrategy);
 
+  /**
+   * //TODO
+   * @param battlerStrategy
+   */
   public void setBattleStrategy(BattleStrategy battlerStrategy);
+
+  /**
+   * //TODO
+   * @param growthStrategy
+   */
+  public void setGrowthStrategy(GrowthStrategy growthStrategy);
+
+  /**
+   * //TODO
+   * @param productionStrategy
+   */
+  public void setProductionStrategy(ProductionStrategy productionStrategy);
 
   public void placeTileAt(Position p, Tile t);
   public void placeUnitAt(Position p, Unit u);

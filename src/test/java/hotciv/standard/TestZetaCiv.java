@@ -1,9 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.Game;
-import hotciv.framework.GameConstants;
-import hotciv.framework.Player;
-import hotciv.framework.Position;
+import hotciv.framework.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,6 +35,8 @@ public class TestZetaCiv {
         game.setWinningStrategy( new ZetaWinningStrategy());
         game.setBattleStrategy( new AlphaBattleStrategy());
         game.setActionStrategy( new AlphaActionStrategy());
+        game.setGrowthStrategy( new AlphaGrowthStrategy());
+        game.setProductionStrategy(new AlphaProductionStrategy());
     }
 
 

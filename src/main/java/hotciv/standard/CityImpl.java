@@ -3,7 +3,7 @@ package hotciv.standard;
 import hotciv.framework.*;
 
 public class CityImpl implements City{
-    private int size;
+    private int population;
     private Player owner;
     private String production;
     private int treasury;
@@ -13,7 +13,7 @@ public class CityImpl implements City{
 
     public CityImpl(Player Owner){
         owner = Owner;
-        size = GameConstants.POPULATION_SIZE;
+        population = GameConstants.POPULATION_SIZE;
         production = GameConstants.ARCHER;
         treasury = 0;
     }
@@ -24,8 +24,8 @@ public class CityImpl implements City{
     }
 
     @Override
-    public int getSize() {
-        return size;
+    public int getPopulation() {
+        return population;
     }
     
     @Override
@@ -48,6 +48,23 @@ public class CityImpl implements City{
         return treasury;
     }
 
+    @Override
+    public int getFood() { return food; }
+
+    @Override
+    public void setFood(int food){ this.food = food; }
+
+    @Override
+    public void setTreasury(int treasury){ this.treasury = treasury; }
+
+    @Override
+    public void setPopulation(int population){
+        if(population > 0) {
+            this.population = population;
+        }else{
+            this.population = 0;
+        }
+    }
 
     @Override
     public void setOwner(Player player) {
@@ -64,8 +81,6 @@ public class CityImpl implements City{
             workforceBalance = GameConstants.productionFocus;
         }
     }
-
-
 
     @Override
     public boolean produceUnit(){
@@ -95,12 +110,6 @@ public class CityImpl implements City{
         return false;
     }
 
-    @Override
-    public void harvest(){
-        if(workforceBalance == GameConstants.productionFocus){
-            treasury += 6;
-        }
 
-    }
 
 }

@@ -13,6 +13,8 @@ public class WorldImpl implements  World{
     private final Map<Position,Tile> map;
     private List<City> cities;
     private List<Unit> units;
+    private GrowthStrategy growthStrategy;
+    private ProductionStrategy productionStrategy;
     //TODO add population strategy
     //TODO add workforceFocus strategy
     //TODO pass these from Game to here and access cities to harvest and populate properly
@@ -45,7 +47,6 @@ public class WorldImpl implements  World{
             }
     }
 
-
     private void setToPlains(){
         for(int r = 0; r < GameConstants.WORLDSIZE; r++) {
             for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
@@ -54,6 +55,16 @@ public class WorldImpl implements  World{
                 placeTile(p,t);
             }
         }
+    }
+
+    @Override
+    public void setGrowthStrategy(GrowthStrategy growthStrategy){
+        this.growthStrategy = growthStrategy;
+    }
+
+    @Override
+    public void setProductionStrategy(ProductionStrategy productionStrategy){
+        this.productionStrategy = productionStrategy;
     }
 
     @Override
@@ -171,9 +182,16 @@ public class WorldImpl implements  World{
     }
 
     @Override
+    public void updateAllCityPopulation(){
+        for(City c: cities){
+            this.growthStrategy.grow(c);
+        }
+    }
+
+    @Override
     public void updateAllCityTreasury(){
         for(City c: cities){
-            c.harvest();
+            this.productionStrategy.produce(c);
         }
     }
 
@@ -268,6 +286,7 @@ public class WorldImpl implements  World{
     public List<City> getAllCities(){
         return cities;
     }
+
 
     private int getTerrainMultiplier(Position position){
         int multiplier = 1;

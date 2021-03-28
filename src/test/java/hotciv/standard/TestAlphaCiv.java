@@ -7,8 +7,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import java.util.*;
-
 /** Skeleton class for AlphaCiv test cases
 
 Updated Oct 2015 for using Hamcrest matchers
@@ -66,7 +64,8 @@ public class TestAlphaCiv {
     game.setWinningStrategy(new AlphaWinningStrategy());
     game.setActionStrategy(new AlphaActionStrategy());
     game.setBattleStrategy(new AlphaBattleStrategy());
-
+    game.setGrowthStrategy(new AlphaGrowthStrategy());
+    game.setProductionStrategy(new AlphaProductionStrategy());
 
     game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED, GameConstants.ARCHER));
     game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED, GameConstants.ARCHER));
@@ -118,11 +117,11 @@ public class TestAlphaCiv {
   @Test
   public void cityPopulationStatic() {
     City c = game.getCityAt(new Position(1,1));
-    assertThat(c.getSize(), is(1));
-    assertThat(c.getSize(), is(not(0)));
-    assertThat(c.getSize(), is(not(2)));
+    assertThat(c.getPopulation(), is(1));
+    assertThat(c.getPopulation(), is(not(0)));
+    assertThat(c.getPopulation(), is(not(2)));
     game.endOfTurn();
-    assertThat(c.getSize(), is(1));
+    assertThat(c.getPopulation(), is(1));
   }
 
   @Test

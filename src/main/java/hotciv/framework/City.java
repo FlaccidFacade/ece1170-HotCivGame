@@ -39,7 +39,7 @@ public interface City {
   /** return the size of the population.
    * @return population size.
    */
-  public int getSize();
+  public int getPopulation();
 
   /** return the treasury, i.e. the
    * number of 'money'/production in the
@@ -62,11 +62,36 @@ public interface City {
    */
   public String getWorkforceBalance();
 
+  /**
+   *
+   * @return
+   */
+  public int getFood();
+
+  /**
+   *
+   */
+  public void setFood(int food);
+
   /**change the type of unit the city is going to produce
    *
    * @param unitType the type of unit the city should be producing
    */
   public void changeProduction(String unitType);
+
+  /** set the treasury of city given an integer value
+   *
+   * @param treasury the amount the treasury will be set to
+   */
+  public void setTreasury(int treasury);
+
+  /** set the size of city given an integer value
+   * size will never be under 0
+   * that is if size is set to a negative value
+   * the size will instead be set to 0
+   * @param population the value the size will be set to
+   */
+  public void setPopulation(int population);
 
   /** declare the owner of the city
    *
@@ -86,9 +111,5 @@ public interface City {
    */
   public boolean produceUnit();
 
-  /** adds to the treasury
-   *
-   */
-  public void harvest();
 
 }

@@ -3,7 +3,17 @@ package hotciv.framework;
 import java.util.List;
 
 public interface World {
+    /** this sets the growth strategy
+     *
+     * @param growthStrategy
+     */
+    public void setGrowthStrategy(GrowthStrategy growthStrategy);
 
+    /** this sets the production strategy
+     *
+     * @param productionStrategy
+     */
+    public void setProductionStrategy(ProductionStrategy productionStrategy);
 
     /** puts a tile and position into the world hashmap
      *
@@ -73,6 +83,11 @@ public interface World {
      * @return able the boolean value of the mobility between from and to
      */
     public boolean movable(Position from, Position to);
+
+    /** updates city populations
+     * based off current set strategy
+     */
+    public void updateAllCityPopulation();
 
     /** updates city Treasury
      *

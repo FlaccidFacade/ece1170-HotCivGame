@@ -71,6 +71,12 @@ public class GameImpl implements Game {
         this.battleStrategy = battleStrategy;
     }
 
+    public void setGrowthStrategy(GrowthStrategy growthStrategy) { this.world.setGrowthStrategy(growthStrategy); }
+
+    public void setProductionStrategy(ProductionStrategy productionStrategy) {
+        this.world.setProductionStrategy(productionStrategy);
+    }
+
     public Tile getTileAt( Position p ) { return world.getTileAt(p); }
 
     public void placeTileAt( Position p , Tile t) { world.placeTile(p,t);}
@@ -163,7 +169,6 @@ public class GameImpl implements Game {
 
         return attackerWins;
     }
-
 
     public void endOfTurn() {
 
