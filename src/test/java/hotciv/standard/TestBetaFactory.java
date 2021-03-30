@@ -2,14 +2,13 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import hotciv.standard.Strategies.BetaAgingStrategy;
-import hotciv.standard.Strategies.BetaWinningStrategy;
+import hotciv.standard.Factories.BetaCivFactory;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 
-public class TestBetaCiv {
+public class TestBetaFactory {
     private Game game;
     String[] layout = new String[] {
             "ohoooooooooooooo",
@@ -31,9 +30,8 @@ public class TestBetaCiv {
     };
     @Before
     public void setUp() {
-        game = new GameImpl(layout);
-        game.setAgingStrategy( new BetaAgingStrategy());
-        game.setWinningStrategy( new BetaWinningStrategy());
+        game = new GameImpl(layout, new BetaCivFactory());
+
     }
 
     @Test

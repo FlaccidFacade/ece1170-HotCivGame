@@ -1,7 +1,22 @@
 package hotciv.framework;
 
-public interface World {
+import hotciv.framework.Strategies.GrowthStrategy;
+import hotciv.framework.Strategies.ProductionStrategy;
 
+import java.util.List;
+
+public interface World {
+    /** this sets the growth strategy
+     *
+     * @param growthStrategy
+     */
+    public void setGrowthStrategy(GrowthStrategy growthStrategy);
+
+    /** this sets the production strategy
+     *
+     * @param productionStrategy
+     */
+    public void setProductionStrategy(ProductionStrategy productionStrategy);
 
     /** puts a tile and position into the world hashmap
      *
@@ -72,6 +87,11 @@ public interface World {
      */
     public boolean movable(Position from, Position to);
 
+    /** updates city populations
+     * based off current set strategy
+     */
+    public void updateAllCityPopulation();
+
     /** updates city Treasury
      *
      */
@@ -86,4 +106,15 @@ public interface World {
      *
      */
     public void updateAllMoveCounts();
+
+    /**
+     *
+     */
+    public int getCombinedDefenseStrength(Position center);
+
+    public int getCombinedAttackStrength(Position center);
+
+    public List<Unit> getAllUnits();
+
+    public List<City> getAllCities();
 }

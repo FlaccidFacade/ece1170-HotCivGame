@@ -3,14 +3,14 @@ import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
-import hotciv.standard.Strategies.GammaActionStrategy;
+import hotciv.standard.Factories.GammaCivFactory;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TestGammaCiv {
+public class TestGammaFactory {
     private Game game;
     String[] layout = new String[] {
             "...ooMooooo.....",
@@ -30,12 +30,12 @@ public class TestGammaCiv {
             "..ooohhoo.......",
             ".....ooooooooo..",
     };
+
     @Before
     public void setUp(){
-        game = new GameImpl(layout);
-        game.setActionStrategy(new GammaActionStrategy());
-
+        game = new GameImpl(layout, new GammaCivFactory());
     }
+
     @Test
     public void testUnitAction(){
         game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED, GameConstants.ARCHER));
@@ -49,7 +49,6 @@ public class TestGammaCiv {
 
         assertThat(game.getUnitAt(new Position(2,1)).getMoveCount(),is(1));
         assertThat(game.getUnitAt(new Position(2,1)).getDefensiveStrength(),is(3));
-
 
         game.placeUnitAt(new Position( 3, 1), new UnitImpl(Player.RED,GameConstants.SETTLER));
         assertThat(game.getUnitAt(new Position(3,1)), is(notNullValue()));

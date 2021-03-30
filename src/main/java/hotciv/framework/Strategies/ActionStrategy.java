@@ -1,4 +1,7 @@
-package hotciv.framework;
+package hotciv.framework.Strategies;
+
+import hotciv.framework.Position;
+import hotciv.framework.World;
 
 public interface ActionStrategy {
     /** performs unit action at position p on world w

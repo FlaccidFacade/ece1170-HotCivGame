@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import hotciv.framework.Strategies.*;
+
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
 
@@ -135,13 +137,41 @@ public interface Game {
    */
   public void performUnitActionAt( Position p );
 
-  public  void setAgingStrategy(AgingStrategy aging);
+  /**
+   * //TODO
+   * @param agingStrategy
+   */
+  public  void setAgingStrategy(AgingStrategy agingStrategy);
 
-  public void setWinningStrategy(WinningStrategy winning);
+  /**
+   * //TODO
+   * @param winningStrategy
+   */
+  public void setWinningStrategy(WinningStrategy winningStrategy);
 
-  public void setActionStrategy(ActionStrategy action);
+  /**
+   * //TODO
+   * @param actionStrategy
+   */
+  public void setActionStrategy(ActionStrategy actionStrategy);
 
+  /**
+   * //TODO
+   * @param battlerStrategy
+   */
+  public void setBattleStrategy(BattleStrategy battlerStrategy);
 
+  /**
+   * //TODO
+   * @param growthStrategy
+   */
+  public void setGrowthStrategy(GrowthStrategy growthStrategy);
+
+  /**
+   * //TODO
+   * @param productionStrategy
+   */
+  public void setProductionStrategy(ProductionStrategy productionStrategy);
 
   public void placeTileAt(Position p, Tile t);
   public void placeUnitAt(Position p, Unit u);

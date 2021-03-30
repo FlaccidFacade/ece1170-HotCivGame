@@ -1,6 +1,6 @@
-package hotciv.standard;
+package hotciv.standard.Strategies;
 
-import hotciv.framework.AgingStrategy;
+import hotciv.framework.Strategies.AgingStrategy;
 import hotciv.framework.GameConstants;
 
 public class AlphaAgingStrategy implements AgingStrategy {

@@ -2,12 +2,11 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import hotciv.standard.Strategies.*;
 import org.junit.*;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-
-import java.util.*;
 
 /** Skeleton class for AlphaCiv test cases
 
@@ -65,11 +64,13 @@ public class TestAlphaCiv {
     game.setAgingStrategy(new AlphaAgingStrategy());
     game.setWinningStrategy(new AlphaWinningStrategy());
     game.setActionStrategy(new AlphaActionStrategy());
+    game.setBattleStrategy(new AlphaBattleStrategy());
+    game.setGrowthStrategy(new AlphaGrowthStrategy());
+    game.setProductionStrategy(new AlphaProductionStrategy());
 
-
-    game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED,GameConstants.ARCHER));
-    game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED,GameConstants.ARCHER));
-    game.placeUnitAt(new Position(4,3), new UnitImpl(Player.RED,GameConstants.SETTLER));
+    game.placeUnitAt(new Position(2,0), new UnitImpl(Player.RED, GameConstants.ARCHER));
+    game.placeUnitAt(new Position(2,1), new UnitImpl(Player.RED, GameConstants.ARCHER));
+    game.placeUnitAt(new Position(4,3), new UnitImpl(Player.RED, GameConstants.SETTLER));
     game.placeUnitAt(new Position(3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
     game.placeCityAt(new Position(1,1), new CityImpl(Player.RED));
     game.placeCityAt(new Position(4,1), new CityImpl(Player.BLUE));
@@ -117,11 +118,11 @@ public class TestAlphaCiv {
   @Test
   public void cityPopulationStatic() {
     City c = game.getCityAt(new Position(1,1));
-    assertThat(c.getSize(), is(1));
-    assertThat(c.getSize(), is(not(0)));
-    assertThat(c.getSize(), is(not(2)));
+    assertThat(c.getPopulation(), is(1));
+    assertThat(c.getPopulation(), is(not(0)));
+    assertThat(c.getPopulation(), is(not(2)));
     game.endOfTurn();
-    assertThat(c.getSize(), is(1));
+    assertThat(c.getPopulation(), is(1));
   }
 
   @Test

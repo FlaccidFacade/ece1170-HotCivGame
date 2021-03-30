@@ -1,6 +1,8 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.framework.Strategies.GrowthStrategy;
+import hotciv.framework.Strategies.ProductionStrategy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +14,14 @@ public class WorldImpl implements  World{
     private final Map<Position,Tile> map;
     private List<City> cities;
     private List<Unit> units;
-
+    private GrowthStrategy growthStrategy;
+    private ProductionStrategy productionStrategy;
+    //TODO add population strategy
+    //TODO add workforceFocus strategy
+    //TODO pass these from Game to here and access cities to harvest and populate properly
+    //TODO do this for alpha then go to Eta
     public WorldImpl(){
-        map = new HashMap<Position,Tile>();
+        map = new HashMap<>();
         cities = new ArrayList<>();
         units = new ArrayList<>();
         setToPlains();
@@ -41,7 +48,6 @@ public class WorldImpl implements  World{
             }
     }
 
-
     private void setToPlains(){
         for(int r = 0; r < GameConstants.WORLDSIZE; r++) {
             for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
@@ -50,6 +56,16 @@ public class WorldImpl implements  World{
                 placeTile(p,t);
             }
         }
+    }
+
+    @Override
+    public void setGrowthStrategy(GrowthStrategy growthStrategy){
+        this.growthStrategy = growthStrategy;
+    }
+
+    @Override
+    public void setProductionStrategy(ProductionStrategy productionStrategy){
+        this.productionStrategy = productionStrategy;
     }
 
     @Override
@@ -96,8 +112,7 @@ public class WorldImpl implements  World{
 
     @Override
     public Tile getTileAt(Position p) {
-        Tile t = map.get(p);
-        return t;
+        return map.get(p);
     }
 
     @Override
@@ -120,13 +135,7 @@ public class WorldImpl implements  World{
 
     @Override
     public boolean movable(Position from, Position to) {
-
         boolean ableNeighbor = false;
-        boolean ableTerrain = false;
-        boolean ableMoveCount = false;
-        boolean ableAttack = true;
-        boolean able = false;
-
 
         List<Position> neighbors = getNeighbors(from);
         //Make sure tile is a neighbor
@@ -141,6 +150,7 @@ public class WorldImpl implements  World{
         if(!ableNeighbor) return false;
 
 
+        boolean ableMoveCount = false;
         //make sure move count is over 0
         Unit unitFrom = map.get(from).getUnit();
         if(unitFrom.getMoveCount() > 0) {
@@ -149,30 +159,20 @@ public class WorldImpl implements  World{
             return false;
         }
 
-        //make sure unit 'to' has proper ownership
-        Unit unitTo = map.get(to).getUnit();
-        if(unitTo != null) {
-            if (unitTo.getOwner() != unitFrom.getOwner()) {
-                ableAttack = true;
-            } else {
-                return false;
-            }
-        }
-
+        boolean ableTerrain = false;
         //make sure tile on 'to' is proper terrain
         Tile t = map.get(to);
-
         if(! this.ableTerrain(t)){
             return false;
         }else{
             ableTerrain = true;
         }
 
+        boolean able = false;
         //Make sure the tile is a neighbor and terrain and can move and proper ownership
-        if(ableNeighbor == true
-                && ableMoveCount == true
-                && ableAttack == true
-                && ableTerrain == true
+        if(ableNeighbor
+                && ableMoveCount
+                && ableTerrain
         ){
             able = true;
         }else{
@@ -183,9 +183,16 @@ public class WorldImpl implements  World{
     }
 
     @Override
+    public void updateAllCityPopulation(){
+        for(City c: cities){
+            this.growthStrategy.grow(c);
+        }
+    }
+
+    @Override
     public void updateAllCityTreasury(){
         for(City c: cities){
-            c.harvest();
+            this.productionStrategy.produce(c);
         }
     }
 
@@ -226,6 +233,73 @@ public class WorldImpl implements  World{
         for(Unit u: units){
             u.setMoveCount(1);
         }
+    }
+
+    @Override
+    public int getCombinedDefenseStrength(Position center){
+        int unitsDefense = getUnitAt(center).getDefensiveStrength();
+        int terrainMultiplier = getTerrainMultiplier(center);
+        int neighboringDefense = 0;
+
+        List<Position> neighbors = getNeighbors(center);
+        for(Position p: neighbors){
+            if(getUnitAt(p) != null){
+                if (getUnitAt(p).getOwner() == getUnitAt(center).getOwner()) {
+                    neighboringDefense += 1;
+                }
+            }
+        }
+
+        int combinedDefense = 0;
+        combinedDefense = unitsDefense + neighboringDefense;
+        combinedDefense *= terrainMultiplier;
+
+        return combinedDefense;
+    }
+    @Override
+    public int getCombinedAttackStrength(Position center){
+        int unitsAttack = getUnitAt(center).getAttackingStrength();
+        int terrainMultiplier = getTerrainMultiplier(center);
+        int neighboringAttack = 0;
+
+        List<Position> neighbors = getNeighbors(center);
+        for(Position p: neighbors){
+            if(getUnitAt(p) != null){
+                if (getUnitAt(p).getOwner() == getUnitAt(center).getOwner()) {
+                    neighboringAttack += 1;
+                }
+            }
+        }
+
+        int combinedAttack = 0;
+        combinedAttack = unitsAttack + neighboringAttack;
+        combinedAttack *= terrainMultiplier;
+
+        return combinedAttack;
+    }
+
+    @Override
+    public List<Unit> getAllUnits(){
+        return units;
+    }
+
+    @Override
+    public List<City> getAllCities(){
+        return cities;
+    }
+
+
+    private int getTerrainMultiplier(Position position){
+        int multiplier = 1;
+
+        if(getCityAt(position) != null){
+            multiplier = 3;
+        }else if(getTerrainAt(position).equals(GameConstants.HILLS)
+                || getTerrainAt(position).equals(GameConstants.FOREST)){
+            multiplier = 2;
+        }
+
+        return multiplier;
     }
 
     private List<Position> getNeighbors(Position center){
