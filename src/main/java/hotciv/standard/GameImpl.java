@@ -108,7 +108,6 @@ public class GameImpl implements Game {
 
     public Player getWinner() {
         return winningStrategy.getWinner(age, world, playerSuccessfulAttackMap, round) ;
-
     }
 
     public World getWorld() {
