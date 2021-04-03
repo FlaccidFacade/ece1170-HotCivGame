@@ -36,26 +36,31 @@ public class GameConstants {
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";
   public static final String SETTLER   = "settler";
+  public static final String UFO       = "ufo";
 
   //Valid unit attack strengths
   public static final int ARCHER_ATTACKING_STRENGTH = 2;
   public static final int LEGION_ATTACKING_STRENGTH = 4;
   public static final int SETTLER_ATTACKING_STRENGTH = 0;
+  public static final int UFO_ATTACKING_STRENGTH = 1;
 
   //Valid unit defense strengths
   public static final int ARCHER_DEFENSIVE_STRENGTH = 3;
   public static final int LEGION_DEFENSIVE_STRENGTH = 2;
   public static final int SETTLER_DEFENSIVE_STRENGTH = 3;
+  public static final int UFO_DEFENSIVE_STRENGTH = 8;
 
   //Valid unit costs
   public static final int ARCHER_COST = 10;
   public static final int LEGION_COST = 15;
   public static final int SETTLER_COST = 30;
+  public static final int UFO_COST = 60;
 
   //Valid unit actions
   public static final String ARCHER_ACTION = "fortify";
   public static final String LEGION_ACTION = "none";
   public static final String SETTLER_ACTION = "build city";
+  public static final String UFO_ACTION = "abduct";
 
 
 

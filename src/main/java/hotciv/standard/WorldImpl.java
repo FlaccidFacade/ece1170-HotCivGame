@@ -70,7 +70,8 @@ public class WorldImpl implements  World{
 
     @Override
     public void placeTile(Position p, Tile t) {
-       map.put(p, t);
+        map.remove(p);
+        map.put(p, t);
     }
 
     @Override
@@ -103,6 +104,13 @@ public class WorldImpl implements  World{
         Tile t = map.get(p);
         t.removeUnit();
         units.remove(t.getUnit());
+    }
+
+    @Override
+    public void removeCity(Position p) {
+        Tile t = map.get(p);
+        t.removeCity();
+        cities.remove(t.getCity());
     }
 
     @Override
