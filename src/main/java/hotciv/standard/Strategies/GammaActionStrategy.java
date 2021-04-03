@@ -23,7 +23,6 @@ public class GammaActionStrategy implements ActionStrategy {
                 case GameConstants.SETTLER:
                     w.placeCity(p,new CityImpl(u.getOwner()));
                     w.removeUnit(p);
-
                     break;
                 case GameConstants.LEGION:
                     break;

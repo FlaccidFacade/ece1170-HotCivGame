@@ -3,7 +3,9 @@ import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
+import hotciv.standard.Factories.GammaCivFactory;
 import hotciv.standard.Strategies.GammaActionStrategy;
+import hotciv.standard.Strategies.ThetaActionStrategy;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -32,8 +34,8 @@ public class TestThetaCiv {
     };
     @Before
     public void setUp(){
-        game = new GameImpl(layout);
-        game.setActionStrategy(new GammaActionStrategy());
+        game = new GameImpl(layout, new GammaCivFactory());
+        game.setActionStrategy(new ThetaActionStrategy());
 
     }
     @Test
@@ -59,5 +61,16 @@ public class TestThetaCiv {
         assertThat(game.getCityAt(new Position(3,1)), is(notNullValue()));
 
         assertThat(game.getCityAt(new Position(3,1)).getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void testUFOAction(){
+        game.placeUnitAt(new Position(6,6), new UnitImpl(Player.RED, GameConstants.ARCHER));
+        assertThat(game.getUnitAt(new Position(2,1)).getMoveCount(),is(1));
+    }
+
+    @Test
+    public void testUFOCreatedByCity(){
+        
     }
 }
