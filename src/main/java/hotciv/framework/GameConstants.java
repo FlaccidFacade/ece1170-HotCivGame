@@ -29,7 +29,7 @@ package hotciv.framework;
    limitations under the License.
 
 */
-public class GameConstants {
+public class  GameConstants {
   // The size of the world is set permanently to a 16x16 grid 
   public static final int WORLDSIZE = 16;
   // Valid unit types
