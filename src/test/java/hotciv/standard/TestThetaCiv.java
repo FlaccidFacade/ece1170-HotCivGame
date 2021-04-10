@@ -134,7 +134,6 @@ public class TestThetaCiv {
         game.placeUnitAt(new Position(5,7), new UnitImpl(Player.RED,GameConstants.UFO));
         game.placeUnitAt(new Position(5,6), new UnitImpl(Player.BLUE,GameConstants.ARCHER));
         assertThat(game.moveUnit(new Position(5,7),new Position(5,6)), is(Boolean.TRUE));
-
         assertThat(game.getUnitAt(new Position(5,6)).getOwner(),is(Player.RED));
     }
 }
