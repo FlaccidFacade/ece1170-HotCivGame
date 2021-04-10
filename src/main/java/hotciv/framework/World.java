@@ -41,9 +41,15 @@ public interface World {
 
     /** removes the unit from a tile
      * precondition: the tile at the position needs to have a unit
-     * @param p the position of the tile
+     * @param p the position of the tile and unit
      */
     public void removeUnit(Position p);
+
+    /** removes city from a tile
+     *
+     * @param p the position of the tile and city
+     */
+    public void removeCity(Position p);
 
     /** returns the size of this world
      *

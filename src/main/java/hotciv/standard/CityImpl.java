@@ -106,6 +106,12 @@ public class CityImpl implements City{
                 }
 
                 break;
+            case GameConstants.UFO:
+                if(treasury >= GameConstants.UFO_COST){
+                    treasury -= GameConstants.UFO_COST;
+                    return true;
+                }
+
         }
         return false;
     }

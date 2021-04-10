@@ -13,30 +13,38 @@ public class UnitImpl implements Unit {
     private int cost;
     private String action;
 
-    public UnitImpl(Player owner, String unittype){
+    public UnitImpl(Player owner, String unitType){
         this.owner = owner;
         moveCount = 1;
-        switch (unittype){
+        switch (unitType){
             case GameConstants.ARCHER:
-                this.unitType = unittype;
+                this.unitType = unitType;
                 this.defenseStrength = GameConstants.ARCHER_DEFENSIVE_STRENGTH;
                 this.attackStrength = GameConstants.ARCHER_ATTACKING_STRENGTH;
                 this.action = GameConstants.ARCHER_ACTION;
                 this.cost = GameConstants.ARCHER_COST;
                 break;
             case GameConstants.LEGION:
-                this.unitType = unittype;
+                this.unitType = unitType;
                 this.defenseStrength = GameConstants.LEGION_DEFENSIVE_STRENGTH;
                 this.attackStrength = GameConstants.LEGION_ATTACKING_STRENGTH;
                 this.action = GameConstants.LEGION_ACTION;
                 this.cost = GameConstants.LEGION_COST;
                 break;
             case GameConstants.SETTLER:
-                this.unitType = unittype;
+                this.unitType = unitType;
                 this.defenseStrength = GameConstants.SETTLER_DEFENSIVE_STRENGTH;
                 this.attackStrength = GameConstants.SETTLER_ATTACKING_STRENGTH;
                 this.action = GameConstants.SETTLER_ACTION;
                 this.cost = GameConstants.SETTLER_COST;
+                break;
+            case GameConstants.UFO:
+                moveCount = 2;
+                this.unitType = unitType;
+                this.defenseStrength = GameConstants.UFO_DEFENSIVE_STRENGTH;
+                this.attackStrength = GameConstants.UFO_ATTACKING_STRENGTH;
+                this.action = GameConstants.UFO_ACTION;
+                this.cost = GameConstants.UFO_COST;
                 break;
             default:
                 this.unitType = GameConstants.SETTLER;

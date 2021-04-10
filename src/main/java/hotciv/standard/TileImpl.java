@@ -53,4 +53,10 @@ public class TileImpl implements Tile{
     public void removeUnit() {
         unit = null;
     }
+
+    @Override
+    public void removeCity() {
+        city = null;
+    }
+
 }
