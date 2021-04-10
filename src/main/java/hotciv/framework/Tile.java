@@ -69,5 +69,9 @@ public interface Tile {
    */
   public void removeUnit();
 
+  /** makes this tile's city null
+   *
+   */
+  public void removeCity();
 
 }

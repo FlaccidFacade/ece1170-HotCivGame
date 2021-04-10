@@ -15,7 +15,6 @@ public class ZetaWinningStrategy implements WinningStrategy {
         if(round < 19) {
             return betaWinningStrategy.getWinner(age,world,playerIntegerMap,round);
 
-
         }else {
             return epsilonWinningStrategy.getWinner(age, world, playerIntegerMap, round);
         }
