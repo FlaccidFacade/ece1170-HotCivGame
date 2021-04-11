@@ -5,10 +5,11 @@ import hotciv.framework.Strategies.*;
 
 public class GameWrapper implements Game {
 
-    private Game decoratee;
+    private boolean display;
     private Game game;
     public GameWrapper(Game game){
         this.game = game;
+        display = true;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class GameWrapper implements Game {
     @Override
     public Player getPlayerInTurn() {
         Player current = game.getPlayerInTurn();
-        System.out.println("Current player is "
+        log("Current player is "
                 + current
                 + "."
         );
@@ -40,11 +41,11 @@ public class GameWrapper implements Game {
     public Player getWinner() {
         Player winner = game.getWinner();
         if(winner == null){
-            System.out.println(
+            log(
                     "Game winner is undetermined."
             );
         }else {
-            System.out.println("Game winner is "
+            log("Game winner is "
                     + winner.toString()
                     + "."
             );
@@ -55,7 +56,7 @@ public class GameWrapper implements Game {
     @Override
     public int getAge() {
         int age = game.getAge();
-        System.out.println("Game age is "
+        log("Game age is "
                 + age
                 + "."
         );
@@ -65,17 +66,22 @@ public class GameWrapper implements Game {
 
     @Override
     public boolean moveUnit(Position from, Position to) {
+        String unitType = game.getUnitAt(from).getTypeString();
         boolean isMovable = game.moveUnit(from, to);
-        if(isMovable){
-            System.out.print(game.getPlayerInTurn().toString()
-                + " moves "
-                + game.getUnitAt(from).getTypeString()
-                + " from "
-                + from.toString()
-                + " to "
-                + to.toString()
-                + "."
-            );
+
+        log(game.getPlayerInTurn().toString()
+            + " tries moves "
+            + unitType
+            + " from "
+            + from.toString()
+            + " to "
+            + to.toString()
+            + " and is"
+        );
+        if(isMovable) {
+            System.out.println(" successful.");
+        }else{
+            System.out.println(" not successful.");
         }
 
         return isMovable;
@@ -83,7 +89,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void endOfTurn() {
-        System.out.println(game.getPlayerInTurn().toString()
+        log(game.getPlayerInTurn().toString()
                 + "'s end of turn."
         );
         game.endOfTurn();
@@ -91,7 +97,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void changeWorkforceFocusInCityAt(Position p, String balance) {
-        System.out.println(game.getPlayerInTurn().toString()
+        log(game.getPlayerInTurn().toString()
                 + " changes work force focus in city at "
                 + p.toString()
                 + " to "
@@ -103,7 +109,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void changeProductionInCityAt(Position p, String unitType) {
-        System.out.println(game.getPlayerInTurn().toString()
+        log(game.getPlayerInTurn().toString()
                 + " changes production in city at "
                 + p.toString()
                 + " to "
@@ -115,7 +121,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void performUnitActionAt(Position p) {
-        System.out.println(game.getPlayerInTurn().toString()
+        log(game.getPlayerInTurn().toString()
                 + " performs unit action at "
                 + p.toString()
                 + "."
@@ -160,7 +166,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void placeUnitAt(Position p, Unit u) {
-        System.out.println(u.getOwner().toString()
+        log(u.getOwner().toString()
                 + " places "
                 + u.getTypeString()
                 + " at "
@@ -172,7 +178,7 @@ public class GameWrapper implements Game {
 
     @Override
     public void placeCityAt(Position p, City c) {
-        System.out.println(c.getOwner().toString()
+        log(c.getOwner().toString()
                 + " places city at "
                 + p.toString()
                 + "."
@@ -182,12 +188,12 @@ public class GameWrapper implements Game {
 
     @Override
     public void toggleLog() {
-        if(game == decoratee) {
-            decoratee = game;
-            game = new GameWrapper(game);
-        } else{
-            game = decoratee;
-        }
+       display = !display;
+    }
 
+    public void log(String info){
+        if(display) {
+            System.out.println(info);
+        }
     }
 }
