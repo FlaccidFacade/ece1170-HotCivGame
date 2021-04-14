@@ -173,8 +173,29 @@ public interface Game {
    */
   public void setProductionStrategy(ProductionStrategy productionStrategy);
 
+  /**
+   * //TODO java doc
+   * @param p
+   * @param t
+   */
   public void placeTileAt(Position p, Tile t);
+
+  /**
+   * //TODO java doc
+   * @param p
+   * @param u
+   */
   public void placeUnitAt(Position p, Unit u);
+
+  /**
+   * //todo java doc
+   * @param p
+   * @param c
+   */
   public void placeCityAt(Position p, City c);
 
+  /**
+   * this method toggles
+   */
+  public void toggleLog();
 }

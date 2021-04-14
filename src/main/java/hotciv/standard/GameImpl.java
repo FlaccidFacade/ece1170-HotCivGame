@@ -3,6 +3,7 @@ package hotciv.standard;
 import hotciv.framework.*;
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
+import hotciv.standard.Decorators.GameWrapper;
 import hotciv.standard.Strategies.ZetaWinningStrategy;
 
 import java.util.HashMap;
@@ -46,16 +47,19 @@ public class GameImpl implements Game {
     private ActionStrategy actionStrategy;
     private BattleStrategy battleStrategy;
 
+
     public GameImpl(){
         age = GameConstants.START_TIME;
         world = new WorldImpl();
         playerSuccessfulAttackMap = new HashMap<>();
+
     }
 
     public GameImpl(String[] layout){
         age = GameConstants.START_TIME;
         world = new WorldImpl(layout);
         playerSuccessfulAttackMap = new HashMap<>();
+
     }
 
     public GameImpl(String[] layout, HotCivFactory factory){
@@ -68,44 +72,64 @@ public class GameImpl implements Game {
         this.setGrowthStrategy(factory.createGrowthStrategy());
         this.setProductionStrategy(factory.createProductionStrategy());
         this.winningStrategy = factory.createWinningStrategy();
+
     }
 
+    @Override
     public void setAgingStrategy(AgingStrategy agingStrategy){
         this.agingStrategy = agingStrategy;
     }
 
+    @Override
     public void setWinningStrategy(WinningStrategy winningStrategy){
         this.winningStrategy = winningStrategy;
     }
 
+    @Override
     public void setActionStrategy(ActionStrategy actionStrategy){
         this.actionStrategy = actionStrategy;
     }
 
+    @Override
     public void setBattleStrategy(BattleStrategy battleStrategy){
         this.battleStrategy = battleStrategy;
     }
 
+    @Override
     public void setGrowthStrategy(GrowthStrategy growthStrategy) { this.world.setGrowthStrategy(growthStrategy); }
 
+    @Override
     public void setProductionStrategy(ProductionStrategy productionStrategy) {
         this.world.setProductionStrategy(productionStrategy);
     }
 
+    @Override
     public Tile getTileAt( Position p ) { return world.getTileAt(p); }
 
+    @Override
     public void placeTileAt( Position p , Tile t) { world.placeTile(p,t);}
 
+    @Override
     public Unit getUnitAt( Position p ) { return world.getUnitAt(p); }
 
+    @Override
     public void placeUnitAt( Position p , Unit u) { world.placeUnit(p,u);}
 
+    @Override
     public City getCityAt( Position p ) { return world.getCityAt(p); }
 
+    @Override
     public void placeCityAt(Position p , City c) { world.placeCity(p,c);}
 
+    @Override
+    public void toggleLog() {
+
+    }
+
+    @Override
     public Player getPlayerInTurn() { return currentTurn; }
 
+    @Override
     public Player getWinner() {
         return winningStrategy.getWinner(age, world, playerSuccessfulAttackMap, round) ;
     }
@@ -114,8 +138,10 @@ public class GameImpl implements Game {
         return world;
     }
 
+    @Override
     public int getAge() { return age; }
 
+    @Override
     public boolean moveUnit( Position from, Position to ) {
         boolean isAMove = from != to;
         if ( ! isAMove) return false;
@@ -184,6 +210,7 @@ public class GameImpl implements Game {
         return attackerWins;
     }
 
+    @Override
     public void endOfTurn() {
 
         currentTurn = currentTurn.next();
@@ -203,19 +230,23 @@ public class GameImpl implements Game {
 
     }
 
+    @Override
     public void changeWorkforceFocusInCityAt( Position p, String balance ) {
         City c = world.getCityAt(p);
         c.setWorkforceBalance(balance);
     }
 
+    @Override
     public void changeProductionInCityAt( Position p, String unitType ) {
         City c = world.getCityAt(p);
         c.changeProduction(unitType);
     }
 
+    @Override
     public void performUnitActionAt( Position p ) {
        actionStrategy.performAction(p, world);
     }
+
 
 
 }
