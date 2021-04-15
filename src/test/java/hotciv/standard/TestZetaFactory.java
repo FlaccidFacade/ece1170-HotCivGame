@@ -2,7 +2,6 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.standard.Factories.ZetaCivFactory;
-import hotciv.standard.Strategies.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ import static org.junit.Assert.assertThat;
 public class TestZetaFactory {
 
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "oooooooooooooooo",
             "oooooooooooooooo",
             "oooooooooooooooo",

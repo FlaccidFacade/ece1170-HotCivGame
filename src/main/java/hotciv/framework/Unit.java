@@ -38,12 +38,12 @@ public interface Unit {
    * least those listed in GameConstants, particular variants
    * may define more strings to be valid.
    */
-  public String getTypeString();
+  String getTypeString();
 
   /** return the owner of this unit.
    * @return the player that controls this unit.
    */
-  public Player getOwner();
+  Player getOwner();
 
   /** return the move distance left (move count).
    * A move count of N means the unit may travel
@@ -52,38 +52,38 @@ public interface Unit {
    * a new turn starts.
    * @return the move count
    */
-  public int getMoveCount();
+  int getMoveCount();
   
   /** return the defensive strength of this unit
    * @return defensive strength
    */
-  public int getDefensiveStrength();
+  int getDefensiveStrength();
   
   /** return the attack strength of this unit
    * @return attack strength
    */
-  public int getAttackingStrength();
+  int getAttackingStrength();
 
   /** sets defense
    *
    */
-  public void setDefensiveStrength(int strength);
+  void setDefensiveStrength(int strength);
 
   /** reduces move count by one
    *
    */
-  public void move();
+  void move();
 
   /** sets the move count variable
    *
    * @param m the move count value to be set to
    */
-  public void setMoveCount(int m);
+  void setMoveCount(int m);
 
   /** returns the action of this unit
    *
    * @return action the string value of the action this unit has
    */
-  public String getAction();
+  String getAction();
 
 }

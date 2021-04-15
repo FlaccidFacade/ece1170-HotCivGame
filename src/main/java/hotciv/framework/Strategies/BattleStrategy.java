@@ -10,5 +10,5 @@ public interface BattleStrategy {
      * @param defender the unit that defends
      * @return the unit that succeeds in battle
      */
-    public Unit getVictor(Position attacker, Position defender, World world);
+    Unit getVictor(Position attacker, Position defender, World world);
 }

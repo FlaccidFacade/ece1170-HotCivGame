@@ -3,7 +3,6 @@ package hotciv.standard;
 import hotciv.framework.*;
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
-import hotciv.standard.Decorators.GameWrapper;
 import hotciv.standard.Strategies.ZetaWinningStrategy;
 
 import java.util.HashMap;
@@ -39,8 +38,9 @@ limitations under the License.
 public class GameImpl implements Game {
     private int age;
     private int round =1;
-    private Player currentTurn = Player.RED, firstPlayer = currentTurn;
-    private Map<Player, Integer> playerSuccessfulAttackMap ;
+    private Player currentTurn = Player.RED;
+    private final Player firstPlayer = currentTurn;
+    private final Map<Player, Integer> playerSuccessfulAttackMap ;
     private final World world;
     private AgingStrategy agingStrategy;
     private WinningStrategy winningStrategy;
@@ -189,18 +189,10 @@ public class GameImpl implements Game {
             world.placeUnit(defender, temp);
             //map.put(key, map.get(key) + 1);
             //round test is 19
-            if( (winningStrategy instanceof ZetaWinningStrategy && round > 19)) {
-                if (playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
-                    playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
-                } else {
-                    playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
-                }
-            }else{
-                if (playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
-                    playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
-                } else {
-                    playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
-                }
+            if (playerSuccessfulAttackMap != null && playerSuccessfulAttackMap.get(currentTurn) != null) {
+                playerSuccessfulAttackMap.put(currentTurn, playerSuccessfulAttackMap.get(currentTurn) + 1);
+            } else {
+                playerSuccessfulAttackMap.put(currentTurn, (Integer) 1);
             }
         } else{
             world.removeUnit(attacker);

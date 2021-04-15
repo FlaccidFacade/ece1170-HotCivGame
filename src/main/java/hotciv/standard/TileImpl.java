@@ -3,7 +3,7 @@ package hotciv.standard;
 import hotciv.framework.*;
 
 public class TileImpl implements Tile{
-    String type;
+    final String type;
     City city;
     Unit unit= null;
 

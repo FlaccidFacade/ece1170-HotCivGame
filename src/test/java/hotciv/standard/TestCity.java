@@ -6,7 +6,7 @@ import hotciv.framework.Player;
 import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
-import java.util.*;
+
 public class TestCity{
 
 

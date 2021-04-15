@@ -8,5 +8,5 @@ public interface GrowthStrategy {
      * //TODO
      * @param city
      */
-    public void grow(City city);
+    void grow(City city);
 }

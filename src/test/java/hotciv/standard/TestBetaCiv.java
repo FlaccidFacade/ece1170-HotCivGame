@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class TestBetaCiv {
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "ohoooooooooooooo",
             ".ooooooooooooooo",
             "ooMooooooooooooo",

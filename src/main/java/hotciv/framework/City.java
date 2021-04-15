@@ -34,12 +34,12 @@ public interface City {
   /** return the owner of this city.
    * @return the player that controls this city.
    */
-  public Player getOwner();
+  Player getOwner();
   
   /** return the size of the population.
    * @return population size.
    */
-  public int getPopulation();
+  int getPopulation();
 
   /** return the treasury, i.e. the
    * number of 'money'/production in the
@@ -48,42 +48,42 @@ public interface City {
    * @return an integer, the amount of production
    * in the city treasury
    */
-  public int getTreasury();
+  int getTreasury();
 
   /** return the type of unit this city is currently producing.
    * @return a string type defining the unit under production,
    * see GameConstants for valid values.
    */
-  public String getProduction();
+  String getProduction();
 
   /** return the work force's focus in this city.
    * @return a string type defining the focus, see GameConstants
    * for valid return values.
    */
-  public String getWorkforceBalance();
+  String getWorkforceBalance();
 
   /**
    *
    * @return
    */
-  public int getFood();
+  int getFood();
 
   /**
    *
    */
-  public void setFood(int food);
+  void setFood(int food);
 
   /**change the type of unit the city is going to produce
    *
    * @param unitType the type of unit the city should be producing
    */
-  public void changeProduction(String unitType);
+  void changeProduction(String unitType);
 
   /** set the treasury of city given an integer value
    *
    * @param treasury the amount the treasury will be set to
    */
-  public void setTreasury(int treasury);
+  void setTreasury(int treasury);
 
   /** set the size of city given an integer value
    * size will never be under 0
@@ -91,25 +91,25 @@ public interface City {
    * the size will instead be set to 0
    * @param population the value the size will be set to
    */
-  public void setPopulation(int population);
+  void setPopulation(int population);
 
   /** declare the owner of the city
    *
    * @param player the player that owns this city
    */
-  public void setOwner(Player player);
+  void setOwner(Player player);
 
   /** set the work force focus/balance
    *
    * @param focus the focus of the city either units/productionFocus or people/foodFocus
    */
-  public void setWorkforceBalance(String focus);
+  void setWorkforceBalance(String focus);
 
   /** returns true if it spends treasury to produce a unit
    * precondition: city has enough treasury
    * @return if the city had enough treasury to create a unit
    */
-  public boolean produceUnit();
+  boolean produceUnit();
 
 
 }

@@ -6,18 +6,13 @@ import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.Decorators.GameWrapper;
 import hotciv.standard.Factories.AlphaCivFactory;
-import hotciv.standard.Strategies.AlphaActionStrategy;
-import hotciv.standard.Strategies.AlphaAgingStrategy;
-import hotciv.standard.Strategies.AlphaBattleStrategy;
-import hotciv.standard.Strategies.AlphaWinningStrategy;
-import javafx.geometry.Pos;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestDecorator {
     private Game decorator;
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "oooooooooooooooo",
             "oooooooooooooooo",
             "oooooooooooooooo",

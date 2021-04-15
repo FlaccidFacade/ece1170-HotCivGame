@@ -6,7 +6,7 @@ import hotciv.framework.Strategies.*;
 public class GameWrapper implements Game {
 
     private boolean display;
-    private Game game;
+    private final Game game;
     public GameWrapper(Game game){
         this.game = game;
         display = true;
