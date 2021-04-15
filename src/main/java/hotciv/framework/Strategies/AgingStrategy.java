@@ -6,5 +6,5 @@ public interface AgingStrategy {
      * @param currentAge the current age of the world
      * @return the age of the world
      */
-    public int ageWorld(int currentAge);
+    int ageWorld(int currentAge);
 }

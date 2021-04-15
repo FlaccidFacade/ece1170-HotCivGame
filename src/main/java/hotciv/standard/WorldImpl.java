@@ -12,8 +12,8 @@ import java.util.Map;
 public class WorldImpl implements  World{
 
     private final Map<Position,Tile> map;
-    private List<City> cities;
-    private List<Unit> units;
+    private final List<City> cities;
+    private final List<Unit> units;
     private GrowthStrategy growthStrategy;
     private ProductionStrategy productionStrategy;
     //TODO add population strategy
@@ -220,8 +220,8 @@ public class WorldImpl implements  World{
                         } else {
                             List<Position> neighbors = getNeighbors(new Position(r, c));
                             for (Position p : neighbors) {
-                                if ((getTileAt(p).getTypeString() != GameConstants.OCEANS)
-                                        && (getTileAt(p).getTypeString() != GameConstants.MOUNTAINS)
+                                if ((!getTileAt(p).getTypeString().equals(GameConstants.OCEANS))
+                                        && (!getTileAt(p).getTypeString().equals(GameConstants.MOUNTAINS))
                                         && (getTileAt(p).getUnit() == null)
                                 ) {
                                     placeUnit(p, unit);

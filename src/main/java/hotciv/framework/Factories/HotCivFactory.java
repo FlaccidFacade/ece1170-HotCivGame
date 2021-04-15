@@ -4,15 +4,15 @@ import hotciv.framework.Strategies.*;
 
 public interface HotCivFactory {
 
-    public ActionStrategy createActionStrategy();
+    ActionStrategy createActionStrategy();
 
-    public AgingStrategy createAgingStrategy();
+    AgingStrategy createAgingStrategy();
 
-    public BattleStrategy createBattleStrategy();
+    BattleStrategy createBattleStrategy();
 
-    public GrowthStrategy createGrowthStrategy();
+    GrowthStrategy createGrowthStrategy();
 
-    public ProductionStrategy createProductionStrategy();
+    ProductionStrategy createProductionStrategy();
 
-    public WinningStrategy createWinningStrategy();
+    WinningStrategy createWinningStrategy();
 }

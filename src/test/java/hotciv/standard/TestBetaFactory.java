@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class TestBetaFactory {
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "ohoooooooooooooo",
             ".ooooooooooooooo",
             "ooMooooooooooooo",

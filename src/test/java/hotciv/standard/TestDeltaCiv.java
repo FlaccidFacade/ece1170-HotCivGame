@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class TestDeltaCiv {
         private Game game;
-        String[] layout = new String[] {
+        final String[] layout = new String[] {
                 "...ooMooooo.....",
                 "..ohhoooofffoo..",
                 ".oooooMooo...oo.",

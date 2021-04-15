@@ -7,12 +7,11 @@ import hotciv.standard.Factories.GammaCivFactory;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class TestGammaFactory {
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "...ooMooooo.....",
             "..ohhoooofffoo..",
             ".oooooMooo...oo.",

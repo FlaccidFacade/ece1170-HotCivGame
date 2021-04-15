@@ -9,7 +9,7 @@ import org.junit.Before;
 
 public class TestEtaCiv {
     private Game game;
-    String[] layout = new String[] {
+    final String[] layout = new String[] {
             "oooooooooooooooo",
             "oooooooooooooooo",
             "oooooooooooooooo",

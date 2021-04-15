@@ -4,14 +4,14 @@ import hotciv.framework.*;
 
 public class UnitImpl implements Unit {
 
-    private Player owner;
+    private final Player owner;
 
-    private String unitType;
-    private int attackStrength;
+    private final String unitType;
+    private final int attackStrength;
     private int defenseStrength;
     private int moveCount;
-    private int cost;
-    private String action;
+    private final int cost;
+    private final String action;
 
     public UnitImpl(Player owner, String unitType){
         this.owner = owner;

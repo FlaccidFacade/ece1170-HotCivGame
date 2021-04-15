@@ -7,5 +7,5 @@ public interface ProductionStrategy {
      * //TODO
      * @param city
      */
-    public void produce(City city);
+    void produce(City city);
 }

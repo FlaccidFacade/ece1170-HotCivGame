@@ -99,7 +99,11 @@ public class  GameConstants {
   public static final int POPULATION_SIZE = 1;
 
   //Valid Number of players
-  public static final int NUMBER_OF_PLAYERS = 2;
+  public static final int MAX_NUMBER_OF_PLAYERS = 4;
+  public static final int and_everything_in_between = 3;
+  public static final int MIN_NUMBER_OF_PLAYERS = 2;
+  public static final int NUMBER_OF_PLAYERS = MIN_NUMBER_OF_PLAYERS;
+
 
   //Game time
   public static final int START_TIME = -4000;
