@@ -72,7 +72,6 @@ public class GameImpl implements Game {
         this.setGrowthStrategy(factory.createGrowthStrategy());
         this.setProductionStrategy(factory.createProductionStrategy());
         this.winningStrategy = factory.createWinningStrategy();
-
     }
 
     @Override

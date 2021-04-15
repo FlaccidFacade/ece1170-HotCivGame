@@ -35,5 +35,4 @@ public enum Player {
   public Player next(){
     return players[(this.ordinal()+1) % GameConstants.NUMBER_OF_PLAYERS];
   }
-
 }
