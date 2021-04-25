@@ -2,6 +2,7 @@ package hotciv.standard.Decorators;
 
 import hotciv.framework.*;
 import hotciv.framework.Strategies.*;
+import hotciv.view.CivDrawing;
 
 public class GameWrapper implements Game {
 
@@ -189,6 +190,16 @@ public class GameWrapper implements Game {
     @Override
     public void toggleLog() {
        display = !display;
+    }
+
+    @Override
+    public void addObserver(CivDrawing civDrawing) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
     }
 
     public void log(String info){

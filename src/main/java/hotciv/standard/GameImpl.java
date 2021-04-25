@@ -4,6 +4,7 @@ import hotciv.framework.*;
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
 import hotciv.standard.Strategies.ZetaWinningStrategy;
+import hotciv.view.CivDrawing;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -122,6 +123,16 @@ public class GameImpl implements Game {
 
     @Override
     public void toggleLog() {
+
+    }
+
+    @Override
+    public void addObserver(CivDrawing civDrawing) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
 
     }
 
