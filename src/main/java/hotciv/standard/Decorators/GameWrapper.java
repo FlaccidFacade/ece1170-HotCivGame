@@ -3,6 +3,8 @@ package hotciv.standard.Decorators;
 import hotciv.framework.*;
 import hotciv.framework.Strategies.*;
 
+import java.util.ArrayList;
+
 public class GameWrapper implements Game {
 
     private boolean display;
@@ -191,6 +193,24 @@ public class GameWrapper implements Game {
        display = !display;
     }
 
+<<<<<<< Updated upstream
+=======
+    @Override
+    public void addObserver(GameObserver observer) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
+    }
+
+    @Override
+    public ArrayList<GameObserver> getObserverList() {
+        return null;
+    }
+
+>>>>>>> Stashed changes
     public void log(String info){
         if(display) {
             System.out.println(info);

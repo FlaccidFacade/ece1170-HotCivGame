@@ -5,7 +5,9 @@ import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
 import hotciv.standard.Strategies.ZetaWinningStrategy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /** Skeleton implementation of HotCiv.
@@ -46,12 +48,14 @@ public class GameImpl implements Game {
     private WinningStrategy winningStrategy;
     private ActionStrategy actionStrategy;
     private BattleStrategy battleStrategy;
+    private ArrayList<GameObserver> observerList;
 
 
     public GameImpl(){
         age = GameConstants.START_TIME;
         world = new WorldImpl();
         playerSuccessfulAttackMap = new HashMap<>();
+        observerList = new ArrayList<>();
 
     }
 
@@ -59,7 +63,7 @@ public class GameImpl implements Game {
         age = GameConstants.START_TIME;
         world = new WorldImpl(layout);
         playerSuccessfulAttackMap = new HashMap<>();
-
+        observerList = new ArrayList<>();
     }
 
     public GameImpl(String[] layout, HotCivFactory factory){
@@ -72,6 +76,7 @@ public class GameImpl implements Game {
         this.setGrowthStrategy(factory.createGrowthStrategy());
         this.setProductionStrategy(factory.createProductionStrategy());
         this.winningStrategy = factory.createWinningStrategy();
+        observerList = new ArrayList<>();
     }
 
     @Override
@@ -126,6 +131,24 @@ public class GameImpl implements Game {
     }
 
     @Override
+<<<<<<< Updated upstream
+=======
+    public void addObserver(GameObserver observer) {
+        observerList.add(observer);
+    }
+
+    //method is used for testing purposes
+    public ArrayList getObserverList(){
+        return observerList;
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
+    }
+
+    @Override
+>>>>>>> Stashed changes
     public Player getPlayerInTurn() { return currentTurn; }
 
     @Override
@@ -210,7 +233,7 @@ public class GameImpl implements Game {
             round++;
             endOfRound();
         }
-
+        updateTurnEnds();
     }
 
     private void endOfRound(){
@@ -238,6 +261,12 @@ public class GameImpl implements Game {
        actionStrategy.performAction(p, world);
     }
 
+    // this needs to be invoked after current turn is updated inside of endOfTurn()
+    private void updateTurnEnds(){
+        for(GameObserver observer : observerList){
+            observer.turnEnds(this.getPlayerInTurn(), this.getAge());
+        }
+    }
 
 
 }
