@@ -1,6 +1,7 @@
 package hotciv.framework;
 
 import hotciv.framework.Strategies.*;
+import hotciv.view.CivDrawing;
 
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
@@ -198,4 +199,8 @@ public interface Game {
    * this method toggles
    */
   void toggleLog();
+
+    void addObserver(CivDrawing civDrawing);
+
+  void setTileFocus(Position position);
 }
