@@ -332,7 +332,7 @@ public class CivDrawing
               new Point( GfxConstants.UNIT_SHIELD_X,
                       GfxConstants.UNIT_SHIELD_Y ) );
 
-      unitCountIcon.setText("");
+      unitCountIcon.setText("  ");
     }
   }
 

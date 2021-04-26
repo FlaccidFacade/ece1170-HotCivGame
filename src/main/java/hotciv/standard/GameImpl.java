@@ -250,7 +250,6 @@ public class GameImpl implements Game {
         world.updateAllCityTreasury();
         world.produceAllCityUnits();
         world.updateAllMoveCounts();
-
     }
 
     @Override
@@ -267,7 +266,8 @@ public class GameImpl implements Game {
 
     @Override
     public void performUnitActionAt( Position p ) {
-       actionStrategy.performAction(p, world);
+       if(world.getUnitAt(p) != null && world.getUnitAt(p).getOwner() == currentTurn)
+        actionStrategy.performAction(p, world);
     }
 
     // this needs to be invoked after current turn is updated inside of endOfTurn()
