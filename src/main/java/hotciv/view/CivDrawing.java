@@ -48,7 +48,7 @@ public class CivDrawing
   implements Drawing, GameObserver {
 
   //TODO turn to false if not debugging
-  private boolean sout = false;
+  private boolean sout = true;
 
   protected Drawing delegate;
   /** store all moveable figures visible in this drawing = units */
