@@ -306,6 +306,16 @@ public class CivDrawing
       cityProductionIcon.set(city.getProduction(),
               new Point(GfxConstants.CITY_PRODUCTION_X,
                       GfxConstants.CITY_PRODUCTION_Y));
+    }else{
+      cityShieldIcon.set( GfxConstants.NOTHING,
+              new Point( GfxConstants.CITY_SHIELD_X,
+                      GfxConstants.CITY_SHIELD_Y ) );
+      workForceFocusIcon.set(GfxConstants.NOTHING,
+              new Point(GfxConstants.WORKFORCEFOCUS_X,
+                      GfxConstants.WORKFORCEFOCUS_Y));
+      cityProductionIcon.set(GfxConstants.NOTHING,
+              new Point(GfxConstants.CITY_PRODUCTION_X,
+                      GfxConstants.CITY_PRODUCTION_Y));
     }
 
     Unit unit = tile.getUnit();
@@ -317,6 +327,12 @@ public class CivDrawing
                       GfxConstants.UNIT_SHIELD_Y ) );
 
       unitCountIcon.setText(unit.getMoveCount()+"");
+    }else{
+      unitShieldIcon.set( GfxConstants.NOTHING,
+              new Point( GfxConstants.UNIT_SHIELD_X,
+                      GfxConstants.UNIT_SHIELD_Y ) );
+
+      unitCountIcon.setText("");
     }
   }
 
