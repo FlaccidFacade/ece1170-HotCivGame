@@ -16,6 +16,7 @@ public class WorldImpl implements  World{
     private final List<Unit> units;
     private GrowthStrategy growthStrategy;
     private ProductionStrategy productionStrategy;
+    private ArrayList<GameObserver> observerList;
     //TODO add population strategy
     //TODO add workforceFocus strategy
     //TODO pass these from Game to here and access cities to harvest and populate properly
@@ -24,6 +25,7 @@ public class WorldImpl implements  World{
         map = new HashMap<>();
         cities = new ArrayList<>();
         units = new ArrayList<>();
+        observerList = new ArrayList<>();
         setToPlains();
     }
 
@@ -31,6 +33,7 @@ public class WorldImpl implements  World{
         map = new HashMap<Position,Tile>();
         cities = new ArrayList<>();
         units = new ArrayList<>();
+        observerList = new ArrayList<>();
             String line;
             for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
                 line = layout[r];
@@ -58,6 +61,10 @@ public class WorldImpl implements  World{
         }
     }
 
+    public void addObserver(GameObserver observer){
+        observerList.add(observer);
+    }
+
     @Override
     public void setGrowthStrategy(GrowthStrategy growthStrategy){
         this.growthStrategy = growthStrategy;
@@ -83,6 +90,7 @@ public class WorldImpl implements  World{
             tile.addCity(c);
             cities.add(c);
             map.put(p,tile);
+            updateWorldChangedAt(p);
         }
 
     }
@@ -96,6 +104,7 @@ public class WorldImpl implements  World{
             tile.addUnit(u);
             units.add(u);
             map.put(p,tile);
+            updateWorldChangedAt(p);
         }
     }
 
@@ -104,6 +113,7 @@ public class WorldImpl implements  World{
         Tile t = map.get(p);
         t.removeUnit();
         units.remove(t.getUnit());
+        updateWorldChangedAt(p);
     }
 
     @Override
@@ -111,6 +121,7 @@ public class WorldImpl implements  World{
         Tile t = map.get(p);
         t.removeCity();
         cities.remove(t.getCity());
+        updateWorldChangedAt(p);
     }
 
     @Override
@@ -233,7 +244,6 @@ public class WorldImpl implements  World{
             }
         }
 
-
     }
 
     @Override
@@ -336,7 +346,11 @@ public class WorldImpl implements  World{
         return properTerrain;
     }
 
-
+    private void updateWorldChangedAt(Position position){
+        for(GameObserver observer : observerList){
+            observer.worldChangedAt(position);
+        }
+    }
 }
 
 

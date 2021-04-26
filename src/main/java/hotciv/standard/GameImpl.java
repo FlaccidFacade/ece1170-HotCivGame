@@ -3,7 +3,7 @@ package hotciv.standard;
 import hotciv.framework.*;
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
-import hotciv.standard.Strategies.ZetaWinningStrategy;
+import hotciv.standard.Strategies.*;
 
 import java.util.*;
 
@@ -53,7 +53,12 @@ public class GameImpl implements Game {
         world = new WorldImpl();
         playerSuccessfulAttackMap = new HashMap<>();
         observerList = new ArrayList<>();
-
+        this.actionStrategy = new AlphaActionStrategy();
+        this.agingStrategy = new AlphaAgingStrategy();
+        this.battleStrategy = new AlphaBattleStrategy();
+        this.setGrowthStrategy(new AlphaGrowthStrategy());
+        this.setProductionStrategy(new AlphaProductionStrategy());
+        this.winningStrategy = new AlphaWinningStrategy();
     }
 
     public GameImpl(String[] layout){
@@ -61,6 +66,12 @@ public class GameImpl implements Game {
         world = new WorldImpl(layout);
         playerSuccessfulAttackMap = new HashMap<>();
         observerList = new ArrayList<>();
+        this.actionStrategy = new AlphaActionStrategy();
+        this.agingStrategy = new AlphaAgingStrategy();
+        this.battleStrategy = new AlphaBattleStrategy();
+        this.setGrowthStrategy(new AlphaGrowthStrategy());
+        this.setProductionStrategy(new AlphaProductionStrategy());
+        this.winningStrategy = new AlphaWinningStrategy();
     }
 
     public GameImpl(String[] layout, HotCivFactory factory){
@@ -130,6 +141,7 @@ public class GameImpl implements Game {
     @Override
     public void addObserver(GameObserver observer) {
         observerList.add(observer);
+        world.addObserver(observer);
     }
 
     //method is used for testing purposes
@@ -262,6 +274,5 @@ public class GameImpl implements Game {
             observer.turnEnds(this.getPlayerInTurn(), this.getAge());
         }
     }
-
 
 }

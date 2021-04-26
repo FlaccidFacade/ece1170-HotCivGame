@@ -162,7 +162,7 @@ public class CivDrawing
 
   public void turnEnds(Player nextPlayer, int age) {
     // TODO: Remove system.out debugging output
-    System.out.println( "CivDrawing: turnEnds for "+
+    System.out.println( "CivDrawing: turn begins for "+
                         nextPlayer+" at "+age );
     String playername = "red";
     if ( nextPlayer == Player.BLUE ) { playername = "blue"; }
