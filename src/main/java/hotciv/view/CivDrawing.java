@@ -68,8 +68,9 @@ public class CivDrawing
     game.addObserver(this);
     // ... and build up the set of figures associated with
     // units in the game.
-    defineUnitMap();
     defineCityMap();
+    defineUnitMap();
+
     // and the set of 'icons' in the status panel
     defineIcons();
   }
@@ -195,7 +196,8 @@ public class CivDrawing
   }
 
 
-  protected ImageFigure turnShieldIcon;
+  protected ImageFigure turnShieldIcon,unitShieldIcon,workForceFocusIcon,cityProductionIcon, refreshButton;
+  protected TextFigure ageTextIcon,unitCountIcon;
   protected void defineIcons() {
     // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
@@ -206,6 +208,20 @@ public class CivDrawing
     // rendering.
     delegate.add(turnShieldIcon);
 
+    ageTextIcon = new TextFigure("4000 BC",
+            new Point(GfxConstants.AGE_TEXT_X,
+                    GfxConstants.AGE_TEXT_Y) );
+
+    delegate.add(ageTextIcon);
+
+    refreshButton =
+            new ImageFigure( GfxConstants.REFRESH_BUTTON,
+                    new Point( GfxConstants.REFRESH_BUTTON_X,
+                            GfxConstants.REFRESH_BUTTON_Y ) );
+    // insert in delegate figure list to ensure graphical
+    // rendering.
+
+    delegate.add(refreshButton);
 
 
   }
@@ -217,9 +233,9 @@ public class CivDrawing
     System.out.println( "CivDrawing: world changes at "+pos);
     // this is a really brute-force algorithm: destroy
     // all known units and build up the entire set again
-    defineUnitMap();
     defineCityMap();
-    // TODO: Cities may change on position as well
+    defineUnitMap();
+
   }
 
   public void turnEnds(Player nextPlayer, int age) {
@@ -231,7 +247,13 @@ public class CivDrawing
     turnShieldIcon.set( playername+"shield",
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
-    // TODO: Age output pending
+    String ageString = "";
+    if(age < 0){
+      ageString += -1 * age + " BC";
+    }else{
+      ageString += age + " AC";
+    }
+    ageTextIcon.setText(ageString);
 
   }
 
@@ -245,9 +267,10 @@ public class CivDrawing
     // A request has been issued to repaint
     // everything. We simply rebuild the
     // entire Drawing.
+    defineCityMap();
     defineUnitMap();
     defineIcons();
-    // TODO: Cities pending
+
   }
 
   @Override

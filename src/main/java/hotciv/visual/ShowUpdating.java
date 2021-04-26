@@ -74,32 +74,41 @@ class UpdateTool extends NullTool {
   private int count = 0;
   public void mouseDown(MouseEvent e, int x, int y) {
     switch(count) {
-    case 0: {
-      editor.showStatus( "State change: Moving archer to (1,1)" );
-      game.moveUnit( new Position(2,0), new Position(1,1) );
-      break;
-    }
-    case 1: {
-      //This will not work since units can only move once a turn
-      editor.showStatus( "State change: Moving archer to (2,2)" );
-      game.moveUnit( new Position(1,1), new Position(2,2) );
-      break;
-    }
-    case 2: {
-      editor.showStatus( "State change: End of Turn (over to blue)" );
-      game.endOfTurn();
-      break;
-    }
-    case 3: {
-      editor.showStatus( "State change: End of Turn (over to red)" );
-      game.endOfTurn();
-      break;
-    }
-    case 4: {
-      editor.showStatus( "State change: Inspect Unit at (4,3)" );
-      game.setTileFocus(new Position(4,3));
-      break;
-    }
+      case 0: {
+        editor.showStatus("State change: Moving archer to (1,1)");
+        game.moveUnit(new Position(2, 0), new Position(1, 1));
+        break;
+      }
+      case 1: {
+        //This will not work since units can only move once a turn
+        editor.showStatus("State change: ");
+        //game.;
+        break;
+      }
+      case 2: {
+        editor.showStatus("State change: End of Turn (over to blue)");
+        game.endOfTurn();
+        break;
+      }
+      case 3: {
+        editor.showStatus("State change: End of Turn (over to red)");
+        game.endOfTurn();
+        break;
+      }
+      case 4: {
+        editor.showStatus("State change: Inspect Unit at (4,3)");
+        game.setTileFocus(new Position(4, 3));
+        break;
+      }
+      case 5:{
+        editor.showStatus("State change: Instantly age by x amount");
+
+        for(int i = 0 ; i < 100; i ++){
+          game.endOfTurn();
+        }
+
+        break;
+      }
       // TODO: Add more state changes for other things to test
     default: {
       editor.showStatus("No more changes in my list...");
