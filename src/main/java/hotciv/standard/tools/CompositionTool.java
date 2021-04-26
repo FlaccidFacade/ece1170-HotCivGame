@@ -90,8 +90,6 @@ public class CompositionTool extends AbstractTool implements Tool {
             game.endOfTurn();
         }
 
-
-
         start = GfxConstants.getPositionFromXY(x,y);
         boolean columnCheck = start.getColumn() < GameConstants.WORLDSIZE;
         if(!columnCheck) return;
@@ -101,11 +99,11 @@ public class CompositionTool extends AbstractTool implements Tool {
 
         if(columnCheck && rowCheck){
             game.setTileFocus(start);
+
         }
+
         boolean unitExists = game.getUnitAt(start) != null;
         if(!unitExists) return;
-
-
 
         if(columnCheck && rowCheck && unitExists && !e.isShiftDown()){
 

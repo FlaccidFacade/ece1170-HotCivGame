@@ -212,7 +212,7 @@ public class CivDrawing
     // rendering.
     delegate.add(turnShieldIcon);
 
-    ageTextIcon = new TextFigure("4000 BC",
+    ageTextIcon = new TextFigure("      ",
             new Point(GfxConstants.AGE_TEXT_X,
                     GfxConstants.AGE_TEXT_Y) );
 
@@ -251,7 +251,7 @@ public class CivDrawing
                     GfxConstants.UNIT_SHIELD_Y ) );
     delegate.add(unitShieldIcon);
 
-    unitCountIcon = new TextFigure("",
+    unitCountIcon = new TextFigure("     ",
             new Point(GfxConstants.UNIT_COUNT_X,
                     GfxConstants.UNIT_COUNT_Y) );
     delegate.add(unitCountIcon);
@@ -279,6 +279,7 @@ public class CivDrawing
     turnShieldIcon.set( playername+"shield",
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
+    ageTextIcon.setText("          ");
     String ageString = "";
     if(age < 0){
       ageString += -1 * age + " BC";
