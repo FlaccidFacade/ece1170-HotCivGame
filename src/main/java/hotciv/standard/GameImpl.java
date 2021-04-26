@@ -151,7 +151,9 @@ public class GameImpl implements Game {
 
     @Override
     public void setTileFocus(Position position) {
-
+        for(GameObserver go: observerList){
+            go.tileFocusChangedAt(position);
+        }
     }
 
     @Override

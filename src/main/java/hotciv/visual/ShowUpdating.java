@@ -7,7 +7,6 @@ import hotciv.framework.Position;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
-import hotciv.stub.StubGame2;
 import minidraw.framework.DrawingEditor;
 import minidraw.standard.MiniDrawApplication;
 import minidraw.standard.NullTool;
@@ -34,7 +33,7 @@ import java.awt.event.MouseEvent;
 public class ShowUpdating {
   
   public static void main(String[] args) {
-    Game game = new GameImpl();//gamestub2;
+    Game game = new GameImpl();
 
     game.placeUnitAt( new Position( 2,0), new UnitImpl(Player.RED, GameConstants.ARCHER));
 
@@ -45,6 +44,10 @@ public class ShowUpdating {
     game.placeUnitAt( new Position( 6,4), new UnitImpl(Player.RED, GameConstants.UFO));
 
     game.placeCityAt( new Position( 6,6), new CityImpl(Player.RED));
+    game.placeCityAt( new Position( 9,9), new CityImpl(Player.BLUE));
+
+    game.changeProductionInCityAt(new Position(9,9), GameConstants.LEGION);
+    game.changeWorkforceFocusInCityAt(new Position(9,9), GameConstants.foodFocus);
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click anywhere to see Drawing updates",  
@@ -101,12 +104,22 @@ class UpdateTool extends NullTool {
         break;
       }
       case 5:{
-        editor.showStatus("State change: Instantly age by x amount");
+        editor.showStatus("State change: Instantly age to 1100");
 
         for(int i = 0 ; i < 100; i ++){
           game.endOfTurn();
         }
 
+        break;
+      }
+      case 6:{
+        editor.showStatus("State change: Focus City at (6,6)");
+       game.setTileFocus(new Position(6,6));
+        break;
+      }
+      case 7:{
+        editor.showStatus("State change: Focus City at (9,9)");
+        game.setTileFocus(new Position(9,9));
         break;
       }
       // TODO: Add more state changes for other things to test
