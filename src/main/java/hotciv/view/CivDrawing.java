@@ -51,6 +51,8 @@ public class CivDrawing
   /** store all moveable figures visible in this drawing = units */
   protected Map<Unit,UnitFigure> unitFigureMap;
 
+  protected Map<City,CityFigure> cityFigureMap;
+
   /** the Game instance that this CivDrawing is going to render units
    * from */
   protected Game game;
@@ -60,13 +62,14 @@ public class CivDrawing
     this.delegate = new StandardDrawing();
     this.game = game;
     this.unitFigureMap = new HashMap<>();
-
+    this.cityFigureMap = new HashMap<>();
     // register this unit drawing as listener to any game state
     // changes...
     game.addObserver(this);
     // ... and build up the set of figures associated with
     // units in the game.
     defineUnitMap();
+    defineCityMap();
     // and the set of 'icons' in the status panel
     defineIcons();
   }
@@ -136,16 +139,75 @@ public class CivDrawing
     unitFigureMap.clear();
   }
 
+
+  /** erase the old list of units, and build a completely new
+   * one from scratch by iterating over the game world and add
+   * Figure instances for each unit in the world.
+   */
+  protected void defineCityMap() {
+    // ensure no units of the old list are accidental in
+    // the selection!
+    clearSelection();
+
+    // remove all unit figures in this drawing
+    removeAllCityFigures();
+
+    // iterate world, and create a unit figure for
+    // each unit in the game world, as well as
+    // create an association between the unit and
+    // the unitFigure in 'unitFigureMap'.
+    Position p;
+    for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
+      for ( int c = 0; c < GameConstants.WORLDSIZE; c++ ) {
+        p = new Position(r,c);
+       City city = game.getCityAt(p);
+        if ( city != null ) {
+
+          // convert the unit's Position to (x,y) coordinates
+          Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()),
+                  GfxConstants.getYFromRow(p.getRow()) );
+
+          CityFigure cityFigure = new CityFigure(city, point);
+          cityFigure.addFigureChangeListener(this);
+          cityFigureMap.put(city, cityFigure);
+
+          // also insert in delegate list as it is
+          // this list that is iterated by the
+          // graphics rendering algorithms
+          delegate.add(cityFigure);
+        }
+      }
+    }
+  }
+
+  /** remove all unit figures in this
+   * drawing, and reset the map (unit->unitfigure).
+   * It is important to actually remove the figures
+   * as it forces a graphical redraw of the screen
+   * where the unit figure was.
+   */
+  protected void removeAllCityFigures() {
+    for (City c : cityFigureMap.keySet()) {
+      CityFigure cf = cityFigureMap.get(c);
+      delegate.remove(cf);
+    }
+    cityFigureMap.clear();
+  }
+
+
   protected ImageFigure turnShieldIcon;
   protected void defineIcons() {
     // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
-      new ImageFigure( "redshield",
+      new ImageFigure( GfxConstants.RED_SHIELD,
                        new Point( GfxConstants.TURN_SHIELD_X,
                                   GfxConstants.TURN_SHIELD_Y ) ); 
     // insert in delegate figure list to ensure graphical
     // rendering.
     delegate.add(turnShieldIcon);
+
+
+
   }
  
   // === Observer Methods ===
@@ -156,7 +218,7 @@ public class CivDrawing
     // this is a really brute-force algorithm: destroy
     // all known units and build up the entire set again
     defineUnitMap();
-
+    defineCityMap();
     // TODO: Cities may change on position as well
   }
 
@@ -170,6 +232,7 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
     // TODO: Age output pending
+
   }
 
   public void tileFocusChangedAt(Position position) {
