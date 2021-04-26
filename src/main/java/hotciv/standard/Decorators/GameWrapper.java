@@ -193,8 +193,7 @@ public class GameWrapper implements Game {
        display = !display;
     }
 
-<<<<<<< Updated upstream
-=======
+
     @Override
     public void addObserver(GameObserver observer) {
 
@@ -210,7 +209,6 @@ public class GameWrapper implements Game {
         return null;
     }
 
->>>>>>> Stashed changes
     public void log(String info){
         if(display) {
             System.out.println(info);

@@ -200,9 +200,6 @@ public interface Game {
    * this method toggles
    */
   void toggleLog();
-<<<<<<< Updated upstream
-=======
-
   /** add an observer on this game instance. The game
    * instance acts as 'subject' in the pattern.
    * @param observer the observer to notify in case of state changes
@@ -216,5 +213,4 @@ public interface Game {
   void setTileFocus(Position position);
 
   ArrayList<GameObserver> getObserverList();
->>>>>>> Stashed changes
 }

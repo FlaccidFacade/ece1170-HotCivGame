@@ -5,10 +5,7 @@ import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
 import hotciv.standard.Strategies.ZetaWinningStrategy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /** Skeleton implementation of HotCiv.
 
@@ -131,14 +128,12 @@ public class GameImpl implements Game {
     }
 
     @Override
-<<<<<<< Updated upstream
-=======
     public void addObserver(GameObserver observer) {
         observerList.add(observer);
     }
 
     //method is used for testing purposes
-    public ArrayList getObserverList(){
+    public ArrayList<GameObserver> getObserverList(){
         return observerList;
     }
 
@@ -148,7 +143,7 @@ public class GameImpl implements Game {
     }
 
     @Override
->>>>>>> Stashed changes
+
     public Player getPlayerInTurn() { return currentTurn; }
 
     @Override
