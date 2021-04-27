@@ -13,11 +13,6 @@ import minidraw.standard.AbstractTool;
 import minidraw.standard.NullTool;
 import minidraw.standard.handlers.*;
 
-/**
- * Selection tool: Uses a internal state pattern to define what type of tool to
- * use in the current situation.
- *
- */
 
 public class CompositionTool extends AbstractTool implements Tool {
 
