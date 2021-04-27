@@ -123,4 +123,6 @@ public interface World {
     List<Unit> getAllUnits();
 
     List<City> getAllCities();
+
+    void addObserver(GameObserver observer);
 }

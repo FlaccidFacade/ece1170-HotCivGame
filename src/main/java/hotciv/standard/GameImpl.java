@@ -3,10 +3,9 @@ package hotciv.standard;
 import hotciv.framework.*;
 import hotciv.framework.Factories.HotCivFactory;
 import hotciv.framework.Strategies.*;
-import hotciv.standard.Strategies.ZetaWinningStrategy;
+import hotciv.standard.Strategies.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** Skeleton implementation of HotCiv.
 
@@ -46,20 +45,33 @@ public class GameImpl implements Game {
     private WinningStrategy winningStrategy;
     private ActionStrategy actionStrategy;
     private BattleStrategy battleStrategy;
+    private ArrayList<GameObserver> observerList;
 
 
     public GameImpl(){
         age = GameConstants.START_TIME;
         world = new WorldImpl();
         playerSuccessfulAttackMap = new HashMap<>();
-
+        observerList = new ArrayList<>();
+        this.actionStrategy = new AlphaActionStrategy();
+        this.agingStrategy = new AlphaAgingStrategy();
+        this.battleStrategy = new AlphaBattleStrategy();
+        this.setGrowthStrategy(new AlphaGrowthStrategy());
+        this.setProductionStrategy(new AlphaProductionStrategy());
+        this.winningStrategy = new AlphaWinningStrategy();
     }
 
     public GameImpl(String[] layout){
         age = GameConstants.START_TIME;
         world = new WorldImpl(layout);
         playerSuccessfulAttackMap = new HashMap<>();
-
+        observerList = new ArrayList<>();
+        this.actionStrategy = new AlphaActionStrategy();
+        this.agingStrategy = new AlphaAgingStrategy();
+        this.battleStrategy = new AlphaBattleStrategy();
+        this.setGrowthStrategy(new AlphaGrowthStrategy());
+        this.setProductionStrategy(new AlphaProductionStrategy());
+        this.winningStrategy = new AlphaWinningStrategy();
     }
 
     public GameImpl(String[] layout, HotCivFactory factory){
@@ -72,6 +84,7 @@ public class GameImpl implements Game {
         this.setGrowthStrategy(factory.createGrowthStrategy());
         this.setProductionStrategy(factory.createProductionStrategy());
         this.winningStrategy = factory.createWinningStrategy();
+        observerList = new ArrayList<>();
     }
 
     @Override
@@ -126,6 +139,25 @@ public class GameImpl implements Game {
     }
 
     @Override
+    public void addObserver(GameObserver observer) {
+        observerList.add(observer);
+        world.addObserver(observer);
+    }
+
+    //method is used for testing purposes
+    public ArrayList<GameObserver> getObserverList(){
+        return observerList;
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+        for(GameObserver go: observerList){
+            go.tileFocusChangedAt(position);
+        }
+    }
+
+    @Override
+
     public Player getPlayerInTurn() { return currentTurn; }
 
     @Override
@@ -210,7 +242,7 @@ public class GameImpl implements Game {
             round++;
             endOfRound();
         }
-
+        updateTurnEnds();
     }
 
     private void endOfRound(){
@@ -218,7 +250,6 @@ public class GameImpl implements Game {
         world.updateAllCityTreasury();
         world.produceAllCityUnits();
         world.updateAllMoveCounts();
-
     }
 
     @Override
@@ -235,9 +266,15 @@ public class GameImpl implements Game {
 
     @Override
     public void performUnitActionAt( Position p ) {
-       actionStrategy.performAction(p, world);
+       if(world.getUnitAt(p) != null && world.getUnitAt(p).getOwner() == currentTurn)
+        actionStrategy.performAction(p, world);
     }
 
-
+    // this needs to be invoked after current turn is updated inside of endOfTurn()
+    private void updateTurnEnds(){
+        for(GameObserver observer : observerList){
+            observer.turnEnds(this.getPlayerInTurn(), this.getAge());
+        }
+    }
 
 }

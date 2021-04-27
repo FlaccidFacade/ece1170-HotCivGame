@@ -2,6 +2,8 @@ package hotciv.framework;
 
 import hotciv.framework.Strategies.*;
 
+import java.util.ArrayList;
+
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
 
@@ -198,4 +200,22 @@ public interface Game {
    * this method toggles
    */
   void toggleLog();
+
+  /** add an observer on this game instance. The game
+   * instance acts as 'subject' in the pattern.
+   * @param observer the observer to notify in case of state changes
+   */
+  void addObserver(GameObserver observer);
+
+  /**
+   * //TODO java doc setTileFocus
+   * @param position
+   */
+  void setTileFocus(Position position);
+
+  /**
+   *
+   * @return
+   */
+  ArrayList<GameObserver> getObserverList();
 }
