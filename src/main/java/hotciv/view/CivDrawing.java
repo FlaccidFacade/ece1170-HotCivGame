@@ -48,13 +48,15 @@ public class CivDrawing
   implements Drawing, GameObserver {
 
   //TODO turn to false if not debugging
-  private boolean sout = true;
+  private boolean sout = false;
 
   protected Drawing delegate;
   /** store all moveable figures visible in this drawing = units */
   protected Map<Unit,UnitFigure> unitFigureMap;
 
   protected Map<City,CityFigure> cityFigureMap;
+
+  protected int age = -4000;
 
   /** the Game instance that this CivDrawing is going to render units
    * from */
@@ -199,10 +201,16 @@ public class CivDrawing
   }
 
 
+
   protected ImageFigure turnShieldIcon,unitShieldIcon, cityShieldIcon,
           workForceFocusIcon,cityProductionIcon, refreshButtonIcon;
   protected TextFigure ageTextIcon,unitCountIcon;
   protected void defineIcons() {
+
+    clearSelection();
+
+
+    removeAllIcons();
 
     turnShieldIcon = 
       new ImageFigure( GfxConstants.RED_SHIELD,
@@ -212,9 +220,10 @@ public class CivDrawing
     // rendering.
     delegate.add(turnShieldIcon);
 
-    ageTextIcon = new TextFigure("      ",
+    ageTextIcon = new TextFigure(getAgeString(),
             new Point(GfxConstants.AGE_TEXT_X,
                     GfxConstants.AGE_TEXT_Y) );
+
 
     delegate.add(ageTextIcon);
 
@@ -257,6 +266,26 @@ public class CivDrawing
     delegate.add(unitCountIcon);
 
   }
+
+  protected  void removeAllIcons(){    delegate.remove(turnShieldIcon);
+    delegate.remove(unitShieldIcon);
+    delegate.remove(cityShieldIcon);
+    delegate.remove(workForceFocusIcon);
+    delegate.remove(cityProductionIcon);
+    delegate.remove(refreshButtonIcon);
+    delegate.remove(ageTextIcon);
+    delegate.remove(unitCountIcon);
+  }
+
+  private String getAgeString(){
+    String ageString = "";
+    if(age < 0){
+      ageString += -1 * age + " BC";
+    }else{
+      ageString += age + " AC";
+    }
+    return ageString;
+  }
  
   // === Observer Methods ===
 
@@ -271,7 +300,7 @@ public class CivDrawing
   }
 
   public void turnEnds(Player nextPlayer, int age) {
-
+    this.age = age;
     if (sout) System.out.println( "CivDrawing: turn begins for "+
                         nextPlayer+" at "+age );
     String playername = "red";
@@ -280,13 +309,8 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
     ageTextIcon.setText("          ");
-    String ageString = "";
-    if(age < 0){
-      ageString += -1 * age + " BC";
-    }else{
-      ageString += age + " AC";
-    }
-    ageTextIcon.setText(ageString);
+
+    ageTextIcon.setText(getAgeString());
 
   }
 

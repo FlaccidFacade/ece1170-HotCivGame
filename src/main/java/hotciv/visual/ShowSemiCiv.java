@@ -38,7 +38,6 @@ public class ShowSemiCiv {
         game.placeUnitAt( new Position( 2,0), new UnitImpl(Player.RED, GameConstants.ARCHER));
         game.placeUnitAt( new Position( 2,1), new UnitImpl(Player.RED, GameConstants.ARCHER));
 
-
         game.placeUnitAt( new Position( 3,2), new UnitImpl(Player.BLUE, GameConstants.LEGION));
 
         game.placeUnitAt( new Position( 4,3), new UnitImpl(Player.RED, GameConstants.SETTLER));
@@ -48,6 +47,7 @@ public class ShowSemiCiv {
         game.placeUnitAt(new Position( 10,12), new UnitImpl(Player.BLUE, GameConstants.SETTLER));
         game.placeCityAt( new Position( 6,6), new CityImpl(Player.RED));
         game.placeCityAt( new Position( 9,9), new CityImpl(Player.BLUE));
+
         DrawingEditor editor =
                 new MiniDrawApplication( "Click and/or drag any item to see all game actions",
                         new HotCivFactory4(game) );
