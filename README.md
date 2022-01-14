@@ -4,3 +4,5 @@ The project contains different usable versions defined by alphaciv, betaciv and 
 Each version is a practice in implementing different software principles, techniques, and patterns.
 
 This project also taught me about advance features of versioning through git and how to leverage them in development.
+
+This project is forked from my school account.
